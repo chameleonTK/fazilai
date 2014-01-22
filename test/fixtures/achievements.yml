@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  achieveName: MyString
+  detail: MyText
+  rule: MyText
+
+two:
+  achieveName: MyString
+  detail: MyText
+  rule: MyText

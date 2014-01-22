@@ -1,0 +1,2 @@
+module AuthenHelper
+end
