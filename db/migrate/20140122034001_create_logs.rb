@@ -1,9 +1,11 @@
 class CreateLogs < ActiveRecord::Migration
   def change
-    create_table :logs do |t|
+    create_table :logs , :primary_key => "lid" do |t|
 		t.belongs_to :user
-		t.belongs_to :server
-      t.timestamps
+		t.belongs_to :proj
+		t.datetime :starttime
+		t.datetime :lefttime
+      #t.timestamps
     end
   end
 end

@@ -1,9 +1,9 @@
 class CreateAchievements < ActiveRecord::Migration
   def change
-    create_table :achievements do |t|
-      t.string :achieveName
+    create_table :achievements , :primary_key => "aid" do |t|
+      t.string :name
       t.text :detail
-      t.text :rule
+      t.text :img
 
       t.timestamps
     end

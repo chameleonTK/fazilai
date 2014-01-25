@@ -1,10 +1,12 @@
 class CreateServers < ActiveRecord::Migration
   def change
-    create_table :servers do |t|
+    create_table :servers , :primary_key => 'sid'  do |t|
       t.string :name
       t.string :domain
-      t.string :user
-      t.string :password
+      t.integer :port
+      t.string :suser
+      t.string :spass
+		t.belongs_to :user , :foreign_key => "uid"
 
       t.timestamps
     end

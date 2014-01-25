@@ -805,3 +805,263 @@ Migrating to CreateLogs (20140122034001)
   [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122034001"]]
   [1m[36m (132.0ms)[0m  [1mcommit transaction[0m
   [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateLogs (20140122034001)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  DROP TABLE "logs"
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20140122034001'[0m
+  [1m[35m (110.2ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (93.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (92.6ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20140122022834)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "password" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122022834"]]
+  [1m[36m (123.1ms)[0m  [1mcommit transaction[0m
+Migrating to CreateServers (20140122023711)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "servers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "domain" varchar(255), "user" varchar(255), "password" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122023711"]]
+  [1m[36m (158.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateProjs (20140122024207)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "projs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "server_id" integer, "projName" varchar(255), "dir" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122024207"]]
+  [1m[36m (155.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAchievements (20140122025330)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "achievements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "achieveName" varchar(255), "detail" text, "rule" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122025330"]]
+  [1m[36m (151.3ms)[0m  [1mcommit transaction[0m
+Migrating to CreateJoinTable (20140122025852)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "achievements_users" ("user_id" integer NOT NULL, "achievement_id" integer NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122025852"]]
+  [1m[36m (119.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateLogs (20140122034001)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "server_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122034001"]]
+  [1m[36m (126.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (117.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (123.6ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20140122022834)
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20140122022834)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "users" ("uid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "password" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122022834"]]
+  [1m[36m (108.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateServers (20140122023711)
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateServers (20140122023711)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "servers" ("sid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "domain" varchar(255), "suser" varchar(255), "spass" varchar(255), "user_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122023711"]]
+  [1m[36m (141.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateProjs (20140122024207)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "projs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "server_id" integer, "projName" varchar(255), "dir" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122024207"]]
+  [1m[36m (169.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAchievements (20140122025330)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "achievements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "achieveName" varchar(255), "detail" text, "rule" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122025330"]]
+  [1m[36m (129.3ms)[0m  [1mcommit transaction[0m
+Migrating to CreateJoinTable (20140122025852)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "achievements_users" ("user_id" integer NOT NULL, "achievement_id" integer NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122025852"]]
+  [1m[36m (131.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateLogs (20140122034001)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "server_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122034001"]]
+  [1m[36m (119.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (91.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (92.9ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20140122022834)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "users" ("uid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "password" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122022834"]]
+  [1m[36m (124.3ms)[0m  [1mcommit transaction[0m
+Migrating to CreateServers (20140122023711)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "servers" ("sid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "domain" varchar(255), "suser" varchar(255), "spass" varchar(255), "user_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122023711"]]
+  [1m[36m (164.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateProjs (20140122024207)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "projs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "server_id" integer, "projName" varchar(255), "dir" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122024207"]]
+  [1m[36m (150.3ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAchievements (20140122025330)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "achievements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "achieveName" varchar(255), "detail" text, "rule" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122025330"]]
+  [1m[36m (159.3ms)[0m  [1mcommit transaction[0m
+Migrating to CreateJoinTable (20140122025852)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "achievements_users" ("user_id" integer NOT NULL, "achievement_id" integer NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122025852"]]
+  [1m[36m (148.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateLogs (20140122034001)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "server_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122034001"]]
+  [1m[36m (125.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (106.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (105.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20140122022834)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "users" ("uid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "password" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122022834"]]
+  [1m[36m (122.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateServers (20140122023711)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "servers" ("sid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "domain" varchar(255), "port" integer, "suser" varchar(255), "spass" varchar(255), "user_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122023711"]]
+  [1m[36m (117.1ms)[0m  [1mcommit transaction[0m
+Migrating to CreateProjs (20140122024207)
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "projs" ("pid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "path" varchar(255), "detail" text, "server_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122024207"]]
+  [1m[36m (139.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAchievements (20140122025330)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "achievements" ("aid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "detail" text, "img" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122025330"]]
+  [1m[36m (138.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateLogs (20140122034001)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "logs" ("lid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "proj_id" integer, "starttime" datetime, "lefttime" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122034001"]]
+  [1m[36m (148.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateJoinTable (20140125131435)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "ownachieve" ("user_id" integer NOT NULL, "achievement_id" integer NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  CREATE INDEX "index_ownachieve_on_uid_and_aid" ON "ownachieve" ("uid", "aid")
+SQLite3::SQLException: table ownachieve has no column named uid: CREATE  INDEX "index_ownachieve_on_uid_and_aid" ON "ownachieve" ("uid", "aid")
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateOwnachieve (20140125131435)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "ownachieve" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "achievement_id" integer) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140125131435"]]
+  [1m[36m (146.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (96.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (113.6ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20140122022834)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("uid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "pass" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122022834"]]
+  [1m[36m (89.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateServers (20140122023711)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "servers" ("sid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "domain" varchar(255), "port" integer, "suser" varchar(255), "spass" varchar(255), "user_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122023711"]]
+  [1m[36m (121.1ms)[0m  [1mcommit transaction[0m
+Migrating to CreateProjs (20140122024207)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "projs" ("pid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "path" varchar(255), "detail" text, "server_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122024207"]]
+  [1m[36m (129.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAchievements (20140122025330)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "achievements" ("aid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "detail" text, "img" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122025330"]]
+  [1m[36m (151.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateLogs (20140122034001)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "logs" ("lid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "proj_id" integer, "starttime" datetime, "lefttime" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122034001"]]
+  [1m[36m (131.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateOwnachieve (20140125131435)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "ownachieve" ("user_id" integer, "achievement_id" integer) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140125131435"]]
+  [1m[36m (147.2ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (121.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (92.8ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20140122022834)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "users" ("uid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "pass" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122022834"]]
+  [1m[36m (88.1ms)[0m  [1mcommit transaction[0m
+Migrating to CreateServers (20140122023711)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "servers" ("sid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "domain" varchar(255), "port" integer, "suser" varchar(255), "spass" varchar(255), "user_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122023711"]]
+  [1m[36m (121.3ms)[0m  [1mcommit transaction[0m
+Migrating to CreateProjs (20140122024207)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "projs" ("pid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "path" varchar(255), "detail" text, "server_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122024207"]]
+  [1m[36m (141.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAchievements (20140122025330)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "achievements" ("aid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "detail" text, "img" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122025330"]]
+  [1m[36m (140.1ms)[0m  [1mcommit transaction[0m
+Migrating to CreateLogs (20140122034001)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "logs" ("lid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "proj_id" integer, "starttime" datetime, "lefttime" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122034001"]]
+  [1m[36m (142.3ms)[0m  [1mcommit transaction[0m
+Migrating to CreateOwnachieve (20140125131435)
+  [1m[36m (114.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (92.9ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20140122022834)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "users" ("uid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "pass" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122022834"]]
+  [1m[36m (133.1ms)[0m  [1mcommit transaction[0m
+Migrating to CreateServers (20140122023711)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "servers" ("sid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "domain" varchar(255), "port" integer, "suser" varchar(255), "spass" varchar(255), "user_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122023711"]]
+  [1m[36m (120.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateProjs (20140122024207)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "projs" ("pid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "path" varchar(255), "detail" text, "server_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122024207"]]
+  [1m[36m (152.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAchievements (20140122025330)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "achievements" ("aid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "detail" text, "img" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122025330"]]
+  [1m[36m (142.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateLogs (20140122034001)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "logs" ("lid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "proj_id" integer, "starttime" datetime, "lefttime" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140122034001"]]
+  [1m[36m (130.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateOwnachieve (20140125131435)
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateOwnachieves (20140125131435)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "ownachieves" ("user_id" integer, "achievement_id" integer) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140125131435"]]
+  [1m[36m (132.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
