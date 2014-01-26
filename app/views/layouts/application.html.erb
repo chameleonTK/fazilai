@@ -6,15 +6,29 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 	<style>
-		.bg { 
-		 	background-image: url(<%= asset_path 'wallpaper.png' %>) 
+
+		.bg{
+			background: #000;	
+		}
+
+		@media only screen and (min-width : 1224px) {
+			.bg { 
+		 		background-image: url(<%= asset_path 'wallpaper.png' %>)
+			}
+		}
+
+	
+		.logo{
+			height: 40px;
+			position: absolute;
+			margin-top: -10px;
 		}
 		
 	</style>
 	
 </head>
-<body class="bg">
-<nav class="navbar navbar-default" role="navigation">
+<body class="bg" style="padding-top:70px">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -24,7 +38,8 @@
       <span class="icon-bar"></span>
     </button>
     	<a class="navbar-brand" href="#">
-			<%=image_tag "logo.png"%>
+			<%=image_tag "logo.png" , class:"logo" %>
+
 		</a>
   </div>
   <!-- Collect the nav links, forms, and other content for toggling -->

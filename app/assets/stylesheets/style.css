@@ -1,0 +1,32 @@
+.fazilai-textform{
+	width: 300px ;
+}
+
+
+.fazilai-login{
+	width: 130px ;
+}
+
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1224px) {
+	.login-box {
+		width: 50%;
+	}
+
+	.social-box {
+		width: 50%;
+	}
+}
+
+.login-box{
+	margin-top: 120px;
+	float: right;
+	padding-right: 30px
+}
+
+.social-box{
+	padding-top:20px;
+}
+
+
