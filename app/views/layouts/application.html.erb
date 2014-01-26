@@ -5,10 +5,34 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+	<style>
+		.bg { 
+		 	background-image: url(<%= asset_path 'wallpaper.png' %>) 
+		}
+		
+	</style>
+	
 </head>
-<body >
+<body class="bg">
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    	<a class="navbar-brand" href="#">
+			<%=image_tag "logo.png"%>
+		</a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+	<%= yield :navright%>
+</nav>
 
-<%= yield %>
+
+<%= yield :body %>
 
 </body>
 </html>
