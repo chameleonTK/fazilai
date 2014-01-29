@@ -1,12 +1,26 @@
 class AuthenController < ApplicationController
-  layout "application"
 
-  def login
-  end
+	layout "application"
+	skip_before_filter :logged, :only => [ :login ]
 
-  def regis
-  end
+	def login
+		p = params[:post]
+		@auth = Auth.user
+		@auth.attempt(p[:username],p[:password])	
+		if @auth.logged
+			redirect_to home_path(@auth.name)
+		else
+			flash[:error] = "username/password not pass"
+			redirect_to index_path()	
+			#render text:"no"
+		end
+	
+	end
 
-  def logout
-  end
+	def logout
+		@auth = Auth.user
+		@auth.logout
+		flash[:notice] = "You have successfully logged out."
+		redirect_to index_path()	
+	end
 end
