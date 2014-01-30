@@ -4,6 +4,6 @@ class AppController < ApplicationController
 	def index
 	end
 
-	def home
+	def choose
 	end
 end

@@ -12913,3 +12913,212 @@ Completed 200 OK in 11ms (Views: 9.8ms | ActiveRecord: 0.0ms)
 
 
 Started GET "/assets/logo.png" for 127.0.0.1 at 2014-01-29 11:40:04 +0700
+
+
+Started GET "/" for 127.0.0.1 at 2014-01-30 11:22:46 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by AppController#index as HTML
+  Rendered app/index.html.erb within layouts/application (41.1ms)
+Completed 200 OK in 550ms (Views: 516.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:48 +0700
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:48 +0700
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:48 +0700
+
+
+Started GET "/assets/authen.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:48 +0700
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2014-01-30 11:22:48 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:48 +0700
+
+
+Started GET "/assets/bootstrap-theme.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:48 +0700
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:48 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:48 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:48 +0700
+
+
+Started GET "/assets/authen.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:48 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:48 +0700
+
+
+Started POST "/" for 127.0.0.1 at 2014-01-30 11:22:51 +0700
+Processing by AuthenController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"fwi2TcvP5uIoUZ/eFGA016mBWigeDYAAoGAebTL/gUI=", "post"=>{"username"=>"k", "password"=>"[FILTERED]"}, "commit"=>"sign in"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'k' LIMIT 1
+Redirected to http://localhost:3000/
+Completed 302 Found in 122ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-01-30 11:22:51 +0700
+Processing by AppController#index as HTML
+  Rendered app/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 13ms (Views: 11.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:52 +0700
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:52 +0700
+
+
+Started GET "/assets/bootstrap-theme.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:52 +0700
+
+
+Started GET "/assets/authen.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:52 +0700
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:52 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:52 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:52 +0700
+
+
+Started GET "/assets/authen.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:52 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:52 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:52 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:52 +0700
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2014-01-30 11:22:52 +0700
+
+
+Started POST "/" for 127.0.0.1 at 2014-01-30 11:22:55 +0700
+Processing by AuthenController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"fwi2TcvP5uIoUZ/eFGA016mBWigeDYAAoGAebTL/gUI=", "post"=>{"username"=>"kramatk@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"sign in"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."email" = 'kramatk@gmail.com' LIMIT 1[0m
+Redirected to http://localhost:3000/choose.kramatk
+Completed 302 Found in 10ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/choose.kramatk" for 127.0.0.1 at 2014-01-30 11:22:55 +0700
+Processing by AppController#choose as 
+  Rendered app/choose.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 36ms (Views: 34.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:55 +0700
+
+
+Started GET "/assets/authen.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:55 +0700
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:55 +0700
+
+
+Started GET "/assets/bootstrap-theme.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:55 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:55 +0700
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-01-30 11:22:55 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:55 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:55 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:55 +0700
+
+
+Started GET "/assets/authen.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:55 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-01-30 11:22:55 +0700
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2014-01-30 11:22:55 +0700
+
+
+Started GET "/logout" for 127.0.0.1 at 2014-01-30 11:24:33 +0700
+Processing by AuthenController#logout as HTML
+Redirected to http://localhost:3000/
+Filter chain halted as :logged rendered or redirected
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-01-30 11:24:33 +0700
+Processing by AppController#index as HTML
+  Rendered app/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 8ms (Views: 6.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2014-01-30 11:24:34 +0700
+
+
+Started POST "/" for 127.0.0.1 at 2014-01-30 11:24:36 +0700
+Processing by AuthenController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"fwi2TcvP5uIoUZ/eFGA016mBWigeDYAAoGAebTL/gUI=", "post"=>{"username"=>"kramatk@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'kramatk@gmail.com' LIMIT 1
+Redirected to http://localhost:3000/choose
+Completed 302 Found in 17ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/choose" for 127.0.0.1 at 2014-01-30 11:24:36 +0700
+Processing by AppController#choose as HTML
+  Rendered app/choose.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 9ms (Views: 8.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-01-30 11:24:36 +0700
+
+
+Started GET "/assets/authen.css?body=1" for 127.0.0.1 at 2014-01-30 11:24:36 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-01-30 11:24:36 +0700
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-01-30 11:24:36 +0700
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-01-30 11:24:36 +0700
+
+
+Started GET "/assets/bootstrap-theme.css?body=1" for 127.0.0.1 at 2014-01-30 11:24:36 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-01-30 11:24:36 +0700
+
+
+Started GET "/assets/authen.js?body=1" for 127.0.0.1 at 2014-01-30 11:24:36 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-01-30 11:24:36 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-01-30 11:24:36 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-01-30 11:24:36 +0700
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2014-01-30 11:24:36 +0700

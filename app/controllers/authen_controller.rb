@@ -8,7 +8,7 @@ class AuthenController < ApplicationController
 		@auth = Auth.user
 		@auth.attempt(p[:username],p[:password])	
 		if @auth.logged
-			redirect_to home_path(@auth.name)
+			redirect_to home_path()
 		else
 			flash[:error] = "username/password not pass"
 			redirect_to index_path()	
