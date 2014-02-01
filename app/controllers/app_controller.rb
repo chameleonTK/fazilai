@@ -6,4 +6,7 @@ class AppController < ApplicationController
 
 	def choose
 	end
+
+	def profile
+	end
 end
