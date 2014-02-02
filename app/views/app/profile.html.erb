@@ -16,6 +16,10 @@
   <div class="tab-pane active" id="profile" background-color='white';>
 
 <%u = Auth.user %>
+  <% result=User.where(uid: u.id).take %>
+  <br> Username:
+  <%=result[:email] %>
+  <% 
 <%s = u.obj.servers  %>
 <%=s.inspect %>
 <br>
