@@ -1,0 +1,50 @@
+<% content_for :body do %>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+
+  <li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>
+
+  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+</ul>
+<div class="mini-layout">
+            <div class="mini-layout-body"></div>
+          </div>
+
+<!-- Tab panes -->
+<div class="tab-content" >
+  <div class="tab-pane active" id="profile" background-color='white';>
+
+<%u = Auth.user %>
+<%s = u.obj.servers  %>
+<%=s.inspect %>
+<br>
+<br>
+<%= s[0].projs.inspect%>
+
+
+
+
+   </div>
+
+  <div class="tab-pane" id="settings">
+  
+<div class="login-box">
+	<form accept-charset="UTF-8" action="/setting" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="xQ0q4JjiMB/DE1zQyeWw1OJfqmqhyxUpk4p6p3QVS+0="></div>
+
+    	<div style="color:white"><h4>Change password</h4><br></div>
+    	<input class="form-control fazilai-textform" id="oldpassword" name="oldpassword" placeholder="old password" type="text"><br>
+    	<input class="form-control fazilai-textform" id="newpassword" name="newpassword" placeholder="new password" type="password"><br>
+	<input class="form-control fazilai-textform" id="renewpassword" name="renewpassword" placeholder="re-new password" type="password"><br>
+	<input class="form-control fazilai-login btn-warning" name="commit" style="display:inline" type="submit" value="Change password"> 
+		<br>
+		<br>
+		<div style="width:300px;height:3px;background:white"><div>
+	</div>
+	</div></form>
+
+<div>
+  
+  </div>
+</div>
+<% end%>

@@ -11,6 +11,8 @@ class Auth
 		if not auth.nil?
 			@state = true
 			@name  = user.split('@')[0]
+			@id = auth[:id]
+			@obj = auth 
 		end
 	end
 
@@ -31,10 +33,19 @@ class Auth
 	def name
 		return @name
 	end
+
+	def id
+		return @id
+	end
 	
+	def obj
+		return @obj
+	end 
+
 	def initialize
 		@state=false
 		@name=""
+		@id = -1
 	end
 	
 	private 
