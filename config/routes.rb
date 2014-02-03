@@ -8,5 +8,5 @@ Fazilai::Application.routes.draw do
 
   get "/choose", to: "app#choose" , as:'home'
   get "/profile", to: "app#profile" , as:'profile' 
-  get "/setting", to: "app#setting", as:'setting'
+  post "/profile", to: "app#profiledata" 
 end
