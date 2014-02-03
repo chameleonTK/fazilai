@@ -7,6 +7,10 @@ Fazilai::Application.routes.draw do
   get "/logout", to: "authen#logout"
 
   get "/choose", to: "app#choose" , as:'home'
+  get "/server", to: "app#server" , as:'server'
+  get   "/listfile" ,to: "app#listfile" ,as: "listfile_root"
   get "/profile", to: "app#profile" , as:'profile' 
   post "/profile", to: "app#profiledata" 
+  get   "/listfile/*dirname" ,to: "app#listfile" , as: 'listfile'
+
 end
