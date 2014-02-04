@@ -1,16 +1,153 @@
+
 <% content_for :navright do %>
-	<ul class="nav navbar-nav navbar-right" style="padding-right: 10px">
-      <li><%= link_to 'Logout', logout_path() %></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
-      </li>
-	</ul>
 <% end %>
+<% content_for :body do %>
+	<div id="choose-page" class ="login-box">
+		<div id="header-choose-page">
+			<div style="color:white">  
+				Choose : 
+				<a id = "btn-create-domain" class="btn btn-default" role="button">
+					<%= image_tag("glyphicons/glyphicons_000_glass.png", :alt => "rss feed") %>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- Element to pop up -->
+    <div style="display:none; height:auto; width:400px;" id="element_to_pop_up">
+	
+    	<div class="modal-content" style="">
+            <div class="modal-header">
+              <button id="btn-close-create-domain" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title">Create New Domain</h4>
+            </div>
+            <div class="modal-body">
+            	<%= form_for :post do |f|  %>
+	              	<!--<div class="form-group">
+	          		<label for="exampleInputEmail1">Domain or IP Address</label>
+	         		<input class="form-control" id="PopupInputDomain" placeholder="ex. 158.108.2.1 , surawat.com">
+	          		<label for="exampleInputEmail1">Password</label>
+	         		<input type = "password"class="form-control" id="PopupInputPassword" placeholder="********">
+	          		<label for="exampleInputEmail1">Port</label>
+	         		<input class="form-control" id="PopupInputPort" placeholder="22">
+	        		</div>-->
+                    <div class="form-group">
+                        <label class="control-label" for='domain'>Domain or IP Address</label>
+                        <input type="text" class="form-control" id="PopupInputDomain" placeholder="ex. 158.108.2.1 , surawat.com">
+                    </div>
+                     <div class="form-group">
+                        <label class="control-label" for='password'>Password</label>
+                        <input type="password" class="form-control" id="PopupInputPassword" placeholder="********">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for='port'>Port</label>
+                        <input type="text" class="form-control" id="PopupInputPort" placeholder="22">
+                    </div>
+        		<% end %>
+            </div>
+            <div class="modal-footer">
+              <button id="btn-popup-create" type="button" class="btn btn-primary" >Create</button>
+            </div>
+        </div>
+
+    </div>	
+
+     <script>
+ // Semicolon (;) to ensure closing of earlier scripting
+    // Encapsulation
+    // $ is assigned to jQuery
+    ;(function($) {
+
+         // DOM Ready
+        $(function() {
+            // Binding a click event
+            // From jQuery v.1.7.0 use .on() instead of .bind()
+            $('#btn-create-domain').bind('click', function(e) {
+
+                // Prevents the default action to be triggered. 
+                e.preventDefault();
+
+                //Clear Input
+                $('#PopupInputDomain').val('');
+                $('#PopupInputPassword').val('');
+                $('#PopupInputPort').val('');
+
+                $('#PopupInputDomain').parent().removeClass();
+                $('#PopupInputDomain').parent().addClass('form-group');
+                $("label[for='domain']").text('Domain or IP Address');
+
+                $('#PopupInputPassword').parent().removeClass();
+                $('#PopupInputPassword').parent().addClass('form-group');
+                $("label[for='password']").text('Password');
+                
+                $('#PopupInputPort').parent().removeClass();
+                $('#PopupInputPort').parent().addClass('form-group');
+                $("label[for='port']").text('Port');
+
+                // Triggering bPopup when click event is fired
+                $('#element_to_pop_up').bPopup({},function() {
+                	$('#btn-popup-create').bind('click', function(e) {
+		            	//alert($('#PopupInputDomain').val());
+
+		            	$.post( "<%= createdomain_path() %>",
+		            		{ domain: $('#PopupInputDomain').val() ,
+		            		password: $('#PopupInputPassword').val() , 
+		            		port: $('#PopupInputPort').val() } , 
+		            		function(data){
+                                //Waiting For Message from validator
+		            		    //console.log(data);
+                                eval('var errorData ='+data);  //change message format to object
+                                //console.log(errorData.domain); 
+
+                                //Show the validation to css
+                                //Form Domain
+                                $('#PopupInputDomain').parent().removeClass();
+                                if(errorData.domain=='Accept'){
+                                    $('#PopupInputDomain').parent().addClass('form-group has-success');
+                                     $("label[for='domain']").text('Domain or IP Address');
+                                }else{
+                                    $('#PopupInputDomain').parent().addClass('form-group has-error');
+                                    $("label[for='domain']").text(errorData.domain);
+                                    //$('#element_to_pop_up').bPopup().close(); 
+                                }
+                                //Form Password
+                                $('#PopupInputPassword').parent().removeClass();
+                                if(errorData.password =='Accept'){
+                                    $('#PopupInputPassword').parent().addClass('form-group has-success');
+                                     $("label[for='password']").text('Password');
+                                }else{
+                                    $('#PopupInputPassword').parent().addClass('form-group has-error');
+                                    $("label[for='password']").text(errorData.password);
+                                    //$('#element_to_pop_up').bPopup().close(); 
+                                }
+
+                                //Form Port
+                                $('#PopupInputPort').parent().removeClass();
+                                if(errorData.port=='Accept'){
+                                    $('#PopupInputPort').parent().addClass('form-group has-success');
+                                    $("label[for='port']").text('Port');
+                                }else{
+                                    $('#PopupInputPort').parent().addClass('form-group has-error');
+                                    $("label[for='port']").text(errorData.port);
+                                    //$('#element_to_pop_up').bPopup().close(); 
+                                }
+
+						});
+
+		            });
+            		
+        		});
+
+            });
+            $('#btn-close-create-domain').bind('click', function(e) {
+
+                $('#element_to_pop_up').bPopup().close(); 
+            });
+
+            
+
+        });
+
+    })(jQuery);
+</script>	
+<% end%>
 

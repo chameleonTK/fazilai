@@ -7,5 +7,6 @@ Fazilai::Application.routes.draw do
   get "/logout", to: "authen#logout"
 
   get "/choose", to: "app#choose" , as:'home'
+  post "/choose/createdomain", to: "app#createdomain" ,as:'createdomain'
   
 end
