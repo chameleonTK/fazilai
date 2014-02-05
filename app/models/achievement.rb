@@ -1,3 +1,3 @@
 class Achievement < ActiveRecord::Base
-	has_many :ownachieves
+	has_many :ownachievements
 end
