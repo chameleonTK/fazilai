@@ -3,7 +3,7 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
 
-  <li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>
+  <li class="active" ><a href="#profile" data-toggle="tab"  >Profile</a></li>
 
   <li><a href="#settings" data-toggle="tab">Settings</a></li>
 </ul>
@@ -25,14 +25,71 @@ margin-left: 20px">
   <legend>account<span class="green"></span></legend>
 
    username:
+   <%if (result[:email].nil?)==false %>
   <%=result[:email] %>
+  <%else%>
+  <%="Error query email" %>
+  <%end%>
+
 <br><br>
  <legend>achievement(s)<span class="green"></span></legend>
 
-<% acount=Ownachiefe.where(user_id: u.id).count %>
-<%a = u.obj.ownachieves  %>
-<% for i in 0..(acount-1) %>
-<%=a[i].achievements[0][:name].inspect %>
+<% acount=Ownachievement.where(user_id: u.id).count %>
+<%a = u.obj.ownachievements  %>
+
+<%if (a[0].nil?)== false%>
+	<% for i in 0..(acount-1) %>
+
+
+
+
+
+			<div align='center'	style="display: inline-block;
+width: 170px;
+height: 100%;
+border-radius: 5px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+-webkit-box-shadow: 0 1px 2px 0 #a39d92,0 0 0 rgba(0,0,0,0);
+-moz-box-shadow: 0 1px 2px 0 #a39d92,0 0 0 rgba(0,0,0,0);
+box-shadow: 0 1px 2px 0 #a39d92,0 0 0 rgba(0,0,0,0);
+border: 1px solid #f3f3e9;">
+				<div >
+					<br>
+					<%if a[i].achievement[:aid].inspect=='1'%>		
+					<%= image_tag "badge1.png" %>
+					<%elsif a[i].achievement[:aid].inspect=='2'%>
+					<%= image_tag "badge2.png" %>
+					<%elsif a[i].achievement[:aid].inspect=='3'%>
+					<%= image_tag "badge3.png" %>
+					<%elsif a[i].achievement[:aid].inspect=='4'%>
+					<%= image_tag "badge4.png" %>
+					<%elsif a[i].achievement[:aid].inspect=='5'%>
+					<%= image_tag "badge5.png" %>
+					<%elsif a[i].achievement[:aid].inspect=='6'%>
+					<%= image_tag "badge6.png" %>
+					<%elsif a[i].achievement[:aid].inspect=='7'%>
+					<%= image_tag "badge7.png" %>
+					<%elsif a[i].achievement[:aid].inspect=='8'%>
+					<%= image_tag "badge8.png" %>
+					<%end%>
+    			</div>
+    			<p>
+      				<span class="name">
+        			<%=a[i].achievement[:name].inspect%><br>
+      				</span>
+
+        			<span class="created_at">
+          			<%=a[i].achievement[:detail].inspect%>
+        			</span>
+    			</p>
+
+  			</div>
+
+
+	<%end%>
+<%else%>
+<%="No achievement(s)"%>
 <%end%>
 
 </div>
@@ -45,12 +102,21 @@ margin-left: 20px;">
 
   The number of server(s) : <%=servercount %>:<br>
 <%s = u.obj.servers  %>
+<%if (s[0].nil?)==false %>
 <% for i in 0..(servercount-1) %>
 <%=i+1%><%= " Server name:"%><%projectcount= Proj.where(server_id: s[i][:sid].inspect).count %>
 <%=s[i][:name].inspect %><%= " contains "%><%=projectcount%><%= " project(s)."%><br>
-	<% for ii in 0..(projectcount-1) %>
-	<%="  -        "%><%= s[i].projs[ii][:name].inspect%><br>
-	<%end%>
+			<%if (s[i].projs[0].nil?)==false %>
+				<% for ii in 0..(projectcount-1) %>
+				<%="  -        "%><%= s[i].projs[ii][:name].inspect%><br>
+				<%end%>
+			<%else%>
+			<%="           No Project(s)"%>
+			<% end %>
+
+<% end %>
+<%else%>
+<%="No server"%>
 <% end %>
 </div>		
 </font>

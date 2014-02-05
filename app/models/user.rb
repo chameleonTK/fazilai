@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 	has_many :servers
 	has_many :logs
-	has_many :ownachieves
-	has_many :achievements , through: :ownachieves
+	has_many :ownachievements
+	has_many :achievements , through: :ownachievements
 	
 end
