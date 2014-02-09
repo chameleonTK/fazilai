@@ -3,15 +3,50 @@
 <% end %>
 <% content_for :body do %>
 	<div id="choose-page" class ="login-box">
-		<div id="header-choose-page">
-			<div style="color:white">  
-				Choose : 
-				<a id = "btn-create-domain" class="btn btn-default" role="button">
-					<%= image_tag("glyphicons/glyphicons_000_glass.png", :alt => "rss feed") %>
-				</a>
-			</div>
-		</div>
+        <div id="list-choose-page" class="panel panel-default">
+            <div class="panel-heading" style="height: 55px;">
+                <div class="panel-title" style="float:left">
+                   <h2 style="margin-top: 0px;">Domain name</h2>
+                </div>
+                <div class="btndiv" style="float:right;margin-top: -8px;">
+                    <button id = "btn-create-domain" type="button" class="btn btn-warning btn-lg" style="height: 50px; width: 50px;">
+                        <span> <img src="/assets/icon-createlist.png"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="panel-body roottree" style="padding: 10px 0px 0px 0px;">
+                <div class="list-group" style="overflow-y: scroll;height: 260px;">
+                    <div index="1" class="list-group-item list-item-hover">
+                        <div style="float: left; margin-top: -5px; margin-left: -8px;">
+                            <img src="assets/domain_badge.png" style="width: 50px; height: 50px;">
+                        </div>
+                        <div style="display: inline-block; margin-left: 10px;">
+                        <h4 class="list-group-item-heading">root@ku.ac.th</h4>
+                        <p class="list-group-item-text">PORT:20</p>
+                        </div>
+                        <div name="option" style="float: right; display: none;margin-top: 8px;">
+                            <div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                                <img src="assets/icon-editlist.png" style="width: 24px; height: 24px;">
+                            </div>
+                            <div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete">
+                                <img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div index="2" class="list-group-item list-item-hover" style="height: 65px; text-align:center;">
+                        <div style="display: inline-block;">
+                            <img src="assets/icon-createlist2.png" style="width: 50px; height: 50px;">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 	</div>
+
+
+
 	<!-- Element to pop up -->
     <div style="display:none; height:auto; width:400px;" id="element_to_pop_up">
 	
@@ -22,17 +57,17 @@
             </div>
             <div class="modal-body">
             	<%= form_for :post do |f|  %>
-	              	<!--<div class="form-group">
-	          		<label for="exampleInputEmail1">Domain or IP Address</label>
-	         		<input class="form-control" id="PopupInputDomain" placeholder="ex. 158.108.2.1 , surawat.com">
-	          		<label for="exampleInputEmail1">Password</label>
-	         		<input type = "password"class="form-control" id="PopupInputPassword" placeholder="********">
-	          		<label for="exampleInputEmail1">Port</label>
-	         		<input class="form-control" id="PopupInputPort" placeholder="22">
-	        		</div>-->
+                    <div class="form-group">
+                        <label class="control-label" for='name'>Name</label>
+                        <input type="text" class="form-control" id="PopupInputName" placeholder="ex. We love Fazilia.">
+                    </div>
                     <div class="form-group">
                         <label class="control-label" for='domain'>Domain or IP Address</label>
                         <input type="text" class="form-control" id="PopupInputDomain" placeholder="ex. 158.108.2.1 , surawat.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for='username'>Username's Domain</label>
+                        <input type="text" class="form-control" id="PopupInputUsername" placeholder="ex. root">
                     </div>
                      <div class="form-group">
                         <label class="control-label" for='password'>Password</label>
@@ -62,18 +97,27 @@
             // Binding a click event
             // From jQuery v.1.7.0 use .on() instead of .bind()
             $('#btn-create-domain').bind('click', function(e) {
-
                 // Prevents the default action to be triggered. 
                 e.preventDefault();
 
                 //Clear Input
+                $('#PopupInputName').val('');
                 $('#PopupInputDomain').val('');
+                $('#PopupInputUsername').val('');
                 $('#PopupInputPassword').val('');
                 $('#PopupInputPort').val('');
+
+                $('#PopupInputName').parent().removeClass();
+                $('#PopupInputName').parent().addClass('form-group');
+                $("label[for='name']").text('Name');
 
                 $('#PopupInputDomain').parent().removeClass();
                 $('#PopupInputDomain').parent().addClass('form-group');
                 $("label[for='domain']").text('Domain or IP Address');
+
+                $('#PopupInputUsername').parent().removeClass();
+                $('#PopupInputUsername').parent().addClass('form-group');
+                $("label[for='username']").text("Username's Domain");
 
                 $('#PopupInputPassword').parent().removeClass();
                 $('#PopupInputPassword').parent().addClass('form-group');
@@ -91,14 +135,27 @@
 		            	$.post( "<%= createdomain_path() %>",
 		            		{ domain: $('#PopupInputDomain').val() ,
 		            		password: $('#PopupInputPassword').val() , 
-		            		port: $('#PopupInputPort').val() } , 
+		            		port: $('#PopupInputPort').val() ,
+                            username: $('#PopupInputUsername').val(),
+                            name: $('#PopupInputName').val()} , 
 		            		function(data){
                                 //Waiting For Message from validator
-		            		    //console.log(data);
+		            		    console.log(data);
                                 eval('var errorData ='+data);  //change message format to object
                                 //console.log(errorData.domain); 
 
                                 //Show the validation to css
+                                //Form Name
+                                $('#PopupInputName').parent().removeClass();
+                                if(errorData.name=='Accept'){
+                                    $('#PopupInputName').parent().addClass('form-group has-success');
+                                     $("label[for='name']").text('Name');
+                                }else{
+                                    $('#PopupInputName').parent().addClass('form-group has-error');
+                                    $("label[for='name']").text(errorData.name);
+                                    //$('#element_to_pop_up').bPopup().close(); 
+                                }
+
                                 //Form Domain
                                 $('#PopupInputDomain').parent().removeClass();
                                 if(errorData.domain=='Accept'){
@@ -109,6 +166,18 @@
                                     $("label[for='domain']").text(errorData.domain);
                                     //$('#element_to_pop_up').bPopup().close(); 
                                 }
+                                //Form Username
+                                $('#PopupInputUsername').parent().removeClass();
+                                if(errorData.username =='Accept'){
+                                    $('#PopupInputUsername').parent().addClass('form-group has-success');
+                                     $("label[for='username']").text("Username's Domain");
+                                }else{
+                                    $('#PopupInputUsername').parent().addClass('form-group has-error');
+                                    $("label[for='username']").text(errorData.username);
+                                    //$('#element_to_pop_up').bPopup().close(); 
+                                }
+
+
                                 //Form Password
                                 $('#PopupInputPassword').parent().removeClass();
                                 if(errorData.password =='Accept'){
@@ -131,6 +200,11 @@
                                     //$('#element_to_pop_up').bPopup().close(); 
                                 }
 
+                                //Success All
+                                if(errorData.domain=='Accept' && errorData.port=='Accept' && errorData.name=='Accept'){
+                                    $('#element_to_pop_up').bPopup().close();
+                                }
+
 						});
 
 		            });
@@ -148,6 +222,31 @@
         });
 
     })(jQuery);
+</script>
+<!--DOMAIN LIST CONTROL-->
+<script>
+    $( "div[index]").hover(
+        function() {
+            var obj = $(this).find("div[name='option']:first");
+            obj.fadeIn(200);
+            //obj.css('display','');
+
+
+            obj.find("div[tool='edit']").hover(function(){
+                $(this).tooltip('show');
+            },function(){
+                $(this).tooltip('hide');
+            });
+            obj.find("div[tool='delete']").hover(function(){
+                $(this).tooltip('show');
+            },function(){
+                $(this).tooltip('hide');
+            });
+        }, function() {
+            var obj = $(this).find("div[name='option']:first")
+            //obj.css('display','none');
+            obj.fadeOut(200);
+        });
 </script>	
 <% end%>
 

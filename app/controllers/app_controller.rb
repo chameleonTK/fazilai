@@ -108,17 +108,37 @@ class AppController < ApplicationController
 
 
 	def createdomain
+		checkValidationName = isNameDomain(params[:name])
+
+		sendMessageValidationName = "name:"+"'"+checkValidationName+"'"
 		sendMessageValidationDomain = "domain:"+"'"+isDomainName(params[:domain])+"'"
 		sendMessageValidationPort = "port:"+"'"+isPort(params[:port])+"'"
+		sendMessageValidationUsername = "username:"+"'"+"Accept"+"'"
 		sendMessageValidationPassword = "password:"+"'"+"Accept"+"'"
 
-		render text: "{"+sendMessageValidationDomain+","+sendMessageValidationPort+","+sendMessageValidationPassword+"}"
+		if isDomainName(params[:domain])=='Accept' && isPort(params[:port])=='Accept' && checkValidationName=='Accept'  then
+			saveDomainToDB(params[:name],params[:domain],params[:username],params[:password],params[:port])
+		end
+
+		render text: "{"+sendMessageValidationName+","+sendMessageValidationDomain+","+sendMessageValidationPort+","+sendMessageValidationUsername+","+sendMessageValidationPassword+"}"
 	end
 
 
 
 
-
+	def saveDomainToDB(name,domain,username,password,port)
+		server_new = Server.new
+		server_new[:name] = name
+		server_new[:domain] = domain
+		server_new[:port] = port
+		server_new[:suser] = username
+		server_new[:spass] = password
+		server_new[:user_id] = 3
+		if server_new.save
+			return true
+		end
+		return false
+	end
 	def isDomainName(addr)
 		if addr.length >= 5
 			return 'Accept'
@@ -133,7 +153,21 @@ class AppController < ApplicationController
 		end
 		return 'Port: Invalid port number'
 	end
-	private :isDomainName , :isPort	
+
+	def isNameDomain(name)
+		if name.length < 3 then
+			return 'Name: Lenght more than 3'
+		else
+			all_name = Server.find(:all)
+			all_name.each do |x|
+				if x[:name]==name && x[:user_id]==3 then
+					return 'Name: This name is already in your list. '
+				end
+			end
+		end
+		return 'Accept'
+	end
+	private :isDomainName , :isPort	, :isNameDomain ,:saveDomainToDB
 
 
 end
