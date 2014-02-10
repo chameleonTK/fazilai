@@ -2,6 +2,7 @@ require 'net/ftp'
 
 class AppController < ApplicationController
 	skip_before_filter :logged, :only => [ :index , :createdomain]
+	before_filter :guest, :only => [ :index ]
 	before_filter :validate , :only => [ :profiledata]
 	skip_before_filter :verify_authenticity_token, :only => [:createdomain]
 	before_filter :setvar , :only => [:listfile]
@@ -105,7 +106,9 @@ class AppController < ApplicationController
 		end
 		render json: ll
 	end
-
+	def log
+		render text: "log not yet"
+	end
 
 	def createdomain
 		checkValidationName = isNameDomain(params[:name])
