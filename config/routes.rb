@@ -12,5 +12,5 @@ Fazilai::Application.routes.draw do
   get "/profile", to: "app#profile" , as:'profile' 
   post "/profile", to: "app#profiledata" 
   get   "/listfile/*dirname" ,to: "app#listfile" , as: 'listfile'
-
+  get "/log", to: "app#log"
 end

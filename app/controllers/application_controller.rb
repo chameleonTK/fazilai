@@ -13,5 +13,12 @@ class ApplicationController < ActionController::Base
 			redirect_to index_path
 		end
 	end
+	
+	def guest
+		@auth = Auth.user
+		if @auth.logged
+			redirect_to home_path
+		end
+	end
 
 end

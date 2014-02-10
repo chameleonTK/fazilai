@@ -2,6 +2,7 @@ require 'net/ftp'
 
 class AppController < ApplicationController
 	skip_before_filter :logged, :only => [ :index ]
+	before_filter :guest, :only => [ :index ]
 	before_filter :validate , :only => [ :profiledata]
 	before_filter :setvar , :only => [:listfile]
 	after_filter :clearvar , :only => [:listfile]
@@ -104,6 +105,8 @@ class AppController < ApplicationController
 		end
 		render json: ll
 	end
-
+	def log
+		render text: "log not yet"
+	end
 
 end
