@@ -1,0 +1,81 @@
+	
+<% content_for :body do %>
+	<!--[if gte IE 9 ]><link rel="stylesheet" type="text/css" href="_styles.css" media="screen"><![endif]-->
+
+	<style>
+		.rightdiv{
+			/*background-color:red;*/
+			float:left;
+			width:65%;
+			padding-left:40px;
+		}
+		.leftdiv{
+			/*background-color:yellow;*/
+			float:left;
+			width:320px;
+			padding-left:20px;
+		}
+	</style>
+
+<style type="text/css">
+    .CodeMirror {
+		height: 500px;
+	 }
+	.panel-heading{
+		height:60px;
+	}
+
+	.panel-title{
+		font-size: 23px;
+		font-weight: bold;
+	}
+
+	.btn{
+		padding: 6px 12px;
+	}
+
+</style>
+
+	<%= javascript_include_tag "server" %>
+	<script>
+		$(function(){
+			init_tree("<%= listfile_root_path() %>");
+		});
+	</script>
+
+<div class="container" style="margin-left:0px">
+	<div class="leftdiv">
+		<div class="panel panel-default" style="display: inline-block;">
+			<div class="panel-heading">
+				<h1 class="panel-title" style="float:left"> Directory </h1>
+				<div class="btndiv" style="float:right">
+					<button type="button" class="btn btn-warning btn-lg">
+						<span> <img src=<%= asset_path "icon-createfile.png" %>></span>
+					</button>
+					<button type="button" class="btn btn-warning btn-lg">
+						<span> <img src=<%= asset_path "icon-createfolder.png" %>></span>
+					</button>
+				</div>
+			</div>
+			<div class="panel-body roottree" style="padding: 10px 0px 0px 0px;">
+				<ol class="tree" > </ol>
+			</div>
+		</div>
+	</div>
+	<div class="rightdiv">
+		<div class="panel panel-default" style="display: inline-block;position: fixed;width: 760px;">
+			<div class="panel-heading">
+				<h1 class="panel-title" style="float:left"> Code </h1>
+				<div class="btndiv" style="float:right">
+					<button type="button" class="btn btn-danger btn-lg">
+						<span> <img src=<%= asset_path "icon-save.png" %>></span>
+					</button>
+				</div>
+			</div>
+			<div class="panel-body roottree" style="padding: 10px 0px 0px 0px;">
+				<textarea id="code" name="code"></textarea>
+			</div>
+		</div>
+	</div>
+</div>
+	<% end%>

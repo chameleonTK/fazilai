@@ -1,173 +1,167 @@
 <% content_for :body do %>
 
+<style>
+	.achieve{
+		display: inline-block;
+		width: 170px;
+		height: 100%;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-webkit-box-shadow: 0 1px 2px 0 #a39d92,0 0 0 rgba(0,0,0,0);
+		-moz-box-shadow: 0 1px 2px 0 #a39d92,0 0 0 rgba(0,0,0,0);
+		box-shadow: 0 1px 2px 0 #a39d92,0 0 0 rgba(0,0,0,0);
+		border: 1px solid #f3f3e9;
+	}
+	.infotab{
+		background-color:white;
+		float:left;
+	}
+
+	legend{
+		font-size: 18px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		color:black;
+		border-bottom: none;
+		padding-top: 10px;
+	}
+	.tab-content {
+		width:700px;
+		margin:auto;
+	}
+	.tab-content > div{
+		height:500px;
+		width:700px;
+	}
+	.nav-tabs{
+		width:700px;
+		margin:auto;
+	}
+	.nav-tabs > li.active a{
+		background: #fff;
+		color: #836F6F;
+		border:none;
+	}
+	.nav-tabs > li.active a:hover{
+		background: #fff;
+		border:none;
+	}
+	.nav-tabs > li a{
+		color: #fff;
+		background:none;
+		border:none;
+	}
+	.nav-tabs > li a:hover{
+		color: #fff;
+		background:none;
+		border:none;
+	}
+
+</style>
+<script>
+	$(function(){
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+			var id = $(e.target).attr("href").substr(1);
+			localStorage.setItem('selectedTab', id);
+			console.log(id)
+		});
+
+		var selectedTab = localStorage.getItem('selectedTab');
+    	$('#myTab a[href="#' + selectedTab + '"]').tab('show');
+		console.log(selectedTab)
+	})
+</script>
+
+
 <!-- Nav tabs -->
-<ul class="nav nav-tabs">
-
+<ul class="nav nav-tabs" id="myTab">
   <li class="active" ><a href="#profile" data-toggle="tab"  >Profile</a></li>
-
+  <li><a href="#achievement" data-toggle="tab">Achievement</a></li>
   <li><a href="#settings" data-toggle="tab">Settings</a></li>
 </ul>
-<div class="mini-layout">
-            <div class="mini-layout-body"></div>
-          </div>
 
 <!-- Tab panes -->
 <div class="tab-content" >
-  <div class="tab-pane active" id="profile"  style="background-color:#FFFFFF;height:1080px;width:1380px;float:left;">
-<font color="green">
-<br>
-<div style="width: 550px;float: left;
-min-height: 1px;
-margin-left: 20px">
-<%u = Auth.user %>
-  <% result=User.where(uid: u.id).take %>
-  <br>
-  <legend>account<span class="green"></span></legend>
+	<div class="tab-pane infotab active" id="profile">
+		<div align=center style="color:green">
+			<%u = Auth.user %>
+	  		<% result=User.where(uid: u.id).take %>
+	  		<legend>Account</legend>
+	  		username:
+	   	<%if (result[:email].nil?)==false %>
+				<%=result[:email] %>
+	  		<%else%>
+		  		<%="Error query email" %>
+			<%end%>
+			<br><br><div style="width:300px;height:1px;background:gray"></div>
+			<%servercount= Server.where(user_id: u.id).count %><br>
+	   	<legend>Server(s) and Project(s)</legend>
+  			The number of server(s) : <%=servercount %>:<br>
+			<%s = u.obj.servers  %>
+			<%if (s[0].nil?)==false %>
+				<%for i in 0..(servercount-1) %>
+					<%=i+1%><%= " Server name:"%><%projectcount= Proj.where(server_id: s[i][:sid].inspect).count %>
+					<%=s[i][:name].inspect %><%= " contains "%><%=projectcount%><%= " project(s)."%><br>
+					<%if (s[i].projs[0].nil?)==false %>
+						<%for ii in 0..(projectcount-1) %>
+							<%="  -        "%><%= s[i].projs[ii][:name].inspect%><br>
+						<%end%>
+					<%else%>
+						<%="           No Project(s)"%>
+					<% end %>
 
-   username:
-   <%if (result[:email].nil?)==false %>
-  <%=result[:email] %>
-  <%else%>
-  <%="Error query email" %>
-  <%end%>
+				<% end %>
+			<%else%>
+				<%="No server"%>
+			<% end %>
+		</div>
+	</div>
 
-<br><br>
- <legend>achievement(s)<span class="green"></span></legend>
-
-<% acount=Ownachievement.where(user_id: u.id).count %>
-<%a = u.obj.ownachievements  %>
-
-<%if (a[0].nil?)== false%>
-	<% for i in 0..(acount-1) %>
-
-
-
-
-
-			<div align='center'	style="display: inline-block;
-width: 170px;
-height: 100%;
-border-radius: 5px;
--moz-border-radius: 5px;
--webkit-border-radius: 5px;
--webkit-box-shadow: 0 1px 2px 0 #a39d92,0 0 0 rgba(0,0,0,0);
--moz-box-shadow: 0 1px 2px 0 #a39d92,0 0 0 rgba(0,0,0,0);
-box-shadow: 0 1px 2px 0 #a39d92,0 0 0 rgba(0,0,0,0);
-border: 1px solid #f3f3e9;">
-				<div >
+	<div class="tab-pane infotab" id="settings">
+		<div  align=center>
+				<%= form_for :post do |f| %>
+		    		<legend>
+						<% flash.each do |name, msg| -%>
+				      	<%= content_tag :div, msg, class: name , style:"color:red;font-size:14px" %>
+			   	 	<% end %>		
+						<div>Change password</div>
+					</legend>
+					<div style="width:300px;height:1px;background:gray"></div>
 					<br>
-					<%if a[i].achievement[:aid].inspect=='1'%>		
-					<%= image_tag "badge1.png" %>
-					<%elsif a[i].achievement[:aid].inspect=='2'%>
-					<%= image_tag "badge2.png" %>
-					<%elsif a[i].achievement[:aid].inspect=='3'%>
-					<%= image_tag "badge3.png" %>
-					<%elsif a[i].achievement[:aid].inspect=='4'%>
-					<%= image_tag "badge4.png" %>
-					<%elsif a[i].achievement[:aid].inspect=='5'%>
-					<%= image_tag "badge5.png" %>
-					<%elsif a[i].achievement[:aid].inspect=='6'%>
-					<%= image_tag "badge6.png" %>
-					<%elsif a[i].achievement[:aid].inspect=='7'%>
-					<%= image_tag "badge7.png" %>
-					<%elsif a[i].achievement[:aid].inspect=='8'%>
-					<%= image_tag "badge8.png" %>
-					<%end%>
-    			</div>
-    			<p>
-      				<span class="name">
-        			<%=a[i].achievement[:name].inspect%><br>
-      				</span>
+		    		<%= f.text_field :oldpassword,:class => "form-control fazilai-textform",:placeholder => "old password" %><br>
+			    	<%= f.password_field :newpassword ,:class => "form-control fazilai-textform",:placeholder => "new password"%><br>
+					<%= f.password_field :renewpassword ,:class => "form-control fazilai-textform",:placeholder => "re new password"%><br>
+					<%= f.submit :"Submit" , :class => "form-control fazilai-login btn-warning" , :style => "display:inline"%> 
+					<br><br>
+					<div style="width:300px;height:1px;background:gray"></div>
+				<% end %>
+		</div>
+	</div>
 
-        			<span class="created_at">
-          			<%=a[i].achievement[:detail].inspect%>
-        			</span>
-    			</p>
-
-  			</div>
-
-
-
-
-	<%end%>
-<%else%>
-<%="No achievement(s)"%>
-<%end%>
-
-</div>
-<div style="width: 450px;float: left;
-min-height: 1px;
-margin-left: 20px;">
-<%servercount= Server.where(user_id: u.id).count %>
-  <br>
-   <legend>server(s) and project(s)<span class="green"></span></legend>
-
-  The number of server(s) : <%=servercount %>:<br>
-<%s = u.obj.servers  %>
-<%if (s[0].nil?)==false %>
-<% for i in 0..(servercount-1) %>
-<%=i+1%><%= " Server name:"%><%projectcount= Proj.where(server_id: s[i][:sid].inspect).count %>
-<%=s[i][:name].inspect %><%= " contains "%><%=projectcount%><%= " project(s)."%><br>
-			<%if (s[i].projs[0].nil?)==false %>
-				<% for ii in 0..(projectcount-1) %>
-				<%="  -        "%><%= s[i].projs[ii][:name].inspect%><br>
+	<div class="tab-pane infotab" id="achievement">
+		<div align=center style="color:green">
+			<legend>Achievement(s)</legend>
+			<% acount=Ownachievement.where(user_id: u.id).count %>
+			<%a = u.obj.ownachievements  %>
+			<%if (a[0].nil?)== false%>
+				<% for i in 0..(acount-1) %>
+					<div align='center'	class="achieve">
+						<div ><br>
+							<% ach =  a[i].achievement[:aid].inspect=='1'%>		
+							<%= image_tag "badge"+ach+".png" %>
+    					</div>
+    					<p>
+      					<span class="name"> 	<%=a[i].achievement[:name].inspect%><br> </span>
+        					<span class="created_at"> <%=a[i].achievement[:detail].inspect%> </span>
+    					</p>
+	  				</div>
 				<%end%>
 			<%else%>
-			<%="           No Project(s)"%>
-			<% end %>
-
-<% end %>
-<%else%>
-<%="No server"%>
-<% end %>
-</div>		
-</font>
-
-
-
-
-   </div>
-
-  <div class="tab-pane" id="settings"  style="background-color:#FFFFFF;height:1080px;width:1380px;float:left;>
-  
-<div class="mini-layout">
-            <div class="mini-layout-body  style="background-color:#dceaf4;width: 70%;">
-
-<br>
-
-	<div  align=center>
-	<table>
-	<tr>
-	<td>
-	<%= form_for :post do |f| %>
-		<% flash.each do |name, msg| -%>
-      	<%= content_tag :div, msg, class: name %>
-    	<% end %>		
-
-    	<div style="color:black"><h4>Change password</h4></div>
-	<div style="width:300px;height:1px;background:gray"><div>
+				<%="No achievement(s)"%>
+			<%end%>
+		</div>
 	</div>
-	</div>
-	<br><br>
-    	<%= f.text_field :oldpassword,:class => "form-control fazilai-textform",:placeholder => "old password" %><br>
-    	<%= f.password_field :newpassword ,:class => "form-control fazilai-textform",:placeholder => "new password"%><br>
-	<%= f.password_field :renewpassword ,:class => "form-control fazilai-textform",:placeholder => "re new password"%><br>
-
-		<%= f.submit :"Submit" , :class => "form-control fazilai-login btn-warning" , :style => "display:inline"%> 
-		<br>
-		<br>
-		<div style="width:300px;height:1px;background:gray"><div>
-	</div>
-	<% end %>
-	</div>
-	<td>
-	<tr>
-	<table>
-
-</div>
-</div>
 
 
-
-</div>
 <% end%>

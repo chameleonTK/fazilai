@@ -1,8 +1,10 @@
 require 'net/ftp'
 
 class AppController < ApplicationController
-	skip_before_filter :logged, :only => [ :index ]
+	skip_before_filter :logged, :only => [ :index , :createdomain]
+	before_filter :guest, :only => [ :index ]
 	before_filter :validate , :only => [ :profiledata]
+	skip_before_filter :verify_authenticity_token, :only => [:createdomain]
 	before_filter :setvar , :only => [:listfile]
 	after_filter :clearvar , :only => [:listfile]
 
@@ -104,6 +106,80 @@ class AppController < ApplicationController
 		end
 		render json: ll
 	end
+	def log
+		render text: "log not yet"
+	end
+
+	def createdomain
+		checkValidationName = isNameDomain(params[:name])
+
+		sendMessageValidationName = "name:"+"'"+checkValidationName+"'"
+		sendMessageValidationDomain = "domain:"+"'"+isDomainName(params[:domain])+"'"
+		sendMessageValidationPort = "port:"+"'"+isPort(params[:port])+"'"
+		sendMessageValidationUsername = "username:"+"'"+"Accept"+"'"
+		sendMessageValidationPassword = "password:"+"'"+"Accept"+"'"
+
+		if isDomainName(params[:domain])=='Accept' && isPort(params[:port])=='Accept' && checkValidationName=='Accept'  then
+			saveDomainToDB(params[:name],params[:domain],params[:username],params[:password],params[:port])
+		end
+
+		render text: "{"+sendMessageValidationName+","+sendMessageValidationDomain+","+sendMessageValidationPort+","+sendMessageValidationUsername+","+sendMessageValidationPassword+"}"
+	end
+
+
+
+
+	def saveDomainToDB(name,domain,username,password,port)
+		u = Auth.user
+
+		server_new = Server.new
+		server_new[:name] = name
+		server_new[:domain] = domain
+		server_new[:port] = port
+		server_new[:suser] = username
+		server_new[:spass] = password
+		server_new[:user_id] = u.id
+		if server_new.save
+			return true
+		end
+		return false
+	end
+	def isDomainName(addr)
+		if addr.length >= 5
+			return 'Accept'
+		end
+		return 'Domain: Lenght more than 5.'
+	end
+
+	def isPort(port)
+		num = Integer(port) rescue -1
+		if num >= 0
+			return 'Accept'
+		end
+		return 'Port: Invalid port number'
+	end
+
+	def isNameDomain(name)
+		u = Auth.user
+
+		if name.length < 3 then
+			return 'Name: Lenght more than 3'
+		else
+			all_name = Server.where('user_id = ?',u.id)
+			all_name.each do |x|
+				if x[:name]==name then
+					return 'Name: This name is already in your list. '
+				end
+			end
+		end
+		return 'Accept'
+	end
+
+	def getAllServerByUserID
+
+	end
+
+	private :isDomainName , :isPort	, :isNameDomain ,:saveDomainToDB, :getAllServerByUserID
 
 
 end

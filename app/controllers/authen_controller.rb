@@ -2,6 +2,7 @@ class AuthenController < ApplicationController
 
 	layout "application"
 	skip_before_filter :logged, :only => [ :login , :signup , :signupdata]
+	before_filter :guest , :only => [ :login , :signup , :signupdata]
 	before_filter :validate , :only => [ :signupdata]
 
 

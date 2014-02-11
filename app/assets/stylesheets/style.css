@@ -29,4 +29,7 @@
 	padding-top:20px;
 }
 
+.list-item-hover:hover{
+	background-color:rgb(255, 224, 224);
+}
 
