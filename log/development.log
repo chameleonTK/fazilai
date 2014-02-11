@@ -72438,3 +72438,654 @@ Started GET "/assets/badge2.png" for 127.0.0.1 at 2014-02-05 20:26:15 +0700
 
 
 Started GET "/assets/wallpaper.png" for 127.0.0.1 at 2014-02-05 20:26:16 +0700
+
+
+Started GET "/" for 127.0.0.1 at 2014-02-06 18:50:26 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by AppController#index as HTML
+  Rendered app/index.html.erb within layouts/application (57.0ms)
+Completed 200 OK in 1326ms (Views: 1271.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/authen.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:29 +0700
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:29 +0700
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:29 +0700
+
+
+Started GET "/assets/directory.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:29 +0700
+
+
+Started GET "/assets/bootstrap-theme.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:29 +0700
+
+
+Started GET "/stylesheets/bootstrap.css.bak.css" for 127.0.0.1 at 2014-02-06 18:50:29 +0700
+
+ActionController::RoutingError (No route matches [GET] "/stylesheets/bootstrap.css.bak.css"):
+  actionpack (4.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.2) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.2) lib/rails/engine.rb:511:in `call'
+  railties (4.0.2) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (15.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (9.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (310.0ms)
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:29 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:29 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:29 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:29 +0700
+
+
+Started GET "/assets/authen.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:30 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:30 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:30 +0700
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2014-02-06 18:50:30 +0700
+
+
+Started GET "/assets/wallpaper.png" for 127.0.0.1 at 2014-02-06 18:50:31 +0700
+
+
+Started POST "/" for 127.0.0.1 at 2014-02-06 18:50:35 +0700
+Processing by AuthenController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RkswzHSq7/0mmRrMg5BeWWbP59XhWEs5rSkdy+e02s8=", "post"=>{"username"=>"narutoct@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"sign in"}
+  [1m[35mUser Load (0.0ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'narutoct@gmail.com' LIMIT 1
+Redirected to http://localhost:3000/choose
+Completed 302 Found in 81ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/choose" for 127.0.0.1 at 2014-02-06 18:50:35 +0700
+Processing by AppController#choose as HTML
+  Rendered app/choose.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 47ms (Views: 45.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:36 +0700
+
+
+Started GET "/assets/authen.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:36 +0700
+
+
+Started GET "/assets/bootstrap-theme.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:36 +0700
+
+
+Started GET "/stylesheets/bootstrap.css.bak.css" for 127.0.0.1 at 2014-02-06 18:50:36 +0700
+
+ActionController::RoutingError (No route matches [GET] "/stylesheets/bootstrap.css.bak.css"):
+  actionpack (4.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.2) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.2) lib/rails/engine.rb:511:in `call'
+  railties (4.0.2) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (91.0ms)
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:36 +0700
+
+
+Started GET "/assets/directory.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:36 +0700
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:36 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:36 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:36 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:36 +0700
+
+
+Started GET "/assets/authen.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:36 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:37 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:37 +0700
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2014-02-06 18:50:37 +0700
+
+
+Started GET "/assets/wallpaper.png" for 127.0.0.1 at 2014-02-06 18:50:37 +0700
+
+
+Started GET "/profile" for 127.0.0.1 at 2014-02-06 18:50:40 +0700
+Processing by AppController#profile as HTML
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."uid" = 3 LIMIT 1[0m
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "ownachievements" WHERE "ownachievements"."user_id" = 3
+  [1m[36mOwnachievement Load (21.0ms)[0m  [1mSELECT "ownachievements".* FROM "ownachievements" WHERE "ownachievements"."user_id" = ?[0m  [["user_id", 3]]
+  [1m[35mAchievement Load (0.0ms)[0m  SELECT "achievements".* FROM "achievements" WHERE "achievements"."aid" = ? ORDER BY "achievements"."aid" ASC LIMIT 1  [["aid", 1]]
+  [1m[36mAchievement Load (0.0ms)[0m  [1mSELECT "achievements".* FROM "achievements" WHERE "achievements"."aid" = ? ORDER BY "achievements"."aid" ASC LIMIT 1[0m  [["aid", 2]]
+  [1m[35mAchievement Load (1.0ms)[0m  SELECT "achievements".* FROM "achievements" WHERE "achievements"."aid" = ? ORDER BY "achievements"."aid" ASC LIMIT 1  [["aid", 3]]
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "servers" WHERE "servers"."user_id" = 3[0m
+  [1m[35mServer Load (0.0ms)[0m  SELECT "servers".* FROM "servers" WHERE "servers"."user_id" = ?  [["user_id", 3]]
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "projs" WHERE "projs"."server_id" = 1[0m
+  [1m[35mProj Load (1.0ms)[0m  SELECT "projs".* FROM "projs" WHERE "projs"."server_id" = ?  [["server_id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "projs" WHERE "projs"."server_id" = 2[0m
+  [1m[35mProj Load (0.0ms)[0m  SELECT "projs".* FROM "projs" WHERE "projs"."server_id" = ?  [["server_id", 2]]
+  Rendered app/profile.html.erb within layouts/application (295.0ms)
+Completed 200 OK in 339ms (Views: 311.0ms | ActiveRecord: 27.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:40 +0700
+
+
+Started GET "/assets/authen.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:40 +0700
+
+
+Started GET "/stylesheets/bootstrap.css.bak.css" for 127.0.0.1 at 2014-02-06 18:50:40 +0700
+
+ActionController::RoutingError (No route matches [GET] "/stylesheets/bootstrap.css.bak.css"):
+  actionpack (4.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.2) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.2) lib/rails/engine.rb:511:in `call'
+  railties (4.0.2) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (88.0ms)
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:40 +0700
+
+
+Started GET "/assets/bootstrap-theme.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:40 +0700
+
+
+Started GET "/assets/directory.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:40 +0700
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-02-06 18:50:41 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:41 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:41 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:41 +0700
+
+
+Started GET "/assets/authen.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:41 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:41 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-02-06 18:50:41 +0700
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2014-02-06 18:50:41 +0700
+
+
+Started GET "/assets/badge1.png" for 127.0.0.1 at 2014-02-06 18:50:41 +0700
+
+
+Started GET "/assets/badge2.png" for 127.0.0.1 at 2014-02-06 18:50:41 +0700
+
+
+Started GET "/assets/badge3.png" for 127.0.0.1 at 2014-02-06 18:50:42 +0700
+
+
+Started GET "/assets/wallpaper.png" for 127.0.0.1 at 2014-02-06 18:50:42 +0700
+
+
+Started GET "/profile" for 127.0.0.1 at 2014-02-06 18:51:14 +0700
+Processing by AppController#profile as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."uid" = 3 LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "ownachievements" WHERE "ownachievements"."user_id" = 3
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "servers" WHERE "servers"."user_id" = 3[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "projs" WHERE "projs"."server_id" = 1
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "projs" WHERE "projs"."server_id" = 2[0m
+  Rendered app/profile.html.erb within layouts/application (34.0ms)
+Completed 200 OK in 84ms (Views: 82.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:14 +0700
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:14 +0700
+
+
+Started GET "/assets/authen.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:14 +0700
+
+
+Started GET "/stylesheets/bootstrap.css.bak.css" for 127.0.0.1 at 2014-02-06 18:51:14 +0700
+
+ActionController::RoutingError (No route matches [GET] "/stylesheets/bootstrap.css.bak.css"):
+  actionpack (4.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.2) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.2) lib/rails/engine.rb:511:in `call'
+  railties (4.0.2) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (105.0ms)
+
+
+Started GET "/assets/bootstrap-theme.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:14 +0700
+
+
+Started GET "/assets/directory.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:14 +0700
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:14 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:14 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:14 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:14 +0700
+
+
+Started GET "/assets/authen.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:14 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:15 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:15 +0700
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2014-02-06 18:51:15 +0700
+
+
+Started GET "/assets/wallpaper.png" for 127.0.0.1 at 2014-02-06 18:51:15 +0700
+
+
+Started GET "/assets/badge1.png" for 127.0.0.1 at 2014-02-06 18:51:15 +0700
+
+
+Started GET "/assets/badge2.png" for 127.0.0.1 at 2014-02-06 18:51:15 +0700
+
+
+Started GET "/assets/badge3.png" for 127.0.0.1 at 2014-02-06 18:51:15 +0700
+
+
+Started GET "/" for 127.0.0.1 at 2014-02-06 18:51:36 +0700
+Processing by AppController#index as HTML
+  Rendered app/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 71ms (Views: 71.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/authen.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:36 +0700
+
+
+Started GET "/stylesheets/bootstrap.css.bak.css" for 127.0.0.1 at 2014-02-06 18:51:36 +0700
+
+ActionController::RoutingError (No route matches [GET] "/stylesheets/bootstrap.css.bak.css"):
+  actionpack (4.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.2) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.2) lib/rails/engine.rb:511:in `call'
+  railties (4.0.2) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (90.0ms)
+
+
+Started GET "/assets/bootstrap-theme.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:36 +0700
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:36 +0700
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:36 +0700
+
+
+Started GET "/assets/directory.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:36 +0700
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:36 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:37 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:37 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:37 +0700
+
+
+Started GET "/assets/authen.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:37 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:37 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:37 +0700
+
+
+Started GET "/assets/wallpaper.png" for 127.0.0.1 at 2014-02-06 18:51:37 +0700
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2014-02-06 18:51:37 +0700
+
+
+Started POST "/" for 127.0.0.1 at 2014-02-06 18:51:44 +0700
+Processing by AuthenController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RkswzHSq7/0mmRrMg5BeWWbP59XhWEs5rSkdy+e02s8=", "post"=>{"username"=>"narutoct@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"sign in"}
+  [1m[35mUser Load (1.0ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'narutoct@gmail.com' LIMIT 1
+Redirected to http://localhost:3000/choose
+Completed 302 Found in 20ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/choose" for 127.0.0.1 at 2014-02-06 18:51:44 +0700
+Processing by AppController#choose as HTML
+  Rendered app/choose.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 48ms (Views: 48.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:44 +0700
+
+
+Started GET "/assets/authen.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:45 +0700
+
+
+Started GET "/stylesheets/bootstrap.css.bak.css" for 127.0.0.1 at 2014-02-06 18:51:45 +0700
+
+ActionController::RoutingError (No route matches [GET] "/stylesheets/bootstrap.css.bak.css"):
+  actionpack (4.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.2) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.2) lib/rails/engine.rb:511:in `call'
+  railties (4.0.2) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (79.0ms)
+
+
+Started GET "/assets/bootstrap-theme.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:45 +0700
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:45 +0700
+
+
+Started GET "/assets/directory.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:45 +0700
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:45 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:45 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:45 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:45 +0700
+
+
+Started GET "/assets/authen.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:45 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:45 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:45 +0700
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2014-02-06 18:51:45 +0700
+
+
+Started GET "/assets/wallpaper.png" for 127.0.0.1 at 2014-02-06 18:51:46 +0700
+
+
+Started GET "/profile" for 127.0.0.1 at 2014-02-06 18:51:49 +0700
+Processing by AppController#profile as HTML
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."uid" = 3 LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "ownachievements" WHERE "ownachievements"."user_id" = 3
+  [1m[36mOwnachievement Load (0.0ms)[0m  [1mSELECT "ownachievements".* FROM "ownachievements" WHERE "ownachievements"."user_id" = ?[0m  [["user_id", 3]]
+  [1m[35mAchievement Load (0.0ms)[0m  SELECT "achievements".* FROM "achievements" WHERE "achievements"."aid" = ? ORDER BY "achievements"."aid" ASC LIMIT 1  [["aid", 1]]
+  [1m[36mAchievement Load (0.0ms)[0m  [1mSELECT "achievements".* FROM "achievements" WHERE "achievements"."aid" = ? ORDER BY "achievements"."aid" ASC LIMIT 1[0m  [["aid", 2]]
+  [1m[35mAchievement Load (0.0ms)[0m  SELECT "achievements".* FROM "achievements" WHERE "achievements"."aid" = ? ORDER BY "achievements"."aid" ASC LIMIT 1  [["aid", 3]]
+  [1m[36mAchievement Load (0.0ms)[0m  [1mSELECT "achievements".* FROM "achievements" WHERE "achievements"."aid" = ? ORDER BY "achievements"."aid" ASC LIMIT 1[0m  [["aid", 4]]
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "servers" WHERE "servers"."user_id" = 3
+  [1m[36mServer Load (0.0ms)[0m  [1mSELECT "servers".* FROM "servers" WHERE "servers"."user_id" = ?[0m  [["user_id", 3]]
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "projs" WHERE "projs"."server_id" = 1
+  [1m[36mProj Load (0.0ms)[0m  [1mSELECT "projs".* FROM "projs" WHERE "projs"."server_id" = ?[0m  [["server_id", 1]]
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "projs" WHERE "projs"."server_id" = 2
+  [1m[36mProj Load (0.0ms)[0m  [1mSELECT "projs".* FROM "projs" WHERE "projs"."server_id" = ?[0m  [["server_id", 2]]
+  Rendered app/profile.html.erb within layouts/application (55.0ms)
+Completed 200 OK in 95ms (Views: 95.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:49 +0700
+
+
+Started GET "/assets/authen.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:49 +0700
+
+
+Started GET "/stylesheets/bootstrap.css.bak.css" for 127.0.0.1 at 2014-02-06 18:51:49 +0700
+
+ActionController::RoutingError (No route matches [GET] "/stylesheets/bootstrap.css.bak.css"):
+  actionpack (4.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.2) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.2) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.2) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.2) lib/rails/engine.rb:511:in `call'
+  railties (4.0.2) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.0ms)
+  Rendered C:/BitNami/rubystack-1.9.3-18/ruby/lib/ruby/gems/1.9.1/gems/actionpack-4.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (83.0ms)
+
+
+Started GET "/assets/bootstrap-theme.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:49 +0700
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:49 +0700
+
+
+Started GET "/assets/directory.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:49 +0700
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-02-06 18:51:49 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:49 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:49 +0700
+
+
+Started GET "/assets/authen.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:50 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:50 +0700
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:50 +0700
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2014-02-06 18:51:50 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-02-06 18:51:50 +0700
+
+
+Started GET "/assets/badge2.png" for 127.0.0.1 at 2014-02-06 18:51:50 +0700
+
+
+Started GET "/assets/badge1.png" for 127.0.0.1 at 2014-02-06 18:51:50 +0700
+
+
+Started GET "/assets/badge3.png" for 127.0.0.1 at 2014-02-06 18:51:50 +0700
+
+
+Started GET "/assets/badge4.png" for 127.0.0.1 at 2014-02-06 18:51:50 +0700
+
+
+Started GET "/assets/wallpaper.png" for 127.0.0.1 at 2014-02-06 18:51:51 +0700
