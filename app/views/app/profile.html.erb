@@ -31,7 +31,7 @@
 		margin:auto;
 	}
 	.tab-content > div{
-		height:500px;
+		height:100%;
 		width:700px;
 	}
 	.nav-tabs{
@@ -41,20 +41,35 @@
 	.nav-tabs > li.active a{
 		background: #fff;
 		color: #836F6F;
+		width: 120px;
+		height: 87px;
+		background:none;
+		background-image: url(/assets/nav-tab-active.png);
 		border:none;
 	}
 	.nav-tabs > li.active a:hover{
 		background: #fff;
+		width: 120px;
+		height: 87px;
+		background:none;
+		background-image: url(/assets/nav-tab-active.png);
 		border:none;
 	}
 	.nav-tabs > li a{
-		color: #fff;
+		/*color: #fff;*/
+		width: 120px;
+		height: 87px;
+
 		background:none;
+		background-image: url(/assets/normal-tab.png);
 		border:none;
 	}
 	.nav-tabs > li a:hover{
-		color: #fff;
+		/*color: #fff;*/
+		width: 120px;
+		height: 87px;
 		background:none;
+		background-image: url(/assets/nav-tab.png);
 		border:none;
 	}
 
@@ -76,9 +91,9 @@
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" id="myTab">
-  <li class="active" ><a href="#profile" data-toggle="tab"  >Profile</a></li>
-  <li><a href="#achievement" data-toggle="tab">Achievement</a></li>
-  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+  <li class="active" ><a href="#profile" data-toggle="tab"  ><br><center>Profile</center></a></li>
+  <li><a href="#achievement" data-toggle="tab"><br><center>Achievement</center></a></li>
+  <li><a href="#settings" data-toggle="tab"><br><center>Settings</center></a></li>
 </ul>
 
 <!-- Tab panes -->
@@ -88,15 +103,19 @@
 			<%u = Auth.user %>
 	  		<% result=User.where(uid: u.id).take %>
 	  		<legend>Account</legend>
+	  		<div style="width:300px;height:1px;background:gray"></div>
+	  		<br>
 	  		username:
 	   	<%if (result[:email].nil?)==false %>
 				<%=result[:email] %>
 	  		<%else%>
 		  		<%="Error query email" %>
 			<%end%>
-			<br><br><div style="width:300px;height:1px;background:gray"></div>
+			<br><br>
 			<%servercount= Server.where(user_id: u.id).count %><br>
 	   	<legend>Server(s) and Project(s)</legend>
+	   	<div style="width:300px;height:1px;background:gray"></div>
+	   	<br>
   			The number of server(s) : <%=servercount %>:<br>
 			<%s = u.obj.servers  %>
 			<%if (s[0].nil?)==false %>
@@ -116,6 +135,7 @@
 				<%="No server"%>
 			<% end %>
 		</div>
+		<br><br>
 	</div>
 
 	<div class="tab-pane infotab" id="settings">
@@ -134,21 +154,23 @@
 					<%= f.password_field :renewpassword ,:class => "form-control fazilai-textform",:placeholder => "re new password"%><br>
 					<%= f.submit :"Submit" , :class => "form-control fazilai-login btn-warning" , :style => "display:inline"%> 
 					<br><br>
-					<div style="width:300px;height:1px;background:gray"></div>
 				<% end %>
 		</div>
+		<br><br>
 	</div>
 
 	<div class="tab-pane infotab" id="achievement">
 		<div align=center style="color:green">
 			<legend>Achievement(s)</legend>
+			<div style="width:300px;height:1px;background:gray"></div>
+			<br>
 			<% acount=Ownachievement.where(user_id: u.id).count %>
 			<%a = u.obj.ownachievements  %>
 			<%if (a[0].nil?)== false%>
 				<% for i in 0..(acount-1) %>
 					<div align='center'	class="achieve">
 						<div ><br>
-							<% ach =  a[i].achievement[:aid].inspect=='1'%>		
+							<% ach =  a[i].achievement[:aid].inspect%>		
 							<%= image_tag "badge"+ach+".png" %>
     					</div>
     					<p>
@@ -156,11 +178,15 @@
         					<span class="created_at"> <%=a[i].achievement[:detail].inspect%> </span>
     					</p>
 	  				</div>
+					<%if (i+1)%3==0%>
+					<br><br>
+					<% end %>
 				<%end%>
 			<%else%>
 				<%="No achievement(s)"%>
 			<%end%>
 		</div>
+		<br><br>
 	</div>
 
 
