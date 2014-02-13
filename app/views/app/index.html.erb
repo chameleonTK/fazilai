@@ -2,6 +2,15 @@
 <% end %>
 
 <% content_for :body do %>
+	<style>
+		@media only screen and (min-width : 1224px) {
+			.bg {
+				background-image: url(<%= asset_path 'wallpaper.png' %>) !important;
+			}
+		}
+	</style>
+
+
 	<div class="login-box">
 	<%= form_for :post do |f| %>
 

@@ -28,8 +28,7 @@
 .social-box{
 	padding-top:20px;
 }
-
-.list-item-hover:hover{
+.tree > li label :hover{
 	background-color:rgb(255, 224, 224);
 }
 

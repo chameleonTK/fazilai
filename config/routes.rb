@@ -11,8 +11,10 @@ Fazilai::Application.routes.draw do
 
   get "/server", to: "app#server" , as:'server'
   get   "/listfile" ,to: "app#listfile" ,as: "listfile_root"
+  get   "/listfile/*dirname" ,to: "app#listfile" , as: 'listfile'
+  post   "/getfile/*dirname" ,to: "app#getfile" ,as: "getfile"
+
   get "/profile", to: "app#profile" , as:'profile' 
   post "/profile", to: "app#profiledata" 
-  get   "/listfile/*dirname" ,to: "app#listfile" , as: 'listfile'
   get "/log", to: "app#log"
 end

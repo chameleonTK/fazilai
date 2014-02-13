@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAkTwOtLX3qFx-vP6Ioi9a-z9CPp--JxTA&sensor=false"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script>
+	var initialLocation=new google.maps.LatLng(13.2809647760776,100.92576419);
+	var now=initialLocation;
+	function initialize()
+	{
+
+		var mapProp = {
+		 	center:initialLocation,
+		  	zoom:16,
+		  	mapTypeId:google.maps.MapTypeId.ROADMAP
+		 };
+
+		var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+		var marker=new google.maps.Marker({
+		  		position:initialLocation
+		  	});
+			marker.setMap(map);
+		
+		google.maps.event.addListener(marker,'click',function(e) {
+ 			$('#content').html("boo");
+  		});
+		
+		google.maps.event.addListener(map,'click',function(e) {
+ 			console.log(e.latLng);
+ 			var x = e.latLng.lb;
+ 			var y = e.latLng.mb;
+ 			var winwin=e.latLng;
+ 			var myTrip=[now,winwin];
+			var flightPath=new google.maps.Polyline({
+			  path:myTrip,
+			  strokeColor:"#0000FF",
+			  strokeOpacity:0.8,
+			  strokeWeight:5
+			  });
+			flightPath.setMap(map);
+			now=winwin;
+
+  		});
+
+		var browserSupportFlag;
+
+		if(navigator.geolocation) {
+    		browserSupportFlag = true;
+		    navigator.geolocation.getCurrentPosition(function(position) {
+		    	//initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+		    	//initialLocation=new google.maps.LatLng(100.925764,13.28096476);
+
+		     	map.setCenter(initialLocation);
+		     	//alert(initialLocation.mb);
+				//alert(initialLocation.lb);
+		    }, function() {
+		    	handleNoGeolocation(browserSupportFlag);
+		    });
+		}
+		else {
+		    browserSupportFlag = false;
+		    handleNoGeolocation(browserSupportFlag);
+		}
+
+		function handleNoGeolocation(errorFlag) {
+		    if (errorFlag == true) {
+		      aconsole.log("Geolocation service failed.");
+		    } else {
+		      console.log("Your browser doesn't support geolocation. We've placed you in Siberia.");
+		    }
+
+		    map.setCenter(initialLocation);
+
+		    
+
+  		}
+
+	}
+	
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+	
+</script>
+
+
+</head>
+
+<body>
+	<div id="content"></div>
+<div id="googleMap" style="width:100%;height:800px;"></div>
+</body>
+</html>

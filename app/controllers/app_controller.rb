@@ -5,8 +5,8 @@ class AppController < ApplicationController
 	before_filter :guest, :only => [ :index ]
 	before_filter :validate , :only => [ :profiledata]
 	skip_before_filter :verify_authenticity_token, :only => [:createdomain]
-	before_filter :setvar , :only => [:listfile]
-	after_filter :clearvar , :only => [:listfile]
+	before_filter :setvar , :only => [:listfile,:getfile]
+	after_filter :clearvar , :only => [:listfile,:getfile]
 
 	def setvar
 		session[:server] = 'ftp.curve.in.th'
@@ -14,6 +14,7 @@ class AppController < ApplicationController
 		session[:password] = '2curveTK' #params["password"]
 		@server = session[:server]
 		@ftp = Net::FTP.new(session[:server])
+		@ftp.passive = true
 		@ftp.login(session[:username], session[:password])
 
 	end
@@ -62,7 +63,6 @@ class AppController < ApplicationController
 	end
 
 	def profiledata
-
 			u = Auth.user
 			user = User.find_by(uid: u.id)
 			user.pass = params[:post][:newpassword]
@@ -76,23 +76,27 @@ class AppController < ApplicationController
 		
 	end
 
+	def chdir (ftp,dirname)
+		@dir = ""
+		dirname.each_with_index do | dr , i |
+			if i == dirname.length-1
+				if params["format"].nil?
+					ftp.chdir(dr)
+					@dir += "/"+dr
+				end
+			else
+				ftp.chdir(dr)
+				@dir += "/"+dr
+			end
+		end
+		return ftp
+	end
 
 	def listfile
 		dir_ = params["dirname"]
 		if not dir_.nil?
-			@dir = ""
 			dirname = dir_.split("/")
-			dirname.each_with_index do | dr , i |
-				if i == dirname.length-1
-					if params["format"].nil?
-						@ftp.chdir(dr)
-						@dir += "/"+dr
-					end
-				else
-					@ftp.chdir(dr)
-					@dir += "/"+dr
-				end
-			end
+			@ftp = chdir(@ftp,dirname)
 		else
 			@dir ="/"
 		end
@@ -106,6 +110,69 @@ class AppController < ApplicationController
 		end
 		render json: ll
 	end
+
+	def getfile
+		filename = ""
+		dir_ = params["dirname"]
+		ret = {}
+		if not dir_.nil?
+			dirname = dir_.split("/")
+			filename = dirname[dirname.length-1]
+			dirname = dirname.take(dirname.length-1).join("/")
+			#@ftp = chdir(@ftp,dirname)
+			#@ftp.gettextfile(filename)
+			if params["format"].nil?
+				ret["code"] = ""
+				ret["type"] = "error"
+				ret["error"] = "no format?"
+			else
+				type = { 
+					"php" => "application/x-httpd-php",
+					"html" => "text/html" ,
+					"js" => "text/javascript",
+					"css" => "text/css",
+					"rb" => "text/x-ruby",
+					"py" => "text/x-python"
+				}
+				if type.has_key?(params["format"])
+				
+					ret["code"] = ""
+					ret["type"] = type[params["format"]]
+					filenames = @ftp.nlst(dirname) 
+					
+					#fileList = @ftp.list(filename+"*")
+					data = "not find file"
+				  	filenames.each do |file|
+
+						if file.include? filename
+							local = "tmp_server/"+filename+"."+params["format"]
+							@ftp.getbinaryfile(file,local,1024)
+							data = file
+							f = open(local, "r")
+							data = f.read
+ 							f.close
+							break
+						end
+				   end
+					ret["code"] = data
+					#render text: filename
+				else	
+					ret["code"] = ""
+					ret["type"] = params["format"]
+					ret["error"] = "not support type"
+				end
+			end
+		else
+			ret["code"] = "error"
+			ret["type"] = "error"
+			ret["error"] = "not dirname"
+		end
+
+		render json: ret	
+
+	end
+
+
 	def log
 		render text: "log not yet"
 	end

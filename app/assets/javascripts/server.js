@@ -1,4 +1,6 @@
-//= require_tree ./server/lib
-//= require_tree ./server/mode
-//= require_tree ./server/addon
-//= require_tree ./server/
+
+//= require_tree ./server/codemirror/lib
+//= require_tree ./server/codemirror/mode
+//= require_tree ./server/codemirror/addon
+//= require_tree ./server/codemirror
+//= require_tree ./server/ftp
