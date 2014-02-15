@@ -17,6 +17,23 @@ function gentree(data,is_root,label_for){
 	});
 	return s
 }
+
+function get_dir(file){
+	var s="";
+	do{
+		if(file.is('ol')){
+			var label = file.prev().prev()
+		}else{
+			var label = file
+		}
+		s = "/"+label.attr('filename') + s;
+		file = file.parent().parent();		
+	
+	}while( !file.hasClass('tree'));
+	return s;
+
+}
+
 function init_tree(path_init){
 	$.get(path_init,function(data){
 		$('.tree').html(gentree(data,true,""));
@@ -32,20 +49,7 @@ function init_tree(path_init){
 			folder.attr('checked', true);
 			var label_for = folder.attr('for');
 			var subfolder = folder.next().next();
-			s=""
-			do{
-				if(folder.is('ol')){
-					var label = folder.prev().prev()
-				}else{
-					var label = folder
-				}
-				s = "/"+label.attr('filename') + s;
-				folder = folder.parent().parent();
-				//console.log("parent");
-				//console.log(folder);
-				//console.log(s);
-				
-			}while( !folder.hasClass('tree'));
+			var s = get_dir(folder);
 			$.get("/listfile"+s,function(data){
 				//console.log(subfolder);
 				subfolder.html(gentree(data,false,label_for));
@@ -64,18 +68,10 @@ function init_tree(path_init){
 		}else{
 			file.addClass('checked');
 			file.attr('checked', true);
-			var subfolder = file.next().next();
-			s=""
-			do{
-				if(file.is('ol')){
-					var label = file.prev().prev()
-				}else{
-					var label = file
-				}
-				s = "/"+label.attr('filename') + s;
-				file = file.parent().parent();
-				
-			}while( !file.hasClass('tree'));
+			var s = get_dir(file);
+			$(".edited").removeClass("edited");
+			file.parent().addClass("edited");
+			
 			$.post("/getfile"+s,function(data){
 				console.log(data);
 				//alert("a");
@@ -84,5 +80,44 @@ function init_tree(path_init){
 			});
 		}
 	});
+	$("#createfile").click(function(){
+
+	});
+
+	$("#createfolder").click(function(){
+
+
+	});	
+	$("#savecode").click(function(){
+		var file = $($(".edited > label")[0]);
+		if(file != undefined && file.is("label")){
+			var s = get_dir(file);
+			var doc = getEditorText();
+			$.post("/putfile"+s,{"doc":doc },function(data){
+				if(data=="accept"){
+					var alert_ = ''
+					alert_ += '<div class="alert alert-success">';
+					alert_ += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+					alert_ += '<span>Already save this file</span>';
+					alert_ += '</div>'
+					$("#code").before(alert_);
+				}else{
+					var alert_ = ''
+					alert_ += '<div class="alert alert-error">';
+					alert_ += '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+					alert_ += '<span>Fail to save file</span>';
+					alert_ += '</div>'
+					$("#code").before(alert_);
+				}
+				$(".alert").show();
+				console.log(data)
+			});
+		}else{
+			alert("sorry it not file");
+		}
+	});
+	
 }
+
+
 

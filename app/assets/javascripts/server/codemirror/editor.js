@@ -35,5 +35,8 @@ function  swapEditor(name,code,mode){
 //	},2000);
 }
 
+function getEditorText(){
+	return editor.getValue();
+}
 
 

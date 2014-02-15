@@ -10,9 +10,10 @@ Fazilai::Application.routes.draw do
   post "/choose/createdomain", to: "app#createdomain" ,as:'createdomain'
 
   get "/server", to: "app#server" , as:'server'
-  get   "/listfile" ,to: "app#listfile" ,as: "listfile_root"
-  get   "/listfile/*dirname" ,to: "app#listfile" , as: 'listfile'
-  post   "/getfile/*dirname" ,to: "app#getfile" ,as: "getfile"
+  get   "/listfile" ,to: "ftp#listfile" ,as: "listfile_root"
+  get   "/listfile/*dirname" ,to: "ftp#listfile" , as: 'listfile'
+  post   "/getfile/*dirname" ,to: "ftp#getfile" ,as: "getfile"
+  post   "/putfile/*dirname" ,to: "ftp#putfile" ,as: "putfile"
 
   get "/profile", to: "app#profile" , as:'profile' 
   post "/profile", to: "app#profiledata" 
