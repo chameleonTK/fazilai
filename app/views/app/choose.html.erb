@@ -15,15 +15,15 @@
                 </div>
             </div>
             <div class="panel-body roottree" style="padding: 10px 0px 0px 0px;">
-                <div class="list-group" style="overflow-y: scroll;height: 260px;">
-                    <div index="1" class="list-group-item list-item-hover">
+                <div id="table-server" class="list-group" style="overflow-y: scroll;height: 260px;">
+                    <div index="3" class="list-group-item list-item-hover">
                         <div style="float: left; margin-top: -5px; margin-left: -8px;">
                             <img src="assets/domain_badge.png" style="width: 50px; height: 50px;">
                         </div>
                         <div style="display: inline-block; margin-left: 10px;">
                         <%= link_to 'We love Fazilai.', server_path , class: "list-group-item-heading" , style: "font-size: 18px" %>
                         <h4 class="list-group-item-heading"></h4>
-                        <p class="list-group-item-text">DOMAIN: root@ku.ac.th</p>
+                        <p class="list-group-item-text">DOMAIN: root@ku.ac.th , PORT: 22</p>
                         </div>
                         <div name="option" style="float: right; display: none;margin-top: 8px;">
                             <div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit">
@@ -35,12 +35,12 @@
                         </div>
                     </div>
 
-                    <div index="2" class="list-group-item list-item-hover" style="height: 65px; text-align:center;">
+                    <div index="4" class="list-group-item list-item-hover" style="height: 65px; text-align:center;">
                         <div style="display: inline-block;">
                             <img src="assets/icon-createlist2.png" style="width: 50px; height: 50px;">
                         </div>
                     </div>
-
+                     <div index="10" class="list-group-item list-item-hover"><div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div style="display: inline-block; margin-left: 10px;"><a class="list-group-item-heading" href="/server" style="font-size: 18px">Nasa Satellite</a><p class="list-group-item-text">DOMAIN: 1 , PORT: 1</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit" style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete" style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div></div>   
                 </div>
             </div>
         </div>
@@ -142,7 +142,7 @@
                             name: $('#PopupInputName').val()} , 
 		            		function(data){
                                 //Waiting For Message from validator
-		            		    console.log(data);
+		            		    //console.log(data);
                                 eval('var errorData ='+data);  //change message format to object
                                 //console.log(errorData.domain); 
 
@@ -230,14 +230,11 @@
 </script>
 <!--DOMAIN LIST CONTROL-->
 <script>
-    $( "div[index]").hover(
-        function() {
-            var obj = $(this).find("div[name='option']:first");
-            obj.fadeIn(200);
-            //obj.css('display','');
-
-
-            obj.find("div[tool='edit']").hover(function(){
+    $(document.body).on('mouseover','div[index]',function(){
+        //console.log("aaa");
+        var obj = $(this).find("div[name='option']:first");
+        obj.fadeIn(200);
+        obj.find("div[tool='edit']").hover(function(){
                 $(this).tooltip('show');
             },function(){
                 $(this).tooltip('hide');
@@ -247,11 +244,31 @@
             },function(){
                 $(this).tooltip('hide');
             });
-        }, function() {
-            var obj = $(this).find("div[name='option']:first")
-            //obj.css('display','none');
-            obj.fadeOut(200);
-        });
-</script>	
-<% end%>
+    });
+    $(document.body).on('mouseleave','div[index]',function(){
+        //console.log("aaa");
+        var obj = $(this).find("div[name='option']:first");
+        obj.fadeOut(200);
+    });
+</script>
+<!--Ajax load all server name-->
+<script>
+    var htmlGeneratorListServer = function(obj){
 
+        var htmlBase = '<div index="'+obj.index+'" class="list-group-item list-item-hover"><div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div style="display: inline-block; margin-left: 10px;"><a class="list-group-item-heading" href="/server" style="font-size: 18px">'+obj.name+'</a></h4><p class="list-group-item-text">DOMAIN: '+obj.domain+' , PORT: '+obj.port+'</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div></div>';
+        //console.log(htmlBase);
+        return htmlBase;
+    }
+    var ListServer = new Array();
+    var ReloadServerName = function(){
+        $.post( "<%= loadallserver_path() %>",
+                            function(data){
+                                //console.log(data);
+                                eval('ListServer ='+data);
+                                $("#table-server").append(htmlGeneratorListServer(ListServer[0]));
+                                $("#table-server").append(htmlGeneratorListServer(ListServer[1]));
+                            });
+    }
+    $("#list-choose-page").ready(ReloadServerName);
+</script>
+<% end%>

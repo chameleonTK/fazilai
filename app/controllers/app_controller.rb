@@ -1,10 +1,10 @@
 require 'net/ftp'
 
 class AppController < ApplicationController
-	skip_before_filter :logged, :only => [ :index , :createdomain]
+	skip_before_filter :logged, :only => [ :index , :createdomain , :loadallserver]
 	before_filter :guest, :only => [ :index ]
 	before_filter :validate , :only => [ :profiledata]
-	skip_before_filter :verify_authenticity_token, :only => [:createdomain]
+	skip_before_filter :verify_authenticity_token, :only => [:createdomain , :loadallserver]
 	before_filter :setvar , :only => [:listfile]
 	after_filter :clearvar , :only => [:listfile]
 
@@ -110,6 +110,23 @@ class AppController < ApplicationController
 		render text: "log not yet"
 	end
 
+
+	def loadallserver
+		u = Auth.user
+		all_name = Server.where('user_id = ?',u.id)
+		if all_name.empty? then
+			render text: "[]"
+		else
+			list_server = Array.new
+			all_name.each do |x|
+				list_server.push(setFormatServerName(x))
+			end
+			sendMessageAllServer = "["+list_server.join(",")+"]"
+			render text: sendMessageAllServer
+		end
+	end	
+
+
 	def createdomain
 		checkValidationName = isNameDomain(params[:name])
 
@@ -175,11 +192,17 @@ class AppController < ApplicationController
 		return 'Accept'
 	end
 
-	def getAllServerByUserID
+	def setFormatServerName(server)
+			indexFormat = "index:"+"'"+server[:sid].to_s+"'"
+			serverNameFormat = "name:"+"'"+server[:name]+"'"
+			domainNameFormat = "domain:"+"'"+server[:domain]+"'"
+			portFormat = "port:"+"'"+server[:port].to_s+"'"
 
+			summaryFormat =  "{"+indexFormat+","+serverNameFormat+","+domainNameFormat+","+portFormat+"}"
+			return summaryFormat
 	end
 
-	private :isDomainName , :isPort	, :isNameDomain ,:saveDomainToDB, :getAllServerByUserID
+	private :isDomainName , :isPort	, :isNameDomain ,:saveDomainToDB, :setFormatServerName
 
 
 end

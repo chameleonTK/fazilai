@@ -8,6 +8,7 @@ Fazilai::Application.routes.draw do
 
   get "/choose", to: "app#choose" , as:'home'
   post "/choose/createdomain", to: "app#createdomain" ,as:'createdomain'
+  post "/choose/loadallserver", to: "app#loadallserver" ,as: "loadallserver"
 
   get "/server", to: "app#server" , as:'server'
   get   "/listfile" ,to: "app#listfile" ,as: "listfile_root"
