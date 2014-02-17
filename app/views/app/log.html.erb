@@ -6,7 +6,11 @@
 	<br>
 	<center>
 	<div class="panel panel-default" style="width:800px">
-		<div class="panel-heading">Log</div>
+		<div class="panel-heading">
+			<div align="left" style="margin-left: 10px">
+				 <h2>Log</h2>
+			</div>
+		</div>
 		<div class="panel-body">
 
 			<%u = Auth.user %>
@@ -30,7 +34,7 @@
   <td class="info">...</td>
 </tr>
 -->
-
+		
 			<table class="table">
 			<thead>
 				<tr>
@@ -42,12 +46,22 @@
 			</thead>
 			<tbody>
 			<%for i in 0..(logcount-1) %>
-				<tr class="active">
+				<%if i%2==0%>
+				<tr class='active'>
 					<td><%=i+1%></td>
 					<td><%=a[i][:starttime].inspect%></td>
 					<td><%name1=Proj.where(pid: a[i][:proj_id].inspect).take %><%=name1[:name]%></td>
 					<td><%name2=User.where(uid: a[i][:user_id].inspect).take %><%=name2[:email]%></td>
 				</tr>
+				<%else%>
+				<tr class='success'>
+				
+					<td><%=i+1%></td>
+					<td><%=a[i][:starttime].inspect%></td>
+					<td><%name1=Proj.where(pid: a[i][:proj_id].inspect).take %><%=name1[:name]%></td>
+					<td><%name2=User.where(uid: a[i][:user_id].inspect).take %><%=name2[:email]%></td>
+				</tr>
+				<%end%>
 			<%end%>
 			</tbody>
 			</table>

@@ -58,7 +58,7 @@ class AppController < ApplicationController
 	end
 
 	def log
-		render text: "log not yet"
+		
 	end
 
 	def createdomain
