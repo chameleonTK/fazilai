@@ -1,10 +1,10 @@
 require 'net/ftp'
 
 class AppController < ApplicationController
-	skip_before_filter :logged, :only => [ :index , :createdomain , :loadallserver]
+	skip_before_filter :logged, :only => [ :index , :createdomain , :loadallserver , :deleteserver]
 	before_filter :guest, :only => [ :index ]
 	before_filter :validate , :only => [ :profiledata]
-	skip_before_filter :verify_authenticity_token, :only => [:createdomain , :loadallserver]
+	skip_before_filter :verify_authenticity_token, :only => [:createdomain , :loadallserver , :deleteserver]
 	before_filter :setvar , :only => [:listfile]
 	after_filter :clearvar , :only => [:listfile]
 
@@ -125,6 +125,18 @@ class AppController < ApplicationController
 			render text: sendMessageAllServer
 		end
 	end	
+
+	def deleteserver
+		u = Auth.user
+		indexDelete = params[:index]
+		all_delete = Server.where('user_id = ? and sid = ? ',u.id,indexDelete)
+		if all_delete.empty? then
+			render text: ""
+		else
+			all_delete.destroy_all
+			render text: indexDelete
+		end
+	end
 
 
 	def createdomain

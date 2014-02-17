@@ -16,31 +16,11 @@
             </div>
             <div class="panel-body roottree" style="padding: 10px 0px 0px 0px;">
                 <div id="table-server" class="list-group" style="overflow-y: scroll;height: 260px;">
-                    <div index="3" class="list-group-item list-item-hover">
-                        <div style="float: left; margin-top: -5px; margin-left: -8px;">
-                            <img src="assets/domain_badge.png" style="width: 50px; height: 50px;">
-                        </div>
-                        <div style="display: inline-block; margin-left: 10px;">
-                        <%= link_to 'We love Fazilai.', server_path , class: "list-group-item-heading" , style: "font-size: 18px" %>
-                        <h4 class="list-group-item-heading"></h4>
-                        <p class="list-group-item-text">DOMAIN: root@ku.ac.th , PORT: 22</p>
-                        </div>
-                        <div name="option" style="float: right; display: none;margin-top: 8px;">
-                            <div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit">
-                                <img src="assets/icon-editlist.png" style="width: 24px; height: 24px;">
-                            </div>
-                            <div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete">
-                                <img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div index="4" class="list-group-item list-item-hover" style="height: 65px; text-align:center;">
+                    <div index="end" class="list-group-item list-item-hover" style="height: 65px; text-align:center;">
                         <div style="display: inline-block;">
                             <img src="assets/icon-createlist2.png" style="width: 50px; height: 50px;">
                         </div>
-                    </div>
-                     <div index="10" class="list-group-item list-item-hover"><div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div style="display: inline-block; margin-left: 10px;"><a class="list-group-item-heading" href="/server" style="font-size: 18px">Nasa Satellite</a><p class="list-group-item-text">DOMAIN: 1 , PORT: 1</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit" style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete" style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div></div>   
+                    </div> 
                 </div>
             </div>
         </div>
@@ -205,6 +185,7 @@
                                 //Success All
                                 if(errorData.domain=='Accept' && errorData.port=='Accept' && errorData.name=='Accept'){
                                     $('#element_to_pop_up').bPopup().close();
+                                    ReloadAddNewServerName();
                                 }
 
                                 
@@ -244,6 +225,17 @@
             },function(){
                 $(this).tooltip('hide');
             });
+        var indexDelete = $(this).attr("index");
+        obj.find("div[tool='delete']").click(function(){
+            //console.log(indexDelete);
+            DeleteServerName(indexDelete);
+            ReloadDeleteServerName(indexDelete);
+        });
+
+        obj.find("div[tool='edit']").click(function(){
+            $('#element_to_pop_up').bPopup({},function() {});
+            console.log(indexDelete);
+        });
     });
     $(document.body).on('mouseleave','div[index]',function(){
         //console.log("aaa");
@@ -254,19 +246,52 @@
 <!--Ajax load all server name-->
 <script>
     var htmlGeneratorListServer = function(obj){
-
         var htmlBase = '<div index="'+obj.index+'" class="list-group-item list-item-hover"><div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div style="display: inline-block; margin-left: 10px;"><a class="list-group-item-heading" href="/server" style="font-size: 18px">'+obj.name+'</a></h4><p class="list-group-item-text">DOMAIN: '+obj.domain+' , PORT: '+obj.port+'</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div></div>';
         //console.log(htmlBase);
         return htmlBase;
     }
     var ListServer = new Array();
+    var LengthListServerBefore = 0;
     var ReloadServerName = function(){
         $.post( "<%= loadallserver_path() %>",
                             function(data){
                                 //console.log(data);
                                 eval('ListServer ='+data);
-                                $("#table-server").append(htmlGeneratorListServer(ListServer[0]));
-                                $("#table-server").append(htmlGeneratorListServer(ListServer[1]));
+                                for(i=0;i<ListServer.length;++i){
+                                    $("#table-server").prepend(htmlGeneratorListServer(ListServer[ListServer.length-i-1]));
+                                }
+                            });
+    }
+    var ReloadAddNewServerName = function(){
+        $.post( "<%= loadallserver_path() %>",
+            function(data){
+                //console.log(data);
+                eval('ListServer ='+data);
+                $("div[index=end]").before(htmlGeneratorListServer(ListServer[ListServer.length-1]));
+            });
+    }
+    var ReloadDeleteServerName = function(indexDelete){
+        $.post( "<%= loadallserver_path() %>",
+            function(data){
+                //console.log(data);
+                eval('ListServer ='+data);
+                for(i=0;i<ListServer.length;++i){
+                    if(ListServer[i].index==indexDelete){
+                        //$("div[index="+indexDelete+"]").remove();
+                        break;
+                    }
+                    if(i==ListServer.length-1){
+                        $("div[index="+indexDelete+"]").remove();
+                    }
+                }
+                //$("div[index=end]").before(htmlGeneratorListServer(ListServer[ListServer.length-1]));
+            });
+    }
+    var DeleteServerName = function(indexDelete){
+        $.post( "<%= deleteserver_path() %>",
+                            { index: indexDelete} , 
+                            function(data){
+                                //console.log(data);
                             });
     }
     $("#list-choose-page").ready(ReloadServerName);
