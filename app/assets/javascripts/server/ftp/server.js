@@ -63,20 +63,19 @@ function init_tree(path_init){
 		var label_for = file.attr('for');
 
 		if (file.hasClass('checked')){
-			file.attr('checked', false);
-			alert("sorry i forget");
+			//alert("sorry i forget");
+			swapEditor(label_for);
 		}else{
 			file.addClass('checked');
-			file.attr('checked', true);
 			var s = get_dir(file);
 			$(".edited").removeClass("edited");
 			file.parent().addClass("edited");
-			
+			setnotEdit();
 			$.post("/getfile"+s,function(data){
+				setEdit();
 				console.log(data);
 				//alert("a");
 				swapEditor(label_for,data["code"],data["type"]);
-
 			});
 		}
 	});
@@ -90,10 +89,12 @@ function init_tree(path_init){
 	});	
 	$("#savecode").click(function(){
 		var file = $($(".edited > label")[0]);
-		if(file != undefined && file.is("label")){
+		if(file != undefined && file.is("label")){	
+			console.log("run save");
 			var s = get_dir(file);
 			var doc = getEditorText();
 			$.post("/putfile"+s,{"doc":doc },function(data){
+				console.log("already save");
 				if(data=="accept"){
 					var alert_ = ''
 					alert_ += '<div class="alert alert-success">';
@@ -110,6 +111,7 @@ function init_tree(path_init){
 					$("#code").before(alert_);
 				}
 				$(".alert").show();
+			
 				console.log(data)
 			});
 		}else{

@@ -1,5 +1,6 @@
 var editor;
 var buffer =[];
+var edit=true;
 $(function(){
 
   	var te = document.getElementById("code");
@@ -24,15 +25,28 @@ function selectBuffer(name,code,mode){
 	return buffer[name];
 }
 
+function setnotEdit(){
+	//alert(edit);
+	edit=false;
+}
+function setEdit(){
+	edit=true;
+}
 function  swapEditor(name,code,mode){
-//	setInterval(function(){
+	if(!edit){
+		console.log("unable");
+		alert("please wait.");
+		return false;
+	}else{
+		code = typeof code !== 'undefined' ? code : "";	
+		mode = typeof mode !== 'undefined' ? mode : "";
 		var buf = selectBuffer(name,code,mode);
 		//console.log(buffer)
 		if (buf.getEditor()) buf = buf.linkedDoc({sharedHist: true});
   		//var old = editor_html.swapDoc(buf);
-  		editor.swapDoc(buf);
+	  	editor.swapDoc(buf);
 		console.log("swap");
-//	},2000);
+	}
 }
 
 function getEditorText(){
