@@ -1,10 +1,10 @@
 require 'net/ftp'
 
 class AppController < ApplicationController
-	skip_before_filter :logged, :only => [ :index , :createdomain , :loadallserver , :deleteserver]
+	skip_before_filter :logged, :only => [ :index , :createdomain , :loadallserver , :deleteserver , :loadallproject, :createproject , :deleteproject]
 	before_filter :guest, :only => [ :index ]
 	before_filter :validate , :only => [ :profiledata]
-	skip_before_filter :verify_authenticity_token, :only => [:createdomain , :loadallserver , :deleteserver]
+	skip_before_filter :verify_authenticity_token, :only => [:createdomain , :loadallserver , :deleteserver , :loadallproject, :createproject , :deleteproject]
 	before_filter :setvar , :only => [:listfile]
 	after_filter :clearvar , :only => [:listfile]
 
@@ -110,6 +110,52 @@ class AppController < ApplicationController
 		render text: "log not yet"
 	end
 
+	def loadallproject
+		server_id = params[:server_id].to_i
+		all_proj = Proj.where('server_id = ?',server_id)
+		if all_proj.empty? then
+			render text: server_id
+		else
+			list_proj = Array.new
+			all_proj.each do |x|
+				list_proj.push(setFormatProjectName(x))
+			end
+			sendMessageAllProject = "["+list_proj.join(",")+"]"
+			render text: sendMessageAllProject
+		end
+	end
+
+	def createproject
+		checkValidationName = isProjectName(params[:name])
+
+		sendMessageValidationName = "name:"+"'"+checkValidationName+"'"
+		sendMessageValidationPath = "path:"+"'"+"Accept"+"'"
+		sendMessageValidationDetail = "detail:"+"'"+"Accept"+"'"
+		if checkValidationName=="Accept" then
+			saveProjectToDB(params[:name],params[:path],fillPathProject(params[:detail]),params[:server_id])
+		end
+
+		render text: "{"+sendMessageValidationName+","+sendMessageValidationPath+","+sendMessageValidationDetail+"}"
+	end
+
+	def deleteproject
+		u = Auth.user
+		indexDelete = params[:index]
+		checkServer = Server.where('user_id = ? and sid = ? ',u.id,params[:server_id])
+		all_delete_project = Proj.where('server_id = ? and pid = ?',params[:server_id],indexDelete)
+
+		if checkServer.empty? || all_delete_project.empty? then
+			render text: ""
+		else
+			all_delete_project.destroy_all
+			render text: indexDelete
+		end
+	end
+
+
+
+
+
 
 	def loadallserver
 		u = Auth.user
@@ -214,7 +260,44 @@ class AppController < ApplicationController
 			return summaryFormat
 	end
 
-	private :isDomainName , :isPort	, :isNameDomain ,:saveDomainToDB, :setFormatServerName
+	def setFormatProjectName(project)
+			indexFormat = "index:"+"'"+project[:pid].to_s+"'"
+			projectNameFormat = "name:"+"'"+project[:name]+"'"
+			pathNameFormat = "path:"+"'"+project[:path]+"'"
+			detailFormat = "detail:"+"'"+project[:detail].to_s+"'"
+
+			summaryFormat =  "{"+indexFormat+","+projectNameFormat+","+pathNameFormat+","+detailFormat+"}"
+			return summaryFormat
+	end
+
+	def saveProjectToDB(name,path,detail,server_id)
+		u = Auth.user
+
+		proj_new = Proj.new
+		proj_new[:name] = name
+		proj_new[:path] = path
+		proj_new[:detail] = detail
+		proj_new[:server_id] = server_id
+		if proj_new.save 
+			return true
+		end
+		return false
+	end
+
+	def isProjectName(name)
+		if name.length < 3 then
+			return "Name length more than 3"
+		end
+		return "Accept"
+	end
+
+	def fillPathProject(path)
+		if path.length ==0 then
+			return "/"
+		end
+		return path
+	end
+	private :isDomainName , :isPort	, :isNameDomain ,:saveDomainToDB, :setFormatServerName , :saveProjectToDB , :isProjectName
 
 
 end
