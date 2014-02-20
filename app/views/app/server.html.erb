@@ -33,6 +33,16 @@
 	.btn{
 		padding: 6px 12px;
 	}
+	.edited{
+		background-image: url("assets/pencil.png");
+		background-size: 15px;
+		background-position: right 15px bottom 0px;
+		background-repeat: no-repeat;
+	}
+	.alert{
+		background-image: none;
+		margin-bottom:0px;
+	}
 
 </style>
 
@@ -49,10 +59,10 @@
 			<div class="panel-heading">
 				<h1 class="panel-title" style="float:left"> Directory </h1>
 				<div class="btndiv" style="float:right">
-					<button type="button" class="btn btn-warning btn-lg">
+					<button type="button" class="btn btn-warning btn-lg" id="createfile">
 						<span> <img src=<%= asset_path "icon-createfile.png" %>></span>
 					</button>
-					<button type="button" class="btn btn-warning btn-lg">
+					<button type="button" class="btn btn-warning btn-lg" id="createfolder">
 						<span> <img src=<%= asset_path "icon-createfolder.png" %>></span>
 					</button>
 				</div>
@@ -67,12 +77,12 @@
 			<div class="panel-heading">
 				<h1 class="panel-title" style="float:left"> Code </h1>
 				<div class="btndiv" style="float:right">
-					<button type="button" class="btn btn-danger btn-lg">
+					<button type="button" class="btn btn-danger btn-lg" id="savecode">
 						<span> <img src=<%= asset_path "icon-save.png" %>></span>
 					</button>
 				</div>
 			</div>
-			<div class="panel-body roottree" style="padding: 10px 0px 0px 0px;">
+			<div class="panel-body" style="padding: 0px 0px 0px 0px;">
 				<textarea id="code" name="code"></textarea>
 			</div>
 		</div>

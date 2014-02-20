@@ -1,0 +1,71 @@
+<% content_for :navright do %>
+<% end %>
+
+<% content_for :body do %>
+	
+	<br>
+	<center>
+	<div class="panel panel-default" style="width:800px">
+		<div class="panel-heading">
+			<div align="left" style="margin-left: 10px">
+				 <h2>Log</h2>
+			</div>
+		</div>
+		<div class="panel-body">
+
+			<%u = Auth.user %>
+			<%Log.order(starttime: :desc)%>
+			<% logcount=Log.where(user_id: u.id).count %>
+			<%a = u.obj.logs.order(starttime: :desc) %>
+			
+
+			<!--  
+<tr class="active">...</tr>
+<tr class="success">...</tr>
+<tr class="warning">...</tr>
+<tr class="danger">...</tr>
+<tr class="info">...</tr>
+
+<tr>
+  <td class="active">...</td>
+  <td class="success">...</td>
+  <td class="warning">...</td>
+  <td class="danger">...</td>
+  <td class="info">...</td>
+</tr>
+-->
+		
+			<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Time</th>
+					<th>Project</th>
+					<th>User</th>
+				</tr>
+			</thead>
+			<tbody>
+			<%for i in 0..(logcount-1) %>
+				<%if i%2==0%>
+				<tr class='active'>
+					<td><%=i+1%></td>
+					<td><%=a[i][:starttime].inspect%></td>
+					<td><%name1=Proj.where(pid: a[i][:proj_id].inspect).take %><%=name1[:name]%></td>
+					<td><%name2=User.where(uid: a[i][:user_id].inspect).take %><%=name2[:email]%></td>
+				</tr>
+				<%else%>
+				<tr class='success'>
+				
+					<td><%=i+1%></td>
+					<td><%=a[i][:starttime].inspect%></td>
+					<td><%name1=Proj.where(pid: a[i][:proj_id].inspect).take %><%=name1[:name]%></td>
+					<td><%name2=User.where(uid: a[i][:user_id].inspect).take %><%=name2[:email]%></td>
+				</tr>
+				<%end%>
+			<%end%>
+			</tbody>
+			</table>
+		</div>
+	</div>
+	</center>
+<% end%>
