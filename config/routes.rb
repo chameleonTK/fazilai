@@ -8,6 +8,11 @@ Fazilai::Application.routes.draw do
 
   get "/choose", to: "app#choose" , as:'home'
   post "/choose/createdomain", to: "app#createdomain" ,as:'createdomain'
+  post "/choose/loadallserver", to: "app#loadallserver" ,as: "loadallserver"
+  post "/choose/deleteserver", to: "app#deleteserver" ,as: 'deleteserver'
+  post "/choose/loadallproject", to: "app#loadallproject" ,as: 'loadallproject'
+  post "/choose/createproject", to: "app#createproject" ,as: 'createproject'
+  post "/choose/deleteproject", to: "app#deleteproject" ,as: 'deleteproject'
 
   get "/server", to: "app#server" , as:'server'
   get   "/listfile" ,to: "ftp#listfile" ,as: "listfile_root"

@@ -3,7 +3,11 @@
 <% end %>
 <% content_for :body do %>
 	<div id="choose-page" style="width: 700px;margin: auto;">
-        <div id="list-choose-page" class="panel panel-default">
+        <div id="slide-section" style="height: 45px;">
+            <a href="#" onClick="return false;"><img id="slide-project" src="assets/slide_ready.png" style="float: right;"></a>
+            <a href="#" onClick="return false;"><img id="slide-server" src="assets/slide_ready.png" style="float: right;"></a>
+        </div>
+        <div id="list-choose-page" class="panel panel-default" style="z-index:1;">
             <div class="panel-heading" style="height: 55px;">
                 <div class="panel-title" style="float:left">
                    <h2 style="margin-top: 0px;">Domain name</h2>
@@ -15,36 +19,38 @@
                 </div>
             </div>
             <div class="panel-body roottree" style="padding: 10px 0px 0px 0px;">
-                <div class="list-group" style="overflow-y: scroll;height: 260px;">
-                    <div index="1" class="list-group-item list-item-hover">
-                        <div style="float: left; margin-top: -5px; margin-left: -8px;">
-                            <img src="assets/domain_badge.png" style="width: 50px; height: 50px;">
-                        </div>
-                        <div style="display: inline-block; margin-left: 10px;">
-                        <%= link_to 'We love Fazilai.', server_path , class: "list-group-item-heading" , style: "font-size: 18px" %>
-                        <h4 class="list-group-item-heading"></h4>
-                        <p class="list-group-item-text">DOMAIN: root@ku.ac.th</p>
-                        </div>
-                        <div name="option" style="float: right; display: none;margin-top: 8px;">
-                            <div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit">
-                                <img src="assets/icon-editlist.png" style="width: 24px; height: 24px;">
-                            </div>
-                            <div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete">
-                                <img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div index="2" class="list-group-item list-item-hover" style="height: 65px; text-align:center;">
+                <div id="table-server" class="list-group" style="overflow-y: scroll;height: 260px;">
+                    <div index="end" class="list-group-item list-item-hover" style="height: 65px; text-align:center;">
                         <div style="display: inline-block;">
                             <img src="assets/icon-createlist2.png" style="width: 50px; height: 50px;">
                         </div>
-                    </div>
-
+                    </div> 
                 </div>
             </div>
         </div>
+        <div id="list-project-page" servid="1" class="panel panel-default" style="display:none;z-index:-1;">
+                <div class="panel-heading" style="height: 55px;">
+                    <div class="panel-title" style="float:left">
+                        <h2 style="margin-top: 0px;">Project name</h2>
+                    </div>
+                    <div class="btndiv" style="float:right;margin-top: -8px;">
+                        <button id = "btn-create-project" type="button" class="btn btn-warning btn-lg" style="height: 50px; width: 50px;">
+                        <span> <img src="/assets/icon-createlist.png"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-body roottree" style="padding: 10px 0px 0px 0px;">
+                    <div id="table-project" class="list-group" style="overflow-y: scroll;height: 260px;">
+                        <div id = "create_project_end" class="list-group-item list-item-hover" style="height: 65px; text-align:center;">
+                            <div style="display: inline-block;">
+                                <img src="assets/icon-createlist2.png" style="width: 50px; height: 50px;">
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+        </div>
 	</div>
+
 
 
 
@@ -87,6 +93,40 @@
 
     </div>	
 
+
+
+
+    <!-- PROJECT POPUP -->
+    <div style="display:none; height:auto; width:400px;" id="project_to_pop_up">
+    
+        <div class="modal-content" style="">
+            <div class="modal-header">
+              <button id="btn-close-create-project" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title">Create New Project</h4>
+            </div>
+            <div class="modal-body">
+                <%= form_for :post do |f|  %>
+                    <div class="form-group">
+                        <label class="control-label" for='namep'>Name</label>
+                        <input type="text" class="form-control" id="PopupInputNameP" placeholder="ex. We love Fazilai">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for='path'>Path</label>
+                        <input type="text" class="form-control" id="PopupInputPath" placeholder="ex. /home/cpe">
+                    </div>
+                     <div class="form-group">
+                        <label class="control-label" for='detail'>Detail</label>
+                        <input type="text" class="form-control" id="PopupInputDetail" placeholder="ex. For homework.">
+                    </div>
+                <% end %>
+            </div>
+            <div class="modal-footer">
+              <button id="btn-popup-create-project" data-loading-text="Loading..." type="button" class="btn btn-primary" >Create</button>
+            </div>
+        </div>
+
+    </div>  
+
      <script>
  // Semicolon (;) to ensure closing of earlier scripting
     // Encapsulation
@@ -97,7 +137,7 @@
         $(function() {
             // Binding a click event
             // From jQuery v.1.7.0 use .on() instead of .bind()
-            $('#btn-create-domain').bind('click', function(e) {
+            $('#btn-create-domain , div[index=end]').bind('click', function(e) {
                 // Prevents the default action to be triggered. 
                 e.preventDefault();
 
@@ -142,7 +182,7 @@
                             name: $('#PopupInputName').val()} , 
 		            		function(data){
                                 //Waiting For Message from validator
-		            		    console.log(data);
+		            		    //console.log(data);
                                 eval('var errorData ='+data);  //change message format to object
                                 //console.log(errorData.domain); 
 
@@ -205,6 +245,7 @@
                                 //Success All
                                 if(errorData.domain=='Accept' && errorData.port=='Accept' && errorData.name=='Accept'){
                                     $('#element_to_pop_up').bPopup().close();
+                                    ReloadAddNewServerName();
                                 }
 
                                 
@@ -230,14 +271,12 @@
 </script>
 <!--DOMAIN LIST CONTROL-->
 <script>
-    $( "div[index]").hover(
-        function() {
-            var obj = $(this).find("div[name='option']:first");
-            obj.fadeIn(200);
-            //obj.css('display','');
-
-
-            obj.find("div[tool='edit']").hover(function(){
+    var isClickServer = false;
+    $(document.body).on('mouseover','div[index]',function(){
+        //console.log("aaa");
+        var obj = $(this).find("div[name='option']:first");
+        obj.fadeIn(200);
+        obj.find("div[tool='edit']").hover(function(){
                 $(this).tooltip('show');
             },function(){
                 $(this).tooltip('hide');
@@ -247,11 +286,310 @@
             },function(){
                 $(this).tooltip('hide');
             });
-        }, function() {
-            var obj = $(this).find("div[name='option']:first")
-            //obj.css('display','none');
-            obj.fadeOut(200);
+        var indexDelete = $(this).attr("index");
+        obj.find("div[tool='delete']").click(function(){
+            //console.log(indexDelete);
+            DeleteServerName(indexDelete);
+            ReloadDeleteServerName(indexDelete);
         });
-</script>	
-<% end%>
 
+        obj.find("div[tool='edit']").click(function(){
+            $('#element_to_pop_up').bPopup({},function() {});
+            console.log(indexDelete);
+        });
+
+        var objLinkToNext  = $(this).find("div[name='detail']");
+        objLinkToNext.click(function(){
+            //console.log("ok");
+            if(isClickServer==false){
+                isClickServer = true;
+                $("#list-choose-page").fadeOut(200);
+                ChangeToSlideProject();
+                ReloadProjectName(indexDelete);
+                $("#list-project-page").delay(200).fadeIn(200);
+                $("#list-project-page").attr('servid',indexDelete);
+            }
+        })
+    });
+    $(document.body).on('mouseleave','div[index]',function(){
+        //console.log("aaa");
+        var obj = $(this).find("div[name='option']:first");
+        obj.fadeOut(200);
+    });
+</script>
+<!--Ajax load all server name-->
+<script>
+    var htmlGeneratorListServer = function(obj){
+        var htmlBase = '<div index="'+obj.index+'" class="list-group-item list-item-hover"><div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;"><a class="list-group-item-heading" href="/server" style="font-size: 18px">'+obj.name+'</a></h4><p class="list-group-item-text">DOMAIN: '+obj.domain+' , PORT: '+obj.port+'</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div></div>';
+        //console.log(htmlBase);
+        return htmlBase;
+    }
+    var ListServer = new Array();
+    var LengthListServerBefore = 0;
+    var ReloadServerName = function(){
+        $.post( "<%= loadallserver_path() %>",
+                            function(data){
+                                //console.log(data);
+                                eval('ListServer ='+data);
+                                for(i=0;i<ListServer.length;++i){
+                                    $("#table-server").prepend(htmlGeneratorListServer(ListServer[ListServer.length-i-1]));
+                                }
+                            });
+        ChangeToSlideServer();
+    }
+    var ReloadAddNewServerName = function(){
+        $.post( "<%= loadallserver_path() %>",
+            function(data){
+                //console.log(data);
+                eval('ListServer ='+data);
+                $("div[index=end]").before(htmlGeneratorListServer(ListServer[ListServer.length-1]));
+            });
+    }
+    var ReloadDeleteServerName = function(indexDelete){
+        $.post( "<%= loadallserver_path() %>",
+            function(data){
+                //console.log(data);
+                eval('ListServer ='+data);
+                for(i=0;i<ListServer.length;++i){
+                    if(ListServer[i].index==indexDelete){
+                        //$("div[index="+indexDelete+"]").remove();
+                        break;
+                    }
+                    if(i==ListServer.length-1){
+                        $("div[index="+indexDelete+"]").remove();
+                    }
+                }
+                //$("div[index=end]").before(htmlGeneratorListServer(ListServer[ListServer.length-1]));
+            });
+    }
+    var DeleteServerName = function(indexDelete){
+        $.post( "<%= deleteserver_path() %>",
+                            { index: indexDelete} , 
+                            function(data){
+                                //console.log(data);
+                            });
+    }
+    $("#list-choose-page").ready(ReloadServerName);
+</script>
+
+
+
+
+
+
+
+
+
+
+<!--CREATE PROJECT-->
+<script>
+    $('#btn-create-project , #create_project_end').bind('click', function(e) {
+            // Prevents the default action to be triggered. 
+            e.preventDefault();
+            $('#PopupInputNameP').val('');
+            $('#PopupInputPath').val('');
+            $('#PopupInputDetail').val('');
+
+            $('#PopupInputNameP').parent().removeClass();
+            $('#PopupInputNameP').parent().addClass('form-group');
+            $("label[for='namep']").text('Name');
+
+            $('#PopupInputPath').parent().removeClass();
+            $('#PopupInputPath').parent().addClass('form-group');
+            $("label[for='path']").text('Path');
+
+            $('#PopupInputDetail').parent().removeClass();
+            $('#PopupInputDetail').parent().addClass('form-group');
+            $("label[for='detail']").text('Detail');
+
+            $('#project_to_pop_up').bPopup({},function() {
+                $('#btn-popup-create-project').bind('click', function(e) {
+                    var $btn = $(this);
+                        $btn.button('loading');
+                        $.post( "<%= createproject_path() %>",
+                            { name: $('#PopupInputNameP').val() ,
+                            path: $('#PopupInputPath').val() , 
+                            detail: $('#PopupInputDetail').val(),
+                            server_id: $('#list-project-page').attr('servid') } , 
+                            function(data){
+
+                                eval('var errorData ='+data);  //change message format to object
+
+                                $('#PopupInputNameP').parent().removeClass();
+                                if(errorData.name=='Accept'){
+                                    $('#PopupInputNameP').parent().addClass('form-group has-success');
+                                     $("label[for='namep']").text('Name');
+                                }else{
+                                    $('#PopupInputNameP').parent().addClass('form-group has-error');
+                                    $("label[for='namep']").text(errorData.name);
+                                }
+
+                                $('#PopupInputPath').parent().removeClass();
+                                if(errorData.path=='Accept'){
+                                    $('#PopupInputPath').parent().addClass('form-group has-success');
+                                     $("label[for='path']").text('Path');
+                                }else{
+                                    $('#PopupInputPath').parent().addClass('form-group has-error');
+                                    $("label[for='path']").text(errorData.path);
+                                }
+
+                                $('#PopupInputDetail').parent().removeClass();
+                                if(errorData.detail=='Accept'){
+                                    $('#PopupInputDetail').parent().addClass('form-group has-success');
+                                     $("label[for='detail']").text('Detail');
+                                }else{
+                                    $('#PopupInputPath').parent().addClass('form-group has-error');
+                                    $("label[for='detail']").text(errorData.detail);
+                                }
+
+
+                                if(errorData.name=='Accept' && errorData.path=='Accept' && errorData.detail=='Accept'){
+                                    $('#project_to_pop_up').bPopup().close();
+                                    ReloadAddNewProjectName();
+                                }
+
+                                $btn.button('reset');
+
+                            });
+                });
+            });
+            $('#btn-close-create-project').bind('click', function(e) {
+
+                $('#project_to_pop_up').bPopup().close(); 
+            });
+    });
+</script>
+
+<!--PROJECT LIST CONTROL-->
+<script>
+    $(document.body).on('mouseover','div[index_proj]',function(){
+        //console.log("aaa");
+        var obj = $(this).find("div[name='option']:first");
+        obj.fadeIn(200);
+        obj.find("div[tool='edit']").hover(function(){
+                $(this).tooltip('show');
+            },function(){
+                $(this).tooltip('hide');
+            });
+            obj.find("div[tool='delete']").hover(function(){
+                $(this).tooltip('show');
+            },function(){
+                $(this).tooltip('hide');
+            });
+        var indexDelete = $(this).attr("index_proj");
+        obj.find("div[tool='delete']").click(function(){
+            //console.log(indexDelete);
+            DeleteProjectName(indexDelete);
+            ReloadDeleteProjectName(indexDelete);
+        });
+
+        obj.find("div[tool='edit']").click(function(){
+            $('#project_to_pop_up').bPopup({},function() {});
+            console.log(indexDelete);
+        });
+
+        var objLinkToNext  = $(this).find("div[name='detail']");
+        objLinkToNext.click(function(){
+            //console.log("ok");
+            /*$("#list-choose-page").fadeOut(200);
+            ReloadProjectName(indexDelete);
+            $("#list-project-page").delay(200).fadeIn(200);*/
+        });
+    });
+    $(document.body).on('mouseleave','div[index_proj]',function(){
+        //console.log("aaa");
+        var obj = $(this).find("div[name='option']:first");
+        obj.fadeOut(200);
+    });
+</script>
+<!--Ajax load all project name-->
+<script>
+    var htmlGeneratorListProject = function(obj){
+        var htmlBase = '<div index_proj="'+obj.index+'" class="list-group-item list-item-hover"><div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;"><a class="list-group-item-heading" href="/server" style="font-size: 18px">'+obj.name+'</a></h4><p class="list-group-item-text">'+obj.detail+' ['+obj.path+']</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div></div>';
+        //console.log(htmlBase);
+        return htmlBase;
+    }
+    var ReloadAddNewProjectName = function(){
+        $.post( "<%= loadallproject_path() %>",{ server_id: $('#list-project-page').attr('servid')},
+            function(data){
+                console.log(data);
+                eval('ListProject ='+data);
+                $("#create_project_end").before(htmlGeneratorListProject(ListProject[ListProject.length-1]));
+            });
+    }
+    var ReloadProjectName = function(indexServer){
+        //console.log(indexServer);
+        $.post( "<%= loadallproject_path() %>",
+                            { server_id: indexServer},
+                            function(data){
+                                //console.log(data);
+                                eval('ListProject ='+data);
+                                for(i=0;i<ListProject.length;++i){
+                                    $("#table-project").prepend(htmlGeneratorListProject(ListProject[ListProject.length-i-1]));
+                                }
+                            });
+    }
+    var ReloadDeleteProjectName = function(indexDelete){
+        $.post( "<%= loadallproject_path() %>",{ server_id: $('#list-project-page').attr('servid')} , 
+            function(data){
+                //console.log(data);
+                eval('ListProject ='+data);
+                for(i=0;i<ListProject.length;++i){
+                    if(ListProject[i].index==indexDelete){
+                        //$("div[index="+indexDelete+"]").remove();
+                        break;
+                    }
+                    if(i==ListProject.length-1){
+                        $("div[index_proj="+indexDelete+"]").remove();
+                    }
+                }
+                //$("div[index=end]").before(htmlGeneratorListServer(ListServer[ListServer.length-1]));
+            });
+    }
+    var DeleteAllProjectName = function(){
+        $("div[index_proj]").remove();
+    }
+    var DeleteProjectName = function(indexDelete){
+        $.post( "<%= deleteproject_path() %>",
+                            { index: indexDelete,server_id:$('#list-project-page').attr('servid')} ,
+                            function(data){
+                                //console.log(data);
+                            });
+    }
+</script>
+
+<!-- SLIDE CONTROLLER -->
+<script>
+    var slide_state = "server";
+    $("#slide-server").click(function(){
+        if(slide_state=="project"){
+            ChangeToSlideServer();
+            isClickServer = false;
+            $("#list-project-page").fadeOut(200);
+            $("#list-choose-page").delay(200).fadeIn(200);
+        }
+    });
+    /*$("#slide-project").click(function(){
+        ChangeToSlideProject();
+    });*/
+    var ChangeToSlideProject = function(){
+        slide_state = "project";
+        $("#slide-project").fadeOut(100);
+        $("#slide-server").fadeOut(100);
+        $("#slide-project").attr('src','/assets/slide_hold.png');
+        $("#slide-server").attr('src','/assets/slide_ready.png');
+        $("#slide-project").fadeIn(100);
+        $("#slide-server").fadeIn(100);
+    }
+    var ChangeToSlideServer = function(){
+        DeleteAllProjectName();
+        slide_state = "server";
+        $("#slide-project").fadeOut(100);
+        $("#slide-server").fadeOut(100);
+        $("#slide-server").attr('src','/assets/slide_hold.png');
+        $("#slide-project").attr('src','/assets/slide_ready.png');
+        $("#slide-project").fadeIn(100);
+        $("#slide-server").fadeIn(100);
+    }
+</script>
+<% end%>
