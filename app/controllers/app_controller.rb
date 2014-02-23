@@ -1,8 +1,8 @@
 class AppController < ApplicationController
-	skip_before_filter :logged, :only => [ :index , :createdomain , :loadallserver , :deleteserver , :loadallproject, :createproject , :deleteproject]
+	skip_before_filter :logged, :only => [ :index , :createdomain , :loadallserver , :deleteserver , :loadallproject, :createproject , :deleteproject , :updateserver , :detailserver , :detailproject , :updateproject]
 	before_filter :guest, :only => [ :index ]
 	before_filter :validate , :only => [ :profiledata]
-	skip_before_filter :verify_authenticity_token, :only => [:createdomain , :loadallserver , :deleteserver , :loadallproject, :createproject , :deleteproject]
+	skip_before_filter :verify_authenticity_token, :only => [:createdomain , :loadallserver , :deleteserver , :loadallproject, :createproject , :deleteproject , :updateserver , :detailserver , :detailproject , :updateproject]
 
 	def index
 	end
@@ -103,6 +103,32 @@ class AppController < ApplicationController
 		end
 	end
 
+	def detailproject
+		indexProject = params[:index]
+		project = Proj.find_by(pid: indexProject)
+		render text: setFormatProjectName(project)
+	end
+
+	def updateproject
+		checkValidationName = isProjectName(params[:name])
+
+		sendMessageValidationName = "name:"+"'"+checkValidationName+"'"
+		sendMessageValidationPath = "path:"+"'"+"Accept"+"'"
+		sendMessageValidationDetail = "detail:"+"'"+"Accept"+"'"
+		if checkValidationName=="Accept" then
+			updateProjectToDB(params[:name],params[:path],fillPathProject(params[:detail]),params[:index])
+		end
+
+		render text: "{"+sendMessageValidationName+","+sendMessageValidationPath+","+sendMessageValidationDetail+"}"
+	end
+
+
+
+
+
+
+
+
 
 
 
@@ -130,14 +156,16 @@ class AppController < ApplicationController
 		if all_delete.empty? then
 			render text: ""
 		else
+			all_delete_project = Proj.where('server_id = ?',indexDelete)
 			all_delete.destroy_all
+			all_delete_project.destroy_all
 			render text: indexDelete
 		end
 	end
 
 
 	def createdomain
-		checkValidationName = isNameDomain(params[:name])
+		checkValidationName = isNameDomain(params[:name],0)
 
 		sendMessageValidationName = "name:"+"'"+checkValidationName+"'"
 		sendMessageValidationDomain = "domain:"+"'"+isDomainName(params[:domain])+"'"
@@ -152,6 +180,34 @@ class AppController < ApplicationController
 		render text: "{"+sendMessageValidationName+","+sendMessageValidationDomain+","+sendMessageValidationPort+","+sendMessageValidationUsername+","+sendMessageValidationPassword+"}"
 	end
 
+	def detailserver
+		u = Auth.user
+		indexServer = params[:index]
+		if isValidServerID(u.id,indexServer) == true then
+			server = Server.find_by(sid: indexServer)
+			render text: setFormatServerNameFull(server)
+		else
+			render text: "Error: Not Permit."
+		end
+	end
+
+	def updateserver
+		indexServer = params[:index]
+
+		checkValidationName = isValidNameUpdateDomain(params[:name],indexServer)
+
+		sendMessageValidationName = "name:"+"'"+checkValidationName+"'"
+		sendMessageValidationDomain = "domain:"+"'"+isDomainName(params[:domain])+"'"
+		sendMessageValidationPort = "port:"+"'"+isPort(params[:port])+"'"
+		sendMessageValidationUsername = "username:"+"'"+"Accept"+"'"
+		sendMessageValidationPassword = "password:"+"'"+"Accept"+"'"
+
+		if isDomainName(params[:domain])=='Accept' && isPort(params[:port])=='Accept' && checkValidationName=='Accept'  then
+			updateDomainToDB(params[:name],params[:domain],params[:username],params[:password],params[:port],indexServer)
+		end
+
+		render text: "{"+sendMessageValidationName+","+sendMessageValidationDomain+","+sendMessageValidationPort+","+sendMessageValidationUsername+","+sendMessageValidationPassword+"}"
+	end
 
 
 
@@ -170,6 +226,22 @@ class AppController < ApplicationController
 		end
 		return false
 	end
+
+	def updateDomainToDB(name,domain,username,password,port,index)
+
+		server_update = Server.find_by(sid: index)
+		server_update[:name] = name
+		server_update[:domain] = domain
+		server_update[:port] = port
+		server_update[:suser] = username
+		server_update[:spass] = password
+
+		if server_update.save
+			return true
+		end
+		return false
+	end
+
 	def isDomainName(addr)
 		if addr.length >= 5
 			return 'Accept'
@@ -185,13 +257,13 @@ class AppController < ApplicationController
 		return 'Port: Invalid port number'
 	end
 
-	def isNameDomain(name)
+	def isNameDomain(name,sid)
 		u = Auth.user
 
 		if name.length < 3 then
 			return 'Name: Lenght more than 3'
 		else
-			all_name = Server.where('user_id = ?',u.id)
+			all_name = Server.where('user_id = ? AND sid <> ?',u.id,sid)
 			all_name.each do |x|
 				if x[:name]==name then
 					return 'Name: This name is already in your list. '
@@ -199,6 +271,23 @@ class AppController < ApplicationController
 			end
 		end
 		return 'Accept'
+	end
+
+	def isValidServerID (uid,index)
+		checkServer = Server.where('user_id = ? and sid = ? ',uid,index)
+		if checkServer.empty? then
+			return false
+		end
+		return true
+	end
+
+	def isValidNameUpdateDomain(name,index)
+		u = Auth.user
+		checkValidName = isNameDomain(name,index);
+		if checkValidName == 'Accept' && isValidServerID(u.id,index) == true then
+			return "Accept"
+		end
+		return checkValidName
 	end
 
 	def setFormatServerName(server)
@@ -210,6 +299,18 @@ class AppController < ApplicationController
 			summaryFormat =  "{"+indexFormat+","+serverNameFormat+","+domainNameFormat+","+portFormat+"}"
 			return summaryFormat
 	end
+	def setFormatServerNameFull(server)
+			serverFormat = "name:"+"'"+server[:name]+"'"
+			domainFormat = "domain:"+"'"+server[:domain]+"'"
+			usernameFormat = "username:"+"'"+server[:suser]+"'"
+			passwordFormat = "password:"+"'"+server[:spass]+"'"
+			portFormat = "port:"+"'"+server[:port].to_s+"'"
+
+			summaryFormat =  "{"+serverFormat+","+domainFormat+","+usernameFormat+","+passwordFormat+","+portFormat+"}"
+			return summaryFormat
+	end
+
+
 
 	def setFormatProjectName(project)
 			indexFormat = "index:"+"'"+project[:pid].to_s+"'"
@@ -235,6 +336,17 @@ class AppController < ApplicationController
 		return false
 	end
 
+	def updateProjectToDB(name,path,detail,index)
+		proj_new = Proj.find_by(pid: index)
+		proj_new[:name] = name
+		proj_new[:path] = path
+		proj_new[:detail] = detail
+		if proj_new.save 
+			return true
+		end
+		return false
+	end
+
 	def isProjectName(name)
 		if name.length < 3 then
 			return "Name length more than 3"
@@ -248,7 +360,8 @@ class AppController < ApplicationController
 		end
 		return path
 	end
-	private :isDomainName , :isPort	, :isNameDomain ,:saveDomainToDB, :setFormatServerName , :saveProjectToDB , :isProjectName
+
+	private :isDomainName , :isPort	, :isNameDomain ,:saveDomainToDB, :setFormatServerName , :saveProjectToDB , :isProjectName , :isValidServerID , :isValidNameUpdateDomain , :updateDomainToDB , :setFormatServerNameFull , :updateProjectToDB
 
 
 end
