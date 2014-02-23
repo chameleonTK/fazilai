@@ -273,7 +273,7 @@
 <script>
     var isClickServer = false;
     $(document.body).on('mouseover','div[index]',function(){
-        //console.log("aaa");
+        //console.log("aaa");index
         var obj = $(this).find("div[name='option']:first");
         obj.fadeIn(200);
         obj.find("div[tool='edit']").hover(function(){
@@ -320,7 +320,7 @@
 <!--Ajax load all server name-->
 <script>
     var htmlGeneratorListServer = function(obj){
-        var htmlBase = '<div index="'+obj.index+'" class="list-group-item list-item-hover"><div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;"><a class="list-group-item-heading" href="/server" style="font-size: 18px">'+obj.name+'</a></h4><p class="list-group-item-text">DOMAIN: '+obj.domain+' , PORT: '+obj.port+'</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div></div>';
+        var htmlBase = '<div index="'+obj.index+'" class="list-group-item list-item-hover"><div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;"><div class="list-group-item-heading" style="font-size: 18px">'+obj.name+'</div></h4><p class="list-group-item-text">DOMAIN: '+obj.domain+' , PORT: '+obj.port+'</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div></div>';
         //console.log(htmlBase);
         return htmlBase;
     }
@@ -505,7 +505,7 @@
 <!--Ajax load all project name-->
 <script>
     var htmlGeneratorListProject = function(obj){
-        var htmlBase = '<div index_proj="'+obj.index+'" class="list-group-item list-item-hover"><div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;"><a class="list-group-item-heading" href="/server" style="font-size: 18px">'+obj.name+'</a></h4><p class="list-group-item-text">'+obj.detail+' ['+obj.path+']</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div></div>';
+        var htmlBase = '<div index_proj="'+obj.index+'" class="list-group-item list-item-hover"><div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;"><div class="list-group-item-heading" style="font-size: 18px">'+obj.name+'</div></h4><p class="list-group-item-text">'+obj.detail+' ['+obj.path+']</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div></div>';
         //console.log(htmlBase);
         return htmlBase;
     }
@@ -591,5 +591,22 @@
         $("#slide-project").fadeIn(100);
         $("#slide-server").fadeIn(100);
     }
+</script>
+<script>
+    $(function(){
+        $("#table-project").on("click",".list-group-item",function(){
+                var pid =  $(this).attr("index_proj");
+                $.post("/session",{"pid":pid},function(data){
+                    if(data=="pass"){
+                        window.location.replace("/server");
+                    }
+                    else{
+                        alert("set session error!!");
+                    }
+                })
+
+        });
+
+    })
 </script>
 <% end%>

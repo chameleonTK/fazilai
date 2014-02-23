@@ -13,6 +13,9 @@ class AppController < ApplicationController
 	def server
 	end
 
+	def error
+		@error = params[:e]
+	end
 
 	def validate
 		u = Auth.user

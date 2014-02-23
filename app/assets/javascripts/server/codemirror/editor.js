@@ -2,7 +2,9 @@ var editor;
 var buffer =[];
 var edit=true;
 function init_editor(te){
-  	te.value = document.documentElement.innerHTML;
+  	te.value = "<html>\n\t<head>\n\t\t<title> WELCOME to Fazilai </title>\n\t</head>\n\t<body>\n\t\t<!-- code hear -->\n\t</body>\n</html>\n";
+
+  	//document.documentElement.innerHTML;
   	editor = CodeMirror.fromTextArea(te, {
     	mode: "application/x-httpd-php",
     	lineNumbers: true,
