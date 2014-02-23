@@ -1,9 +1,7 @@
 var editor;
 var buffer =[];
 var edit=true;
-$(function(){
-
-  	var te = document.getElementById("code");
+function init_editor(te){
   	te.value = document.documentElement.innerHTML;
   	editor = CodeMirror.fromTextArea(te, {
     	mode: "application/x-httpd-php",
@@ -17,8 +15,11 @@ $(function(){
 
   //editor.foldCode(CodeMirror.Pos(11, 0));
   //var buffers = [editor,editor_html];
+}
+$(function(){
+	var te = document.getElementById("code");
+	init_editor(te);
 });
-
 function selectBuffer(name,code,mode){
 	if(!buffer.hasOwnProperty(name))
 		buffer[name] = CodeMirror.Doc(code,mode);

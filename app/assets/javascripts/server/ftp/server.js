@@ -34,6 +34,7 @@ function get_dir(file){
 
 }
 
+
 function init_tree(path_init){
 	$.get(path_init,function(data){
 		$('.tree').html(gentree(data,true,""));
@@ -120,6 +121,4 @@ function init_tree(path_init){
 	});
 	
 }
-
-
 
