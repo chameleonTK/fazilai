@@ -20,7 +20,7 @@
             </div>
             <div class="panel-body roottree" style="padding: 10px 0px 0px 0px;">
                 <div id="table-server" class="list-group" style="overflow-y: scroll;height: 260px;">
-                    <div index="end" class="list-group-item list-item-hover" style="height: 65px; text-align:center;">
+                    <div index="end" class="list-group-item list-item-hover" style="height: 65px; text-align:center;cursor: pointer;">
                         <div style="display: inline-block;">
                             <img src="assets/icon-createlist2.png" style="width: 50px; height: 50px;">
                         </div>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="panel-body roottree" style="padding: 10px 0px 0px 0px;">
                     <div id="table-project" class="list-group" style="overflow-y: scroll;height: 260px;">
-                        <div id = "create_project_end" class="list-group-item list-item-hover" style="height: 65px; text-align:center;">
+                        <div id = "create_project_end" class="list-group-item list-item-hover" style="height: 65px; text-align:center;cursor: pointer;">
                             <div style="display: inline-block;">
                                 <img src="assets/icon-createlist2.png" style="width: 50px; height: 50px;">
                             </div>
@@ -88,6 +88,8 @@
             </div>
             <div class="modal-footer">
               <button id="btn-popup-create" data-loading-text="Loading..." type="button" class="btn btn-primary" >Create</button>
+              <button id="btn-popup-cancel" data-loading-text="Loading..." type="button" class="btn btn-default" >Cancel</button>
+              <button id="btn-popup-update" data-loading-text="Loading..." type="button" class="btn btn-primary" >Update</button>
             </div>
         </div>
 
@@ -122,12 +124,100 @@
             </div>
             <div class="modal-footer">
               <button id="btn-popup-create-project" data-loading-text="Loading..." type="button" class="btn btn-primary" >Create</button>
+              <button id="btn-popup-cancel-project" data-loading-text="Loading..." type="button" class="btn btn-default" >Cancel</button>
+              <button id="btn-popup-update-project" data-loading-text="Loading..." type="button" class="btn btn-primary" >Update</button>
             </div>
         </div>
 
     </div>  
 
      <script>
+     var ClearFormPopupServer = function (){
+        $('#PopupInputName').val('');
+        $('#PopupInputDomain').val('');
+        $('#PopupInputUsername').val('');
+        $('#PopupInputPassword').val('');
+        $('#PopupInputPort').val('');
+
+        $('#PopupInputName').parent().removeClass();
+        $('#PopupInputName').parent().addClass('form-group');
+        $("label[for='name']").text('Name');
+
+        $('#PopupInputDomain').parent().removeClass();
+        $('#PopupInputDomain').parent().addClass('form-group');
+        $("label[for='domain']").text('Domain or IP Address');
+
+        $('#PopupInputUsername').parent().removeClass();
+        $('#PopupInputUsername').parent().addClass('form-group');
+        $("label[for='username']").text("Username's Domain");
+
+        $('#PopupInputPassword').parent().removeClass();
+        $('#PopupInputPassword').parent().addClass('form-group');
+        $("label[for='password']").text('Password');
+        
+        $('#PopupInputPort').parent().removeClass();
+        $('#PopupInputPort').parent().addClass('form-group');
+        $("label[for='port']").text('Port');
+
+        $("#btn-popup-create").button('reset');
+        $("#btn-popup-update").button('reset');
+     }
+     var ValidationPopupFormServer = function(errorData){
+        $('#PopupInputName').parent().removeClass();
+        if(errorData.name=='Accept'){
+            $('#PopupInputName').parent().addClass('form-group has-success');
+             $("label[for='name']").text('Name');
+        }else{
+            $('#PopupInputName').parent().addClass('form-group has-error');
+            $("label[for='name']").text(errorData.name);
+            //$('#element_to_pop_up').bPopup().close(); 
+        }
+
+        //Form Domain
+        $('#PopupInputDomain').parent().removeClass();
+        if(errorData.domain=='Accept'){
+            $('#PopupInputDomain').parent().addClass('form-group has-success');
+             $("label[for='domain']").text('Domain or IP Address');
+        }else{
+            $('#PopupInputDomain').parent().addClass('form-group has-error');
+            $("label[for='domain']").text(errorData.domain);
+            //$('#element_to_pop_up').bPopup().close(); 
+        }
+        //Form Username
+        $('#PopupInputUsername').parent().removeClass();
+        if(errorData.username =='Accept'){
+            $('#PopupInputUsername').parent().addClass('form-group has-success');
+             $("label[for='username']").text("Username's Domain");
+        }else{
+            $('#PopupInputUsername').parent().addClass('form-group has-error');
+            $("label[for='username']").text(errorData.username);
+            //$('#element_to_pop_up').bPopup().close(); 
+        }
+
+
+        //Form Password
+        $('#PopupInputPassword').parent().removeClass();
+        if(errorData.password =='Accept'){
+            $('#PopupInputPassword').parent().addClass('form-group has-success');
+             $("label[for='password']").text('Password');
+        }else{
+            $('#PopupInputPassword').parent().addClass('form-group has-error');
+            $("label[for='password']").text(errorData.password);
+            //$('#element_to_pop_up').bPopup().close(); 
+        }
+
+        //Form Port
+        $('#PopupInputPort').parent().removeClass();
+        if(errorData.port=='Accept'){
+            $('#PopupInputPort').parent().addClass('form-group has-success');
+            $("label[for='port']").text('Port');
+        }else{
+            $('#PopupInputPort').parent().addClass('form-group has-error');
+            $("label[for='port']").text(errorData.port);
+            //$('#element_to_pop_up').bPopup().close(); 
+        }
+
+     }
  // Semicolon (;) to ensure closing of earlier scripting
     // Encapsulation
     // $ is assigned to jQuery
@@ -141,32 +231,12 @@
                 // Prevents the default action to be triggered. 
                 e.preventDefault();
 
-                //Clear Input
-                $('#PopupInputName').val('');
-                $('#PopupInputDomain').val('');
-                $('#PopupInputUsername').val('');
-                $('#PopupInputPassword').val('');
-                $('#PopupInputPort').val('');
+                //Clear Inp
+                ClearFormPopupServer();
 
-                $('#PopupInputName').parent().removeClass();
-                $('#PopupInputName').parent().addClass('form-group');
-                $("label[for='name']").text('Name');
-
-                $('#PopupInputDomain').parent().removeClass();
-                $('#PopupInputDomain').parent().addClass('form-group');
-                $("label[for='domain']").text('Domain or IP Address');
-
-                $('#PopupInputUsername').parent().removeClass();
-                $('#PopupInputUsername').parent().addClass('form-group');
-                $("label[for='username']").text("Username's Domain");
-
-                $('#PopupInputPassword').parent().removeClass();
-                $('#PopupInputPassword').parent().addClass('form-group');
-                $("label[for='password']").text('Password');
-                
-                $('#PopupInputPort').parent().removeClass();
-                $('#PopupInputPort').parent().addClass('form-group');
-                $("label[for='port']").text('Port');
+                $("#btn-popup-create").show();
+                $("#btn-popup-update").hide();
+                $("#btn-popup-cancel").hide();
 
                 // Triggering bPopup when click event is fired
                 $('#element_to_pop_up').bPopup({},function() {
@@ -188,67 +258,12 @@
 
                                 //Show the validation to css
                                 //Form Name
-                                $('#PopupInputName').parent().removeClass();
-                                if(errorData.name=='Accept'){
-                                    $('#PopupInputName').parent().addClass('form-group has-success');
-                                     $("label[for='name']").text('Name');
-                                }else{
-                                    $('#PopupInputName').parent().addClass('form-group has-error');
-                                    $("label[for='name']").text(errorData.name);
-                                    //$('#element_to_pop_up').bPopup().close(); 
-                                }
-
-                                //Form Domain
-                                $('#PopupInputDomain').parent().removeClass();
-                                if(errorData.domain=='Accept'){
-                                    $('#PopupInputDomain').parent().addClass('form-group has-success');
-                                     $("label[for='domain']").text('Domain or IP Address');
-                                }else{
-                                    $('#PopupInputDomain').parent().addClass('form-group has-error');
-                                    $("label[for='domain']").text(errorData.domain);
-                                    //$('#element_to_pop_up').bPopup().close(); 
-                                }
-                                //Form Username
-                                $('#PopupInputUsername').parent().removeClass();
-                                if(errorData.username =='Accept'){
-                                    $('#PopupInputUsername').parent().addClass('form-group has-success');
-                                     $("label[for='username']").text("Username's Domain");
-                                }else{
-                                    $('#PopupInputUsername').parent().addClass('form-group has-error');
-                                    $("label[for='username']").text(errorData.username);
-                                    //$('#element_to_pop_up').bPopup().close(); 
-                                }
-
-
-                                //Form Password
-                                $('#PopupInputPassword').parent().removeClass();
-                                if(errorData.password =='Accept'){
-                                    $('#PopupInputPassword').parent().addClass('form-group has-success');
-                                     $("label[for='password']").text('Password');
-                                }else{
-                                    $('#PopupInputPassword').parent().addClass('form-group has-error');
-                                    $("label[for='password']").text(errorData.password);
-                                    //$('#element_to_pop_up').bPopup().close(); 
-                                }
-
-                                //Form Port
-                                $('#PopupInputPort').parent().removeClass();
-                                if(errorData.port=='Accept'){
-                                    $('#PopupInputPort').parent().addClass('form-group has-success');
-                                    $("label[for='port']").text('Port');
-                                }else{
-                                    $('#PopupInputPort').parent().addClass('form-group has-error');
-                                    $("label[for='port']").text(errorData.port);
-                                    //$('#element_to_pop_up').bPopup().close(); 
-                                }
-
+                                ValidationPopupFormServer(errorData);
                                 //Success All
                                 if(errorData.domain=='Accept' && errorData.port=='Accept' && errorData.name=='Accept'){
                                     $('#element_to_pop_up').bPopup().close();
                                     ReloadAddNewServerName();
                                 }
-
-                                
                                 $btn.button('reset');
 
 						});
@@ -258,7 +273,7 @@
         		});
 
             });
-            $('#btn-close-create-domain').bind('click', function(e) {
+            $('#btn-close-create-domain , #btn-popup-cancel').bind('click', function(e) {
 
                 $('#element_to_pop_up').bPopup().close(); 
             });
@@ -269,11 +284,63 @@
 
     })(jQuery);
 </script>
+
+<!--Update Button Server-->
+<script>
+    var OnUpdateServerPopup = function (e,indexUpdate){
+        // Prevents the default action to be triggered. 
+        e.preventDefault();
+
+        //Clear Input
+        ClearFormPopupServer();
+
+        $("#btn-popup-create").hide();
+        $("#btn-popup-update").show();
+        $("#btn-popup-cancel").show();
+
+        $.post( "<%= detailserver_path() %>",{ index: indexUpdate},function(data){
+            //console.log(data);
+            eval('var postData ='+data);
+            $('#PopupInputName').val(postData.name);
+            $('#PopupInputDomain').val(postData.domain);
+            $('#PopupInputUsername').val(postData.username);
+            $('#PopupInputPassword').val(postData.password);
+            $('#PopupInputPort').val(postData.port);
+
+            $('#element_to_pop_up').bPopup({},function() {
+                $('#btn-popup-update').bind('click', function(e) {
+                    var $btn = $(this);
+                    $btn.button('loading');
+                    $.post( "<%= updateserver_path() %>",
+                    { index: indexUpdate ,
+                    domain: $('#PopupInputDomain').val() ,
+                    password: $('#PopupInputPassword').val() , 
+                    port: $('#PopupInputPort').val() ,
+                    username: $('#PopupInputUsername').val(),
+                    name: $('#PopupInputName').val()},
+                    function(data){
+                        eval('var errorData ='+data);
+                        ValidationPopupFormServer(errorData);
+
+                        //Success All
+                        if(errorData.domain=='Accept' && errorData.port=='Accept' && errorData.name=='Accept'){
+                            $('#element_to_pop_up').bPopup().close();
+                            UpdateServerName(indexUpdate,{domain: $('#PopupInputDomain').val(),port: $('#PopupInputPort').val() ,name: $('#PopupInputName').val()});
+                        }
+                        $btn.button('reset');
+                    });
+                });
+            });
+        });
+    }
+</script>
+    
+
 <!--DOMAIN LIST CONTROL-->
 <script>
     var isClickServer = false;
     $(document.body).on('mouseover','div[index]',function(){
-        //console.log("aaa");index
+        //console.log("aaa");
         var obj = $(this).find("div[name='option']:first");
         obj.fadeIn(200);
         obj.find("div[tool='edit']").hover(function(){
@@ -289,13 +356,16 @@
         var indexDelete = $(this).attr("index");
         obj.find("div[tool='delete']").click(function(){
             //console.log(indexDelete);
+            obj.parent().addClass('list-item-delete');
+            obj.parent().removeClass('list-item-hover');
             DeleteServerName(indexDelete);
             ReloadDeleteServerName(indexDelete);
         });
 
-        obj.find("div[tool='edit']").click(function(){
-            $('#element_to_pop_up').bPopup({},function() {});
-            console.log(indexDelete);
+        obj.find("div[tool='edit']").click(function(e){
+            //$('#element_to_pop_up').bPopup({},function() {});
+            OnUpdateServerPopup(e,indexDelete);
+            //console.log(indexDelete);
         });
 
         var objLinkToNext  = $(this).find("div[name='detail']");
@@ -319,8 +389,12 @@
 </script>
 <!--Ajax load all server name-->
 <script>
+    var htmlGeneratorDivInfoServer = function(obj){
+        var htmlBase = '<div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;width: 350px;cursor: pointer;"><a class="list-group-item-heading" href="/server" style="font-size: 18px">'+obj.name+'</a></h4><p class="list-group-item-text">DOMAIN: '+obj.domain+' , PORT: '+obj.port+'</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;cursor: pointer;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div>'
+        return htmlBase;
+    }
     var htmlGeneratorListServer = function(obj){
-        var htmlBase = '<div index="'+obj.index+'" class="list-group-item list-item-hover"><div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;"><div class="list-group-item-heading" style="font-size: 18px">'+obj.name+'</div></h4><p class="list-group-item-text">DOMAIN: '+obj.domain+' , PORT: '+obj.port+'</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div></div>';
+        var htmlBase = '<div index="'+obj.index+'" class="list-group-item list-item-hover">'+htmlGeneratorDivInfoServer(obj)+'</div>';
         //console.log(htmlBase);
         return htmlBase;
     }
@@ -344,6 +418,10 @@
                 eval('ListServer ='+data);
                 $("div[index=end]").before(htmlGeneratorListServer(ListServer[ListServer.length-1]));
             });
+    }
+    var UpdateServerName = function(index,data){
+        var itemServer = $("div[index="+index+"]");
+        itemServer.html(htmlGeneratorDivInfoServer(data));
     }
     var ReloadDeleteServerName = function(indexDelete){
         $.post( "<%= loadallserver_path() %>",
@@ -383,83 +461,139 @@
 
 <!--CREATE PROJECT-->
 <script>
+    var ClearFormPopupProject = function(){
+        $('#PopupInputNameP').val('');
+        $('#PopupInputPath').val('');
+        $('#PopupInputDetail').val('');
+
+        $('#PopupInputNameP').parent().removeClass();
+        $('#PopupInputNameP').parent().addClass('form-group');
+        $("label[for='namep']").text('Name');
+
+        $('#PopupInputPath').parent().removeClass();
+        $('#PopupInputPath').parent().addClass('form-group');
+        $("label[for='path']").text('Path');
+
+        $('#PopupInputDetail').parent().removeClass();
+        $('#PopupInputDetail').parent().addClass('form-group');
+        $("label[for='detail']").text('Detail');
+
+        $("#btn-popup-create-project").button('reset');
+        $("#btn-popup-update-project").button('reset');
+    }
+    var ValidationPopupFormProject = function(errorData){
+
+
+        $('#PopupInputNameP').parent().removeClass();
+        if(errorData.name=='Accept'){
+            $('#PopupInputNameP').parent().addClass('form-group has-success');
+            $("label[for='namep']").text('Name');
+        }else{
+            $('#PopupInputNameP').parent().addClass('form-group has-error');
+            $("label[for='namep']").text(errorData.name);
+        }
+
+        $('#PopupInputPath').parent().removeClass();
+        if(errorData.path=='Accept'){
+            $('#PopupInputPath').parent().addClass('form-group has-success');
+             $("label[for='path']").text('Path');
+        }else{
+            $('#PopupInputPath').parent().addClass('form-group has-error');
+            $("label[for='path']").text(errorData.path);
+        }
+
+        $('#PopupInputDetail').parent().removeClass();
+        if(errorData.detail=='Accept'){
+            $('#PopupInputDetail').parent().addClass('form-group has-success');
+             $("label[for='detail']").text('Detail');
+        }else{
+            $('#PopupInputPath').parent().addClass('form-group has-error');
+            $("label[for='detail']").text(errorData.detail);
+        }
+    }
     $('#btn-create-project , #create_project_end').bind('click', function(e) {
             // Prevents the default action to be triggered. 
             e.preventDefault();
-            $('#PopupInputNameP').val('');
-            $('#PopupInputPath').val('');
-            $('#PopupInputDetail').val('');
-
-            $('#PopupInputNameP').parent().removeClass();
-            $('#PopupInputNameP').parent().addClass('form-group');
-            $("label[for='namep']").text('Name');
-
-            $('#PopupInputPath').parent().removeClass();
-            $('#PopupInputPath').parent().addClass('form-group');
-            $("label[for='path']").text('Path');
-
-            $('#PopupInputDetail').parent().removeClass();
-            $('#PopupInputDetail').parent().addClass('form-group');
-            $("label[for='detail']").text('Detail');
+            ClearFormPopupProject();
+            $('#btn-popup-create-project').show();
+            $('#btn-popup-cancel-project').hide();
+            $('#btn-popup-update-project').hide();
 
             $('#project_to_pop_up').bPopup({},function() {
                 $('#btn-popup-create-project').bind('click', function(e) {
                     var $btn = $(this);
-                        $btn.button('loading');
-                        $.post( "<%= createproject_path() %>",
-                            { name: $('#PopupInputNameP').val() ,
-                            path: $('#PopupInputPath').val() , 
-                            detail: $('#PopupInputDetail').val(),
-                            server_id: $('#list-project-page').attr('servid') } , 
-                            function(data){
+                    $btn.button('loading');
+                    $.post( "<%= createproject_path() %>",
+                        { name: $('#PopupInputNameP').val() ,
+                        path: $('#PopupInputPath').val() , 
+                        detail: $('#PopupInputDetail').val(),
+                        server_id: $('#list-project-page').attr('servid') } , 
+                        function(data){
 
-                                eval('var errorData ='+data);  //change message format to object
+                            eval('var errorData ='+data);  //change message format to object
 
-                                $('#PopupInputNameP').parent().removeClass();
-                                if(errorData.name=='Accept'){
-                                    $('#PopupInputNameP').parent().addClass('form-group has-success');
-                                     $("label[for='namep']").text('Name');
-                                }else{
-                                    $('#PopupInputNameP').parent().addClass('form-group has-error');
-                                    $("label[for='namep']").text(errorData.name);
-                                }
+                            ValidationPopupFormProject(errorData);
 
-                                $('#PopupInputPath').parent().removeClass();
-                                if(errorData.path=='Accept'){
-                                    $('#PopupInputPath').parent().addClass('form-group has-success');
-                                     $("label[for='path']").text('Path');
-                                }else{
-                                    $('#PopupInputPath').parent().addClass('form-group has-error');
-                                    $("label[for='path']").text(errorData.path);
-                                }
-
-                                $('#PopupInputDetail').parent().removeClass();
-                                if(errorData.detail=='Accept'){
-                                    $('#PopupInputDetail').parent().addClass('form-group has-success');
-                                     $("label[for='detail']").text('Detail');
-                                }else{
-                                    $('#PopupInputPath').parent().addClass('form-group has-error');
-                                    $("label[for='detail']").text(errorData.detail);
-                                }
-
-
-                                if(errorData.name=='Accept' && errorData.path=='Accept' && errorData.detail=='Accept'){
-                                    $('#project_to_pop_up').bPopup().close();
-                                    ReloadAddNewProjectName();
-                                }
-
-                                $btn.button('reset');
-
-                            });
+                            if(errorData.name=='Accept' && errorData.path=='Accept' && errorData.detail=='Accept'){
+                                $('#project_to_pop_up').bPopup().close();
+                                ReloadAddNewProjectName();
+                            }
+                            $btn.delay(1000).button('reset');
+                        });
                 });
             });
-            $('#btn-close-create-project').bind('click', function(e) {
+    });
 
-                $('#project_to_pop_up').bPopup().close(); 
-            });
+    $('#btn-close-create-project , #btn-popup-cancel-project').bind('click', function(e) {
+        $('#project_to_pop_up').bPopup().close(); 
     });
 </script>
 
+<!--UPDATE BUTTON PROJECT-->
+<script>
+    var OnUpdateProjectPopup = function (e,indexUpdate){
+        // Prevents the default action to be triggered. 
+        e.preventDefault();
+
+        //Clear Input
+        ClearFormPopupProject();
+
+        $("#btn-popup-create-project").hide();
+        $("#btn-popup-update-project").show();
+        $("#btn-popup-cancel-project").show();
+
+        $.post( "<%= detailproject_path() %>",{ index: indexUpdate},function(data){
+            console.log(data);
+            eval('var postData ='+data);
+            $('#PopupInputNameP').val(postData.name);
+            $('#PopupInputPath').val(postData.path);
+            $('#PopupInputDetail').val(postData.detail);
+
+            $('#project_to_pop_up').bPopup({},function() {
+                $('#btn-popup-update-project').bind('click', function(e) {
+                    var $btn = $(this);
+                    $btn.button('loading');
+                    $.post( "<%= updateproject_path() %>",
+                    { index: indexUpdate ,
+                    name: $('#PopupInputNameP').val() ,
+                    path: $('#PopupInputPath').val() , 
+                    detail: $('#PopupInputDetail').val()},
+                    function(data){
+                        eval('var errorData ='+data);
+                        ValidationPopupFormProject(errorData);
+
+                        //Success All
+                        if(errorData.name=='Accept' && errorData.path=='Accept' && errorData.detail=='Accept'){
+                            $('#project_to_pop_up').bPopup().close();
+                            UpdateProjectName(indexUpdate,{name: $('#PopupInputNameP').val(),path: $('#PopupInputPath').val() ,detail: $('#PopupInputDetail').val()});
+                        }
+                        $btn.button('reset');
+                    });
+                });
+            });
+        });
+    }
+</script>
 <!--PROJECT LIST CONTROL-->
 <script>
     $(document.body).on('mouseover','div[index_proj]',function(){
@@ -479,13 +613,16 @@
         var indexDelete = $(this).attr("index_proj");
         obj.find("div[tool='delete']").click(function(){
             //console.log(indexDelete);
+            obj.parent().addClass('list-item-delete');
+            obj.parent().removeClass('list-item-hover');
             DeleteProjectName(indexDelete);
             ReloadDeleteProjectName(indexDelete);
         });
 
-        obj.find("div[tool='edit']").click(function(){
-            $('#project_to_pop_up').bPopup({},function() {});
-            console.log(indexDelete);
+        obj.find("div[tool='edit']").click(function(e){
+            //$('#project_to_pop_up').bPopup({},function() {});
+            OnUpdateProjectPopup(e,indexDelete)
+            //console.log(indexDelete);
         });
 
         var objLinkToNext  = $(this).find("div[name='detail']");
@@ -504,8 +641,13 @@
 </script>
 <!--Ajax load all project name-->
 <script>
+    var htmlGeneratorDivInfoProject = function(obj){
+         var htmlBase = '<div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;width: 350px;cursor: pointer;"><a class="list-group-item-heading" href="/server" style="font-size: 18px">'+obj.name+'</a></h4><p class="list-group-item-text">'+obj.detail+' ['+obj.path+']</p></div><div name="option" style="float: right; display: none;margin-top: 8px;cursor: pointer;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;cursor: pointer;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div>';
+        //console.log(htmlBase);
+        return htmlBase;
+    }
     var htmlGeneratorListProject = function(obj){
-        var htmlBase = '<div index_proj="'+obj.index+'" class="list-group-item list-item-hover"><div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;"><div class="list-group-item-heading" style="font-size: 18px">'+obj.name+'</div></h4><p class="list-group-item-text">'+obj.detail+' ['+obj.path+']</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div></div>';
+        var htmlBase = '<div index_proj="'+obj.index+'" class="list-group-item list-item-hover">'+htmlGeneratorDivInfoProject(obj)+'</div>';
         //console.log(htmlBase);
         return htmlBase;
     }
@@ -528,6 +670,10 @@
                                     $("#table-project").prepend(htmlGeneratorListProject(ListProject[ListProject.length-i-1]));
                                 }
                             });
+    }
+    var UpdateProjectName = function(index,data){
+        var itemServer = $("div[index_proj="+index+"]")
+        itemServer.html(htmlGeneratorDivInfoProject(data));
     }
     var ReloadDeleteProjectName = function(indexDelete){
         $.post( "<%= loadallproject_path() %>",{ server_id: $('#list-project-page').attr('servid')} , 
@@ -591,22 +737,5 @@
         $("#slide-project").fadeIn(100);
         $("#slide-server").fadeIn(100);
     }
-</script>
-<script>
-    $(function(){
-        $("#table-project").on("click",".list-group-item",function(){
-                var pid =  $(this).attr("index_proj");
-                $.post("/session",{"pid":pid},function(data){
-                    if(data=="pass"){
-                        window.location.replace("/server");
-                    }
-                    else{
-                        alert("set session error!!");
-                    }
-                })
-
-        });
-
-    })
 </script>
 <% end%>

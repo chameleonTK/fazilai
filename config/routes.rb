@@ -10,9 +10,14 @@ Fazilai::Application.routes.draw do
   post "/choose/createdomain", to: "app#createdomain" ,as:'createdomain'
   post "/choose/loadallserver", to: "app#loadallserver" ,as: "loadallserver"
   post "/choose/deleteserver", to: "app#deleteserver" ,as: 'deleteserver'
+  post "/choose/detailserver", to: "app#detailserver" ,as: 'detailserver'
+  post "/choose/updateserver", to: "app#updateserver" ,as: 'updateserver'
+
   post "/choose/loadallproject", to: "app#loadallproject" ,as: 'loadallproject'
   post "/choose/createproject", to: "app#createproject" ,as: 'createproject'
   post "/choose/deleteproject", to: "app#deleteproject" ,as: 'deleteproject'
+  post "/choose/detailproject", to: "app#detailproject" ,as: 'detailproject'
+  post "/choose/updateproject", to: "app#updateproject" ,as: 'updateproject'
 
   post "/session", to: "ftp#setsession" , as:'session' 
   get "/server", to: "app#server" , as:'server'

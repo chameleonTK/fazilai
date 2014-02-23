@@ -31,4 +31,10 @@
 .tree > li label :hover{
 	background-color:rgb(255, 224, 224);
 }
-
+.list-item-hover:hover {
+	background-color:rgb(255, 239, 219);
+}
+.list-item-delete{
+	transition: background-color 1s ease;
+	background-color:rgb(80, 80, 80);
+}
