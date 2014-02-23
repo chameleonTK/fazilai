@@ -20,7 +20,7 @@
             </div>
             <div class="panel-body roottree" style="padding: 10px 0px 0px 0px;">
                 <div id="table-server" class="list-group" style="overflow-y: scroll;height: 260px;">
-                    <div index="end" class="list-group-item list-item-hover" style="height: 65px; text-align:center;">
+                    <div index="end" class="list-group-item list-item-hover" style="height: 65px; text-align:center;cursor: pointer;">
                         <div style="display: inline-block;">
                             <img src="assets/icon-createlist2.png" style="width: 50px; height: 50px;">
                         </div>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="panel-body roottree" style="padding: 10px 0px 0px 0px;">
                     <div id="table-project" class="list-group" style="overflow-y: scroll;height: 260px;">
-                        <div id = "create_project_end" class="list-group-item list-item-hover" style="height: 65px; text-align:center;">
+                        <div id = "create_project_end" class="list-group-item list-item-hover" style="height: 65px; text-align:center;cursor: pointer;">
                             <div style="display: inline-block;">
                                 <img src="assets/icon-createlist2.png" style="width: 50px; height: 50px;">
                             </div>
@@ -356,6 +356,8 @@
         var indexDelete = $(this).attr("index");
         obj.find("div[tool='delete']").click(function(){
             //console.log(indexDelete);
+            obj.parent().addClass('list-item-delete');
+            obj.parent().removeClass('list-item-hover');
             DeleteServerName(indexDelete);
             ReloadDeleteServerName(indexDelete);
         });
@@ -388,7 +390,7 @@
 <!--Ajax load all server name-->
 <script>
     var htmlGeneratorDivInfoServer = function(obj){
-        var htmlBase = '<div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;"><a class="list-group-item-heading" href="/server" style="font-size: 18px">'+obj.name+'</a></h4><p class="list-group-item-text">DOMAIN: '+obj.domain+' , PORT: '+obj.port+'</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div>'
+        var htmlBase = '<div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;width: 350px;cursor: pointer;"><a class="list-group-item-heading" href="/server" style="font-size: 18px">'+obj.name+'</a></h4><p class="list-group-item-text">DOMAIN: '+obj.domain+' , PORT: '+obj.port+'</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;cursor: pointer;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div>'
         return htmlBase;
     }
     var htmlGeneratorListServer = function(obj){
@@ -611,6 +613,8 @@
         var indexDelete = $(this).attr("index_proj");
         obj.find("div[tool='delete']").click(function(){
             //console.log(indexDelete);
+            obj.parent().addClass('list-item-delete');
+            obj.parent().removeClass('list-item-hover');
             DeleteProjectName(indexDelete);
             ReloadDeleteProjectName(indexDelete);
         });
@@ -638,7 +642,7 @@
 <!--Ajax load all project name-->
 <script>
     var htmlGeneratorDivInfoProject = function(obj){
-         var htmlBase = '<div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;"><a class="list-group-item-heading" href="/server" style="font-size: 18px">'+obj.name+'</a></h4><p class="list-group-item-text">'+obj.detail+' ['+obj.path+']</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div>';
+         var htmlBase = '<div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;width: 350px;cursor: pointer;"><a class="list-group-item-heading" href="/server" style="font-size: 18px">'+obj.name+'</a></h4><p class="list-group-item-text">'+obj.detail+' ['+obj.path+']</p></div><div name="option" style="float: right; display: none;margin-top: 8px;cursor: pointer;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;cursor: pointer;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div>';
         //console.log(htmlBase);
         return htmlBase;
     }
