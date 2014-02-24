@@ -1,10 +1,10 @@
 var editor;
 var buffer =[];
 var edit=true;
-$(function(){
+function init_editor(te){
+  	te.value = "<html>\n\t<head>\n\t\t<title> WELCOME to Fazilai </title>\n\t</head>\n\t<body>\n\t\t<!-- code hear -->\n\t</body>\n</html>\n";
 
-  	var te = document.getElementById("code");
-  	te.value = document.documentElement.innerHTML;
+  	//document.documentElement.innerHTML;
   	editor = CodeMirror.fromTextArea(te, {
     	mode: "application/x-httpd-php",
     	lineNumbers: true,
@@ -17,8 +17,11 @@ $(function(){
 
   //editor.foldCode(CodeMirror.Pos(11, 0));
   //var buffers = [editor,editor_html];
+}
+$(function(){
+	var te = document.getElementById("code");
+	init_editor(te);
 });
-
 function selectBuffer(name,code,mode){
 	if(!buffer.hasOwnProperty(name))
 		buffer[name] = CodeMirror.Doc(code,mode);

@@ -5,14 +5,39 @@ class FtpController < ApplicationController
 	after_filter :clearvar , :only => [:listfile,:getfile,:putfile]
 
 	def setvar
-		session[:server] = 'ftp.curve.in.th'
-		session[:username] = 'curveinth' #params["username"]
-		session[:password] = '2curveTK' #params["password"]
+		is_error = false
+		e = ""
+		#session[:server] = 'ftp.curve.in.th'
+		#session[:username] = 'curveinth' #params["username"]
+		#session[:password] = '2curveTK' #params["password"]
 		@server = session[:server]
-		@ftp = Net::FTP.new(session[:server])
-		@ftp.passive = true
-		@ftp.login(session[:username], session[:password])
+		begin
+			@ftp = Net::FTP.new(session[:server])
+			begin
+				@ftp.passive = true
+				@ftp.login(session[:username], session[:password])
+			rescue
+				is_error = true
+				e = "loginError"
+			end
+		rescue
+			is_error = true
+			e = "connectError"
+		end
 
+		if is_error
+			render text: e
+		end
+	end
+
+	def setsession
+		pid = params[:pid]
+		p = Proj.find(pid)
+		s = p.server
+		session[:server] = s.domain
+		session[:username] = s.suser
+		session[:password] = s.spass
+		render text: "pass"
 	end
 
 	def clearvar
@@ -70,18 +95,29 @@ class FtpController < ApplicationController
  		f.close
 
 		is_save = false
+		is_error = false
+		e = ""
 		filenames.each do |file|
 			if file.include? filename
-				@ftp.putbinaryfile(local,file,1024)
+				begin
+					@ftp.putbinaryfile(local,file,1024)
+				rescue
+					is_error = true
+					e = "permissionError"
+				end
 				is_save = true
 				break
 			end
 		end
 
-		if is_save
-			render text: "accept"
+		if is_error
+			render text: e
 		else
-			render text: "denine"
+			if is_save
+				render text: "accept"
+			else
+				render text: "denine"
+			end
 		end
 	end
 

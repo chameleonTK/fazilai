@@ -1,4 +1,6 @@
-	
+<% content_for :include do %>
+	<%= javascript_include_tag "server" %>
+<% end%>
 <% content_for :body do %>
 	<!--[if gte IE 9 ]><link rel="stylesheet" type="text/css" href="_styles.css" media="screen"><![endif]-->
 
@@ -46,12 +48,16 @@
 
 </style>
 
-	<%= javascript_include_tag "server" %>
 	<script>
+		
 		$(function(){
+
 			init_tree("<%= listfile_root_path() %>");
+			var te = document.getElementById("code");
+			init_editor(te);
 		});
-	</script>
+
+	</script>	
 
 <div class="container" style="margin-left:0px">
 	<div class="leftdiv">

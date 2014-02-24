@@ -1,3 +1,9 @@
+function error_check(data){
+	if(data=="connectError" || data=="loginError" || data=="permissionError")
+		window.location.replace("/error?e="+data);
+
+}
+
 function gentree(data,is_root,label_for){
 	var s = "";
 	$.each(data, function( index, value ) {
@@ -34,8 +40,10 @@ function get_dir(file){
 
 }
 
+
 function init_tree(path_init){
 	$.get(path_init,function(data){
+		error_check(data);
 		$('.tree').html(gentree(data,true,""));
 	});
 
@@ -52,6 +60,7 @@ function init_tree(path_init){
 			var s = get_dir(folder);
 			$.get("/listfile"+s,function(data){
 				//console.log(subfolder);
+				error_check(data);
 				subfolder.html(gentree(data,false,label_for));
 			});
 		}
@@ -72,6 +81,7 @@ function init_tree(path_init){
 			file.parent().addClass("edited");
 			setnotEdit();
 			$.post("/getfile"+s,function(data){
+				error_check(data);
 				setEdit();
 				console.log(data);
 				//alert("a");
@@ -94,6 +104,7 @@ function init_tree(path_init){
 			var s = get_dir(file);
 			var doc = getEditorText();
 			$.post("/putfile"+s,{"doc":doc },function(data){
+				error_check(data);
 				console.log("already save");
 				if(data=="accept"){
 					var alert_ = ''
@@ -120,6 +131,4 @@ function init_tree(path_init){
 	});
 	
 }
-
-
 
