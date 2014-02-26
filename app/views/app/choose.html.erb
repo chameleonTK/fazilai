@@ -12,11 +12,6 @@
                 <div class="panel-title" style="float:left">
                    <h2 style="margin-top: 0px;">Domain name</h2>
                 </div>
-                <div class="btndiv" style="float:right;margin-top: -8px;">
-                    <button id = "btn-create-domain" type="button" class="btn btn-warning btn-lg" style="height: 50px; width: 50px;">
-                        <span> <img src="/assets/icon-createlist.png"></span>
-                    </button>
-                </div>
             </div>
             <div class="panel-body roottree" style="padding: 10px 0px 0px 0px;">
                 <div id="table-server" class="list-group" style="overflow-y: scroll;height: 260px;">
@@ -33,11 +28,7 @@
                     <div class="panel-title" style="float:left">
                         <h2 style="margin-top: 0px;">Project name</h2>
                     </div>
-                    <div class="btndiv" style="float:right;margin-top: -8px;">
-                        <button id = "btn-create-project" type="button" class="btn btn-warning btn-lg" style="height: 50px; width: 50px;">
-                        <span> <img src="/assets/icon-createlist.png"></span>
-                        </button>
-                    </div>
+                    
                 </div>
                 <div class="panel-body roottree" style="padding: 10px 0px 0px 0px;">
                     <div id="table-project" class="list-group" style="overflow-y: scroll;height: 260px;">
@@ -227,7 +218,7 @@
         $(function() {
             // Binding a click event
             // From jQuery v.1.7.0 use .on() instead of .bind()
-            $('#btn-create-domain , div[index=end]').bind('click', function(e) {
+            $('div[index=end]').bind('click', function(e) {
                 // Prevents the default action to be triggered. 
                 e.preventDefault();
 
@@ -511,7 +502,7 @@
             $("label[for='detail']").text(errorData.detail);
         }
     }
-    $('#btn-create-project , #create_project_end').bind('click', function(e) {
+    $('#create_project_end').bind('click', function(e) {
             // Prevents the default action to be triggered. 
             e.preventDefault();
             ClearFormPopupProject();

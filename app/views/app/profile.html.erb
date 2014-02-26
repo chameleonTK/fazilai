@@ -97,70 +97,109 @@
 <!-- Tab panes -->
 <div class="tab-content" >
 	<div class="tab-pane infotab active" id="profile">
-		<div align=center style="color:green">
+		<div align='center' style="color:green">
+			<table>
+			<tr>
+			<td>
 			<%u = Auth.user %>
 	  		<% result=User.where(uid: u.id).take %>
-	  		<legend>Account</legend>
-	  		<div style="width:300px;height:1px;background:gray"></div>
+	  		<legend>&nbsp;&nbsp;&nbsp;&nbsp;Account</legend>
+	  		<div style="width:350px;height:1px;background:gray"></div>
 	  		<br>
-	  		username:
-	   	<%if (result[:email].nil?)==false %>
-				<%=result[:email] %>
-	  		<%else%>
-		  		<%="Error query email" %>
-			<%end%>
-			<br><br>
+
+	  			&nbsp;&nbsp;&nbsp;&nbsp;username : 
+	   			<%if (result[:email].nil?)==false %>
+					<b><i><%=result[:email] %></i></b>
+	  			<%else%>
+		  			<%="Error query email" %>
+				<%end%>
+			</td>
+			</tr>
+			</table>
+
+	   	<table>
+		<tr>
+		<td>
 			<%servercount= Server.where(user_id: u.id).count %><br>
-	   	<legend>Server(s) and Project(s)</legend>
-	   	<div style="width:300px;height:1px;background:gray"></div>
-	   	<br>
-  			The number of server(s) : <%=servercount %>:<br>
+	   		<legend>&nbsp;&nbsp;&nbsp;&nbsp;Server(s) and Project(s)</legend>
+	   		<div style="width:350px;height:1px;background:gray"></div><br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The number of server(s) : <b><i><%=servercount %></i></b><br>
+			<br>
 			<%s = u.obj.servers  %>
 			<%if (s[0].nil?)==false %>
 				<%for i in 0..(servercount-1) %>
-					<%=i+1%><%= " Server name:"%><%projectcount= Proj.where(server_id: s[i][:sid].inspect).count %>
-					<%=s[i][:name].inspect %><%= " contains "%><%=projectcount%><%= " project(s)."%><br>
-					<%if (s[i].projs[0].nil?)==false %>
-						<%for ii in 0..(projectcount-1) %>
-							<%="  -        "%><%= s[i].projs[ii][:name].inspect%><br>
-						<%end%>
-					<%else%>
-						<%="           No Project(s)"%>
-					<% end %>
 
+			<table class="table">
+			<tr class="active">
+			<td style="width:200px;">				
+					 	&nbsp;&nbsp;&nbsp;&nbsp;<%= " Server : "%><%projectcount= Proj.where(server_id: s[i][:sid].inspect).count %><b><i><%=s[i][:name].inspect %></i></b>
+			</td>
+			<td>		 	
+					<%= " contains "%><b><i><%=projectcount%></i></b><%= " project(s)."%>
+			</td>
+			</tr>
+			<tr class="info">
+			<td>
+					<%if (s[i].projs[0].nil?)==false %>
+						<ul>
+						<%for ii in 0..(projectcount-1) %>
+							<li type=square>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%="	"%><b><%= s[i].projs[ii][:name].inspect%></b>
+						<%end%>
+						</ul>
+					<%else%>
+						&nbsp;&nbsp;&nbsp;&nbsp;<%="           No Project(s)"%>
+					<% end %>
+			<td>
+			</tr>
+			</table>
 				<% end %>
+
 			<%else%>
-				<%="No server"%>
+				&nbsp;&nbsp;&nbsp;&nbsp;<%="No server"%>
 			<% end %>
+			
+			
+		</td>
+		</tr>
+		</table>
 		</div>
-		<br><br>
+		
 	</div>
 
 	<div class="tab-pane infotab" id="settings">
 		<div  align=center>
+			<table>
+			<tr>
+			<td>
 				<%= form_for :post do |f| %>
 		    		<legend>
 						<% flash.each do |name, msg| -%>
 				      	<%= content_tag :div, msg, class: name , style:"color:red;font-size:14px" %>
 			   	 	<% end %>		
-						<div>Change password</div>
+						<div>&nbsp;&nbsp;&nbsp;&nbsp;Change password</div>
 					</legend>
 					<div style="width:300px;height:1px;background:gray"></div>
 					<br>
 		    		<%= f.text_field :oldpassword,:class => "form-control fazilai-textform",:placeholder => "old password" %><br>
 			    	<%= f.password_field :newpassword ,:class => "form-control fazilai-textform",:placeholder => "new password"%><br>
 					<%= f.password_field :renewpassword ,:class => "form-control fazilai-textform",:placeholder => "re new password"%><br>
-					<%= f.submit :"Submit" , :class => "form-control fazilai-login btn-warning" , :style => "display:inline"%> 
+					&nbsp;&nbsp;&nbsp;&nbsp;<%= f.submit :"Submit" , :class => "form-control fazilai-login btn-warning" , :style => "display:inline"%> 
 					<br><br>
 				<% end %>
+				</td>
+			</tr>
+			</table>
 		</div>
 		<br><br>
 	</div>
 
 	<div class="tab-pane infotab" id="achievement">
 		<div align=center style="color:green">
-			<legend>Achievement(s)</legend>
-			<div style="width:300px;height:1px;background:gray"></div>
+			<table>
+			<tr>
+			<td>
+			<legend>&nbsp;&nbsp;&nbsp;&nbsp;Achievement(s)</legend>
+			<div style="width:550px;height:1px;background:gray"></div>
 			<br>
 			<% acount=Ownachievement.where(user_id: u.id).count %>
 			<%a = u.obj.ownachievements  %>
@@ -181,8 +220,11 @@
 					<% end %>
 				<%end%>
 			<%else%>
-				<%="No achievement(s)"%>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%="No achievement(s)"%>
 			<%end%>
+			</td>
+			</tr>
+			</table>
 		</div>
 		<br><br>
 	</div>
