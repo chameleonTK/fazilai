@@ -104,7 +104,7 @@
 			<%u = Auth.user %>
 	  		<% result=User.where(uid: u.id).take %>
 	  		<legend>&nbsp;&nbsp;&nbsp;&nbsp;Account</legend>
-	  		<div style="width:350px;height:1px;background:gray"></div>
+	  		<div style="width:550px;height:1px;background:gray"></div>
 	  		<br>
 
 	  			&nbsp;&nbsp;&nbsp;&nbsp;username : 
@@ -122,7 +122,7 @@
 		<td>
 			<%servercount= Server.where(user_id: u.id).count %><br>
 	   		<legend>&nbsp;&nbsp;&nbsp;&nbsp;Server(s) and Project(s)</legend>
-	   		<div style="width:350px;height:1px;background:gray"></div><br>
+	   		<div style="width:550px;height:1px;background:gray"></div><br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The number of server(s) : <b><i><%=servercount %></i></b><br>
 			<br>
 			<%s = u.obj.servers  %>
@@ -131,7 +131,7 @@
 
 			<table class="table">
 			<tr class="active">
-			<td style="width:200px;">				
+			<td style="width:300px;">				
 					 	&nbsp;&nbsp;&nbsp;&nbsp;<%= " Server : "%><%projectcount= Proj.where(server_id: s[i][:sid].inspect).count %><b><i><%=s[i][:name].inspect %></i></b>
 			</td>
 			<td>		 	
