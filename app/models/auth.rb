@@ -8,7 +8,7 @@ class Auth
 
 	def attempt( user , pass)
 		auth = User.find_by(email: user)
-		if not auth.nil?
+		if not auth.nil? and auth.pass == pass
 			@state = true
 			@name  = user.split('@')[0]
 			@id = auth[:id]

@@ -1,0 +1,25 @@
+<% content_for :include do %>
+<% end%>
+<% content_for :body do %>
+	<style>	
+		.errorimg{
+			width:500px;
+			float:left;
+		}
+	</style>
+
+	<script>
+		$(function(){
+			window.setTimeout(function() {
+				window.location.href = '/choose';
+			}, 2000);
+		});
+	</script>
+	<div style="margin: auto;width: 70%;">
+		<%=image_tag("error-e2.png", class: "errorimg")%>
+		<div style="padding-top:200px">
+			<div style="font-size:70px"><b> Sorry</b> </div>
+			<div style="font-size:36px"> Error : <%=@error%></div>
+		</div>
+	</div>
+<% end%>

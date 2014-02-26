@@ -14,5 +14,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.bpopup.min
-//= require turbolinks
 //= require_tree ./global

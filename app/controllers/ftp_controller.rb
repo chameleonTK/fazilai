@@ -37,10 +37,24 @@ class FtpController < ApplicationController
 		session[:server] = s.domain
 		session[:username] = s.suser
 		session[:password] = s.spass
+		time = Time.new
+		t = time.strftime("%a, %d %b %Y %H:%M:%S")
+		u = Auth.user
+		log = u.obj.logs.new
+		log.proj_id = pid
+		log.starttime = t
+		log.lefttime = t
+		log.save
+		session[:lid] = log.lid
 		render text: "pass"
 	end
 
 	def clearvar
+		log = Log.find(session[:lid])
+		time = Time.new
+		t = time.strftime("%a, %d %b %Y %H:%M:%S")
+		log.lefttime = t
+		log.save
 		@ftp.close
 	end
 
