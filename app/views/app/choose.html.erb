@@ -4,8 +4,8 @@
 <% content_for :body do %>
 	<div id="choose-page" style="width: 700px;margin: auto;">
         <div id="slide-section" style="height: 45px;">
-            <a href="#" onClick="return false;"><img id="slide-project" src="assets/slide_ready.png" style="float: right;"></a>
-            <a href="#" onClick="return false;"><img id="slide-server" src="assets/slide_ready.png" style="float: right;"></a>
+            <a href="#" onClick="return false;"><img id="slide-project" src=<%= asset_path "slide_ready.png" %> style="float: right;"></a>
+            <a href="#" onClick="return false;"><img id="slide-server" src=<%= asset_path "slide_ready.png" %> style="float: right;"></a>
         </div>
         <div id="list-choose-page" class="panel panel-default" style="z-index:1;">
             <div class="panel-heading" style="height: 55px;">
@@ -17,7 +17,7 @@
                 <div id="table-server" class="list-group" style="overflow-y: scroll;height: 260px;">
                     <div index="end" class="list-group-item list-item-hover" style="height: 65px; text-align:center;cursor: pointer;">
                         <div style="display: inline-block;">
-                            <img src="assets/icon-createlist2.png" style="width: 50px; height: 50px;">
+                            <img src=<%= asset_path "icon-createlist2.png" %> style="width: 50px; height: 50px;">
                         </div>
                     </div> 
                 </div>
@@ -34,7 +34,7 @@
                     <div id="table-project" class="list-group" style="overflow-y: scroll;height: 260px;">
                         <div id = "create_project_end" class="list-group-item list-item-hover" style="height: 65px; text-align:center;cursor: pointer;">
                             <div style="display: inline-block;">
-                                <img src="assets/icon-createlist2.png" style="width: 50px; height: 50px;">
+                                <img src=<%= asset_path "icon-createlist2.png" %> style="width: 50px; height: 50px;">
                             </div>
                         </div> 
                     </div>
@@ -381,7 +381,7 @@
 <!--Ajax load all server name-->
 <script>
     var htmlGeneratorDivInfoServer = function(obj){
-        var htmlBase = '<div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;width: 350px;cursor: pointer;"><div class="list-group-item-heading" style="font-size: 18px">'+obj.name+'</div></h4><p class="list-group-item-text">DOMAIN: '+obj.domain+' , PORT: '+obj.port+'</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;cursor: pointer;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div>'
+        var htmlBase = '<div style="float: left; margin-top: -5px; margin-left: -8px;"><img src=<%=(asset_path "domain_badge.png")%> style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;width: 350px;cursor: pointer;"><div class="list-group-item-heading" style="font-size: 18px">'+obj.name+'</div></h4><p class="list-group-item-text">DOMAIN: '+obj.domain+' , PORT: '+obj.port+'</p></div><div name="option" style="float: right; display: none;margin-top: 8px;"><div tool="edit"style="display: inline-block; margin-left: 10px;cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src=<%=(asset_path "icon-editlist.png")%> style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;cursor: pointer;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src=<%=(asset_path "icon-deletelist.png")%> style="width: 24px; height: 24px;"></div></div>'
         return htmlBase;
     }
     var htmlGeneratorListServer = function(obj){
@@ -633,7 +633,7 @@
 <!--Ajax load all project name-->
 <script>
     var htmlGeneratorDivInfoProject = function(obj){
-         var htmlBase = '<div style="float: left; margin-top: -5px; margin-left: -8px;"><img src="assets/domain_badge.png" style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;width: 350px;cursor: pointer;"><div class="list-group-item-heading" style="font-size: 18px">'+obj.name+'</div></h4><p class="list-group-item-text">'+obj.detail+' ['+obj.path+']</p></div><div name="option" style="float: right; display: none;margin-top: 8px;cursor: pointer;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src="assets/icon-editlist.png" style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;cursor: pointer;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src="assets/icon-deletelist.png" style="width: 24px; height: 24px;"></div></div>';
+         var htmlBase = '<div style="float: left; margin-top: -5px; margin-left: -8px;"><img src=<%=(asset_path "domain_badge.png")%> style="width: 50px; height: 50px;"></div><div name="detail"style="display: inline-block; margin-left: 10px;width: 350px;cursor: pointer;"><div class="list-group-item-heading" style="font-size: 18px">'+obj.name+'</div></h4><p class="list-group-item-text">'+obj.detail+' ['+obj.path+']</p></div><div name="option" style="float: right; display: none;margin-top: 8px;cursor: pointer;"><div tool="edit"style="display: inline-block; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="Edit"><img src=<%=(asset_path "icon-editlist.png")%> style="width: 24px; height: 24px;"></div><div tool="delete"style="display: inline-block; margin-left: 10px;cursor: pointer;"data-toggle="tooltip" data-placement="bottom" title="Delete"><img src=<%=(asset_path "icon-deletelist.png")%> style="width: 24px; height: 24px;"></div></div>';
         //console.log(htmlBase);
         return htmlBase;
     }
@@ -713,8 +713,8 @@
         slide_state = "project";
         $("#slide-project").fadeOut(100);
         $("#slide-server").fadeOut(100);
-        $("#slide-project").attr('src','/assets/slide_hold.png');
-        $("#slide-server").attr('src','/assets/slide_ready.png');
+        $("#slide-project").attr('src',"<%=(asset_path "slide_hold.png")%>");
+        $("#slide-server").attr('src',"<%=(asset_path "slide_ready.png")%>");
         $("#slide-project").fadeIn(100);
         $("#slide-server").fadeIn(100);
     }
@@ -723,8 +723,8 @@
         slide_state = "server";
         $("#slide-project").fadeOut(100);
         $("#slide-server").fadeOut(100);
-        $("#slide-server").attr('src','/assets/slide_hold.png');
-        $("#slide-project").attr('src','/assets/slide_ready.png');
+        $("#slide-server").attr('src',"<%=(asset_path "slide_hold.png")%>");
+        $("#slide-project").attr('src',"<%=(asset_path "slide_ready.png")%>");
         $("#slide-project").fadeIn(100);
         $("#slide-server").fadeIn(100);
     }
