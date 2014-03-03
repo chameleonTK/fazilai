@@ -1,8 +1,8 @@
 require 'net/ftp'
 
 class FtpController < ApplicationController
-	before_filter :setvar , :only => [:listfile,:getfile,:putfile]
-	after_filter :clearvar , :only => [:listfile,:getfile,:putfile]
+	before_filter :setvar , :only => [:listfile,:getfile,:putfile,:mkdir,:mkfile]
+	after_filter :clearvar , :only => [:listfile,:getfile,:putfile,:mkdir,:mkfile]
 
 	def setvar
 		is_error = false
@@ -92,7 +92,50 @@ class FtpController < ApplicationController
 		end
 		render json: ll
 	end
+	
+	def mkdir
+		folder = params["folder"]
+		dir_ = params["dirname"]
+		
+		is_error = false
+		begin
+			@ftp.mkdir(dir_+"/"+folder)
+		rescue
+			is_error = true
+		end
 
+		if is_error
+			render text: "error : "+dir_+"/"+folder
+		else
+			render text: "create directory pass"
+		end
+	end
+
+	def mkfile
+		file = params["file"]
+		dir_ = params["dirname"]
+		local = "tmp_server/"+file
+
+		filenames = @ftp.nlst(dir_) 				
+		f = open(local, "w")
+		f.write("")
+ 		f.close
+
+		is_error = false
+		e = ""
+		begin
+			@ftp.putbinaryfile(local,dir_+"/"+file,1024)
+		rescue
+			is_error = true
+		end
+
+		if is_error
+			render text: "error"
+		else
+			render text: "create '"+file+"' successful"
+		end
+	end
+	
 	def putfile
 		filename = ""
 		dir_ = params["dirname"]

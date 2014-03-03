@@ -26,30 +26,34 @@ function gentree(data,is_root,label_for){
 
 function get_dir(file){
 	var s="";
+	//console.log(file);
 	do{
 		if(file.is('ol')){
 			var label = file.prev().prev()
 		}else{
 			var label = file
 		}
+		//console.log(label.attr("filename"));
 		s = "/"+label.attr('filename') + s;
 		file = file.parent().parent();		
-	
 	}while( !file.hasClass('tree'));
 	return s;
 
 }
-
 
 function init_tree(path_init){
 	$.get(path_init,function(data){
 		error_check(data);
 		$('.tree').html(gentree(data,true,""));
 	});
-
+	
 	$(".tree").on('click', 'label.folder' ,function(){
 		var folder = $(this);
 		//console.log(folder);
+		
+		$(".nowfolder").removeClass("nowfolder");
+		folder.addClass("nowfolder");
+
 		if (folder.hasClass('checked')){
 			folder.attr('checked', false);
 		}else{
@@ -89,14 +93,43 @@ function init_tree(path_init){
 			});
 		}
 	});
-	$("#createfile").click(function(){
-
+	$("#createF").click(function(){
+		var folder = $(".nowfolder");
+		var s ="";
+		if ( folder.length == 0){
+			var s="/";
+		}else{
+			var s = get_dir(folder);
+		}
+		var newfile = $("#newfile").val();
+		$.get("/mkfile",{dirname:s,file:newfile},function(data){
+			alert(data);
+			if(data!="error"){
+				location.reload();
+			}
+		});
 	});
 
-	$("#createfolder").click(function(){
-
-
-	});	
+	$("#createD").click(function(){
+		var folder = $(".nowfolder");
+		var s ="";
+		if ( folder.length == 0){
+			var s="/";
+		}else{
+			var s = get_dir(folder);
+		}
+			//alert(s);
+			var newfolder = $("#newdirectory").val();
+			//alert(newfolder);
+		$.get("/mkdir",{dirname:s,folder:newfolder},function(data){
+			//console.log(data);
+			alert(data);
+			if(data!="error"){
+				location.reload();
+			}
+		});
+	});
+	
 	$("#savecode").click(function(){
 		var file = $($(".edited > label")[0]);
 		if(file != undefined && file.is("label")){	

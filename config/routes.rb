@@ -21,6 +21,8 @@ Fazilai::Application.routes.draw do
 
   post "/session", to: "ftp#setsession" , as:'session' 
   get "/server", to: "app#server" , as:'server'
+  get "/mkdir" ,to: "ftp#mkdir" ,as: "mkdir"
+  get "/mkfile" ,to: "ftp#mkfile" ,as: "mkfile"
   get "/listfile" ,to: "ftp#listfile" ,as: "listfile_root"
   get "/listfile/*dirname" ,to: "ftp#listfile" , as: 'listfile'
   post "/getfile/*dirname" ,to: "ftp#getfile" ,as: "getfile"
