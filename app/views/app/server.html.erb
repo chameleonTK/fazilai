@@ -65,10 +65,10 @@
 			<div class="panel-heading">
 				<h1 class="panel-title" style="float:left"> Directory </h1>
 				<div class="btndiv" style="float:right">
-					<button type="button" class="btn btn-warning btn-lg" id="createfile">
+					<button type="button" class="btn btn-warning btn-lg" id="createfile" data-toggle="modal" data-target="#modal2">
 						<span> <img src=<%= asset_path "icon-createfile.png" %>></span>
 					</button>
-					<button type="button" class="btn btn-warning btn-lg" id="createfolder">
+					<button type="button" class="btn btn-warning btn-lg" id="createfolder" data-toggle="modal" data-target="#modal">
 						<span> <img src=<%= asset_path "icon-createfolder.png" %>></span>
 					</button>
 				</div>
@@ -94,4 +94,43 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="mylabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="mylabel">Create Directory</h4>
+      </div>
+      <div class="modal-body">
+      	  	<label class="sr-only" for="newdirectory"> new Directory</label>
+				<input type="text" class="form-control" id="newdirectory" placeholder="enter your new directoory">
+				<div style="margin-top: 20px;">
+	        		<button type="button" class="btn btn-primary" id="createD">Create</button>
+   	     		<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="mylabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="mylabel2">Create File</h4>
+      </div>
+      <div class="modal-body">
+      	  	<label class="sr-only" for="newfile"> new File</label>
+				<input type="text" class="form-control" id="newfile" placeholder="enter your new file">
+				<div style="margin-top: 20px;">
+	        		<button type="button" class="btn btn-primary" id="createF">Create</button>
+   	     		<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 	<% end%>
