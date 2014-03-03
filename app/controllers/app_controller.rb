@@ -266,11 +266,9 @@ class AppController < ApplicationController
 		if name.length < 3 then
 			return 'Name: Lenght more than 3'
 		else
-			all_name = Server.where('user_id = ? AND sid <> ?',u.id,sid)
-			all_name.each do |x|
-				if x[:name]==name then
-					return 'Name: This name is already in your list. '
-				end
+			all_name = Server.where('user_id = ? AND sid <> ? AND name = ?',u.id,sid,name)
+			unless all_name.empty? then
+				return 'Name: This name is already in your list. '
 			end
 		end
 		return 'Accept'
