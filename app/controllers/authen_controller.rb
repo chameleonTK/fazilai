@@ -47,7 +47,7 @@ class AuthenController < ApplicationController
 				flash[:error] = "You have failed two passwords not same"
 				redirect_to signup_path()
 			
-			elsif params[:post][:password]=/\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/
+			elsif params[:post][:password]==/\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/
 				flash[:error] = "Invalid email"
 				redirect_to signup_path()
 			end

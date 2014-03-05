@@ -9,7 +9,15 @@
 			}
 		}
 	</style>
+	<script>
+		$(function(){
+			$("#forget").click(function(){
+				alert("we will send new password to your mail");
 
+			});	
+
+		});	
+	</script>
 
 	<div class="login-box">
 	<%= form_for :post do |f| %>
@@ -18,11 +26,11 @@
       	<%= content_tag :div, msg, class: name %>
     	<% end %>		
 
-    	<div style="color:white"> New user? <a href="#">Sign up</a> now</div>
+    	<div style="color:white"> New user? <%= link_to 'Sign up', signup_path %> now</div>
     	<%= f.text_field :username ,:class => "form-control fazilai-textform",:placeholder => "e-mail" %><br>
     	<%= f.password_field :password ,:class => "form-control fazilai-textform",:placeholder => "password"%><br>
 		<%= f.submit :"sign in" , :class => "form-control fazilai-login btn-warning" , :style => "display:inline"%> 
-		<div style="display:inline"> <a href="#">forget password?</a></div>
+		<div style="display:inline"> <a id="forget" href="#">forget password?</a></div>
 		<br>
 		<br>
 		<div style="width:300px;height:3px;background:white"><div>
